@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +21,10 @@ Route::get('/', function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/projects', function () {
-    return view('projects.list');
-})->middleware(['auth'])->name('projlist');
+/*Route::get('/projects', [ProjectController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('projlist');*/
 
+Route::resource('/projects', ProjectController::class)
+    ->middleware(['auth'])
+    ->name('*','projlist');
