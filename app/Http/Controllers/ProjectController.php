@@ -15,19 +15,23 @@ class ProjectController extends Controller
     {
         $today = date('Y-m-d');
         $archived = false;
-        $projectlist = auth()->user()->projects->sortByDesc('must');
-        $currentQueries = $request->query();
-        if($currentQueries && $currentQueries['arkiv'] ==='y') {
-            $archived = true;
-            $visibleproj = $projectlist->filter(function ($item) {
-                return $item->visible === 'n';
-            });
+        if(auth()->user()->projects) {
+            $projectlist = auth()->user()->projects->sortByDesc('must');
+            $currentQueries = $request->query();
+            if ($currentQueries && $currentQueries['arkiv'] === 'y') {
+                $archived = true;
+                $visibleproj = $projectlist->filter(function ($item) {
+                    return $item->visible === 'n';
+                });
+            } else {
+                $archived = false;
+                $visibleproj = $projectlist->filter(function ($item) {
+                    return $item->visible === 'y';
+                });
+            }
         }
         else{
-            $archived = false;
-            $visibleproj = $projectlist->filter(function ($item) {
-                return $item->visible === 'y';
-            });
+            $visibleproj = array();
         }
 
         /*$visibleproj->each(function ($item, $key) {

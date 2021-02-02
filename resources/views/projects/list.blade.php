@@ -1,23 +1,18 @@
 <x-headless-app>
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="max-w-lg bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200 bg-green-100">
-                    <h4><a class="text-blue-600 text-xl font-bold hover:text-purple-600 hover:underline" href="/memories">Minnen</a></h4>
-                    <hr class="hrdash">
-                    <h5 class="text-lg font-semibold">Projekt</h5>
-                    <p><a class="dashlink" href="/projects">Mina projekt</a></p>
-                    <p><a class="dashlink" href="/todos">Ofärdiga arbetsuppgifter</a></p>
-                    <hr class="hrdash">
-                    <h5 class="text-lg font-semibold">Blogg</h5>
-                    <p><a class="dashlink" href="/blog">Publik blogg</a></p>
-                    <p><a class="dashlink" href="/articles">Blogginlägg</a> - skapa och redigera</p>
-                    <p><a class="dashlink" href="/comments">Nya bloggkommentarer</a></p>
-                    <p><a class="dashlink" href="/categories">Bloggkategorier</a> - skapa och redigera</p>
-                    <p><a class="dashlink" href="/about">Om Ankhemmet</a> - lite info för bloggbesökare</p>
-
-                    <hr class="hrdash">
-                    <p class="text-sm">Du är inloggad!</p>
+        <div class="max-w-screen-lg mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm border-2">
+                <div class="pl-3">
+                    <h1 class="text-3xl">Mina projekt</h1>
+                    @if(count($visibleproj)>0)
+                        <ul class="list-group striped-list pl-3">
+                            @foreach ($visibleproj as $project)
+                                <li class="list-group-item"><h4><a href="/projects/{{ $project->id }}">{{ $project->title }}</a></h4> <span class="must">@if($archived)<b>ARKIVERAT PROJEKT!</b><br>@endif</span><span class="must">@if($project['must']=='y')Plikt!<br>@endif</span> @if($project['deadline']) Deadline: <span @if($project['deadline'] <= $today)class="redalert"@endif>{{ $project->deadline }}</span>@endif<br>@if($project['late'])<span class="redalert">Det finns minst en försenad arbetsuppgift!</span>@endif</li>
+                            @endforeach
+                        </ul>
+                    @else
+                        <h2 class="text-xl pt-8 text-red-500">Du har inga projekt på gång.</h2>
+                    @endif
                 </div>
             </div>
         </div>
