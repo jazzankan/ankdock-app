@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class ProjectController extends Controller
 {
@@ -59,7 +60,11 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        $myid = auth()->user()->id;
+        $allusers = User::all();
+        $usersminusme = $allusers->where('id','!=',$myid);
+
+        return view ('projects.create')->with('usersminusme',$usersminusme);
     }
 
     /**

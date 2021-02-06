@@ -2,10 +2,10 @@
     <div class="py-12">
         <div class="max-w-screen-lg mx-auto sm:px-6 lg:px-8">
             <h1 class="text-3xl pl-2 mb-2">Mina projekt</h1>
-            <div>
-                <a href="/projects/create" class="btn-blue text-xs">Nytt projekt</a> <a class="btn btn-secondary btn-sm"href="/projects?arkiv=y">Arkiverade projekt</a>
+            <div class="my-4 pl-2">
+                <a href="/projects/create" class="btn-blue text-xs font-bold">Nytt projekt</a> <a class="btn btn-blue text-xs font-bold"href="/projects?arkiv=y">Arkiverade projekt</a>
             </div>
-            <div class="bg-white overflow-hidden shadow-sm border-2">
+            <div class="bg-white overflow-hidden shadow-sm border-2 mt-5">
                 <div>
                     @if(count($visibleproj)>0)
                         @php
