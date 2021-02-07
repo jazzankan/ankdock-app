@@ -14,4 +14,7 @@
         margin-top: 1.1rem;
         margin-bottom: 1.1rem;
     }
+    li:nth-child(even){
+        @apply bg-blue-100;
+    }
 }

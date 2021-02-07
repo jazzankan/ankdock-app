@@ -8,17 +8,9 @@
             <div class="bg-white overflow-hidden shadow-sm border-2 mt-5">
                 <div>
                     @if(count($visibleproj)>0)
-                        @php
-                            $bcolor = false;
-                        @endphp
                         <ul>
                             @foreach ($visibleproj as $project)
-                                <li class="py-4 pl-2 border-b-2 @if($bcolor)bg-blue-100" @else " @endif><h4 class="text-xl text-blue-700"><a class="hover:underline" href="/projects/{{ $project->id }}">{{ $project->title }}</a></h4> <span class="must">@if($archived)<b>ARKIVERAT PROJEKT!</b><br>@endif</span><span class="text-red-600">@if($project['must']=='y')Plikt!<br>@endif</span> @if($project['deadline']) Deadline: <span @if($project['deadline'] <= $today)class="text-red-600"@endif>{{ $project->deadline }}</span>@endif<br>@if($project['late'])<span class="redalert">Det finns minst en försenad arbetsuppgift!</span>@endif</li>
-                                    @if($bcolor == false)
-                                        @php($bcolor = true)
-                                    @else
-                                        @php($bcolor = false)
-                                    @endif
+                                <li class="py-4 pl-2 border-b-2"><h4 class="text-xl text-blue-700"><a class="hover:underline" href="/projects/{{ $project->id }}">{{ $project->title }}</a></h4> <span class="must">@if($archived)<b>ARKIVERAT PROJEKT!</b><br>@endif</span><span class="text-red-600">@if($project['must']=='y')Plikt!<br>@endif</span> @if($project['deadline']) Deadline: <span @if($project['deadline'] <= $today)class="text-red-600"@endif>{{ $project->deadline }}</span>@endif<br>@if($project['late'])<span class="redalert">Det finns minst en försenad arbetsuppgift!</span>@endif</li>
                             @endforeach
                         </ul>
                     @else
