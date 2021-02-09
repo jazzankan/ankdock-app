@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Project;
 
 class ProjectController extends Controller
 {
@@ -75,7 +76,38 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request['visible'] = 'y';
+        $request['deadline'] = $request['date'];
+        $getSharingUsers = null;
+
+        $attributes = request()->validate([
+
+            'title' => 'required | min:3',
+            'description' => 'required | min:5',
+            'deadline' => 'nullable|date',
+            'must' => 'required',
+            'visible' => 'required'
+        ]);
+
+        $project = Project::create($attributes);
+
+        $user_id = auth()->id();
+
+        $project->users()->attach($user_id);
+
+        if($request['selshare'] !== null) {
+            $getSharingUsers = User::whereIn('name', $request['selshare'])->get();
+
+            foreach ($getSharingUsers as $g) {
+                if (!$g->projects->contains($project->id)) {
+                    $g->projects()->attach($project->id);
+                }
+                if($g->id !== $user_id){
+                    $g->notify(new NewProject());
+                }
+            }
+        }
+        return redirect('/projects');
     }
 
     /**
@@ -97,7 +129,21 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
-        //
+            $this->authorize('update',$project);
+
+            $myname = auth()->user()->name;
+            $users = User::all();
+            $usernames = array();
+            foreach ($users as $u) {
+                if($u->name !== $myname) {
+                    array_push($usernames, $u->name);
+                }
+            };
+
+            // Det finns ett scope i model User, en metod kallad scopeShared. Den returnerar namnen på dem som delar projektet. Och den anropas med bara Shared.
+            $sharing = User::Shared($myname, $project);
+
+            return view('projects.edit')->with('project',$project)->with('usernames',$usernames)->with('sharing',$sharing);
     }
 
     /**
