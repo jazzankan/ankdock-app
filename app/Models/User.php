@@ -41,4 +41,21 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Project');
 
     }
+    public function scopeShared($query, $myname, $project)
+    {
+        $sharing = array();
+        $user = User::all();
+        foreach($user as $u) {
+            foreach($u->projects as $p) {
+                if ($p->id == $project->id) {
+                    array_push($sharing, $u->name);
+                }
+            }
+        }
+
+        if (($key = array_search($myname, $sharing)) !== false) {
+            unset($sharing[$key]);
+        }
+        return $sharing;
+    }
 }

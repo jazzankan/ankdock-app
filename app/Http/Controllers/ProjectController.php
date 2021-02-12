@@ -153,9 +153,62 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Project $project)
     {
-        //
+        if($request['delete'] === 'delete'){
+            $this->destroy($project);
+            return redirect('/projects');
+        }
+
+        if($request['visible'] != 'n'){
+            $request['visible'] = 'y';
+        }
+        $request['deadline'] = $request['date'];
+
+        $attributes = request()->validate([
+
+            'title' => 'required | min:3',
+            'description' => 'required | min:5',
+            'deadline' => 'nullable|date',
+            'must' => 'required',
+            'visible' => 'required'
+        ]);
+
+        $allUsers = User::all();
+        $me = auth()->user();
+        $user_id = auth()->id();
+
+        $project->update(request(['title','description','deadline','must','visible']));
+
+        if($request['selshare']) {
+            $getSharingUsers = User::whereIn('name', $request['selshare'])->get();
+            foreach ($getSharingUsers as $g) {
+                if (!$g->projects->contains($project->id)) {
+                    $g->projects()->attach($project->id);
+                }
+
+                if($request['sendmail']) {
+                    if ($g->id !== $user_id) {
+                        $g->notify(new ChangedProject());
+                    }
+                }
+            }
+            foreach ($allUsers as $a) {
+                if ($a->projects->contains($project->id) && $getSharingUsers->where('name', $a->name)->count() === 0 && $a->id != $me->id) {
+                    $a->projects()->detach($project->id);
+                }
+            }
+        }
+        else {
+            foreach ($allUsers as $a) {
+                if ($a->projects->contains($project->id) && $a->id != $me->id) {
+                    $a->projects()->detach($project->id);
+                }
+            }
+        }
+
+        return redirect('/projects/' . $project->id);
+
     }
 
     /**
