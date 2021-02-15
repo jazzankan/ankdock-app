@@ -116,9 +116,42 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Project $project)
     {
-        //
+        $this->authorize('view', $project);
+        $today = date('Y-m-d');
+        $myname = auth()->user()->name;
+        $sharing = User::Shared($myname, $project);
+        /*$belongingfiles = File::where('projectid',$project->id)->get();
+        $belongingtodos = Todo::where('project_id',$project->id)->orderBy('deadline', 'ASC')->get();
+
+        $detlink = false;
+
+        $belongingtodos->each(function ($todo, $key) {
+            if ($todo['assigned']) {
+                $todo['assigned'] = " Utförs av: " . $todo['assigned'];
+            }
+            else {
+                $todo['assigned'] = "";
+            }
+            if(!$todo['deadline']) {
+                $todo['deadline'] = "Ingen satt";
+            }
+            if($todo['priority'] == "l") {
+                $todo['priority'] = "Prio: Låg ";
+            }
+            if($todo['priority'] == "m") {
+                $todo['priority'] = "";
+            }
+            if($todo['priority'] == "h") {
+                $todo['priority'] = "Prio: Hög ";
+            }
+            $todo['details'] = str_replace("'","\\'",$todo['details']); //Annars blank sida om ' förekommer
+        });
+        $projcomments = Projcomment::where('project_id', $project->id)->orderBy('id', 'DESC')->get();*/
+        //dd($projcomments->user->name);
+        return view('projects.show')->with('project',$project);
+        //return view('projects.show')->with('project',$project)->with('sharing',$sharing)->with('belongingtodos',$belongingtodos)->with('belongingfiles',$belongingfiles)->with('projcomments',$projcomments)->with('today',$today);
     }
 
     /**

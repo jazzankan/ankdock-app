@@ -30,7 +30,8 @@ class ProjectPolicy
      */
     public function view(User $user, Project $project)
     {
-        //
+        $usersproj = $user->projects()->where('user_id', $user->id)->where('project_id',$project->id)->get();
+        return count($usersproj) > 0;
     }
 
     /**

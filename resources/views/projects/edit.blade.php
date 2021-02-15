@@ -1,7 +1,7 @@
 <x-headless-app>
     <div class="py-12">
         <div class="max-w-screen-lg mx-auto sm:px-6 lg:px-8">
-            <h1 class="text-3xl pl-2 mb-3">Redigera projektet <span class="projtitel">{{ $project->title }}</span></h1>
+            <h1 class="text-3xl pl-2 mb-3">Redigera projektet <span class="text-blue-800">{{ $project->title }}</span></h1>
             <div>
                 <form method="post" action="/projects/{{ $project->id  }}">
                     @method('PATCH')
