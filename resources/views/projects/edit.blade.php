@@ -32,6 +32,17 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="mt-3">
+                                <p class="mb-2"><input type="checkbox" class="form-checkbox" id="visible" name="visible" value="n">
+                                    <label class="" for="visible">Arkivera projektet. Det syns då inte längre i den vanliga projektlistan.</label></p>
+                                <p class="mb-2"><input type="checkbox" class="form-checkbox" id="delete" name="delete" value="delete">
+                                <label class="" for="delete">Ta bort projektet för gott. All tillhörande data tas bort!</label></p>
+                                @if($sharing)
+                                <p><input type="checkbox" class="form-checkbox" id="sendmail" name="sendmail" value="sendmail" checked="checked">
+                                    <label class="" for="sendmail">Skicka mail till dem  du delar projektet med.</label></p>
+                                @endif
+
+                        </div>
                         <button type="submit" class="mt-3 btn-blue">Spara</button>
                     </div>
                 </form>
