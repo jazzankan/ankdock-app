@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Project;
 use App\Notifications\ChangedProject;
+use App\Notifications\NewProject;
 
 class ProjectController extends Controller
 {
@@ -251,8 +252,23 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Project $project)
     {
-        //
+        $this->authorize('view',$project);
+
+        $allUsers = User::all();
+
+        foreach($allUsers as $a) {
+            $a->projects()->detach($project);
+        }
+
+        $allProjcomments = Projcomment::all();
+        foreach($allProjcomments as $c) {
+            if($c->project_id === $project->id){
+                $c->delete();
+            }
+        }
+
+        $project->delete();
     }
 }
