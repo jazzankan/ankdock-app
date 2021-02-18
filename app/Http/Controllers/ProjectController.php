@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Project;
+use App\Models\Todo;
 use App\Notifications\ChangedProject;
 use App\Notifications\NewProject;
 
@@ -38,7 +39,7 @@ class ProjectController extends Controller
             $visibleproj = array();
         }
 
-        /*$visibleproj->each(function ($item, $key) {
+        $visibleproj->each(function ($item, $key) {
             $this->late = false;
             $belongingtodo = Todo::where('project_id',$item->id)->get();
             if($belongingtodo){
@@ -51,7 +52,7 @@ class ProjectController extends Controller
             if($this->late){
                 $item['late'] = 'y';
             }
-        });*/
+        });
 
         return view('projects.list')->with('visibleproj', $visibleproj)->with('today', $today)->with('archived',$archived);
     }

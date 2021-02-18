@@ -18,7 +18,7 @@ class CreateProjectsTable extends Migration
             $table->timestamps();
             $table->string('title');
             $table->mediumText('description');
-            $table->date('deadline');
+            $table->date('deadline')->nullable();
             $table->enum('must',array('y', 'n'));
             $table->enum('visible',array('y', 'n'));
         });

@@ -7,6 +7,12 @@
     <h1 class="text-3xl mb-3">{{ $project->title }}</h1>
         <p class="font-bold">Beskrivning:</p>
         {!! $project->description !!}
+            @if($project->deadline)
+            <p class="mt-3"><span class="font-bold">Deadline:</span> {{ $project->deadline }}</p>
+                @endif
         </div>
+        <hr class="my-4">
+        <h2 class="text-2xl mb-3">Arbetsuppgifter</h2>
+        <a href="/todos/create/{{ $project->id }}" class="btn-blue text-xs font-bold">Skapa arbetsuppgift</a>
     </div>
 </x-headless-app>
