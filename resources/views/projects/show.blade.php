@@ -15,13 +15,13 @@
         <div class="pl-2">
         <h2 class="text-2xl mb-3">Arbetsuppgifter</h2>
         <a href="/todos/create/{{ $project->id }}" class="btn-blue text-xs font-bold">Skapa arbetsuppgift</a>
-        <div class="mt-4">
+        <div class="mt-4" x-data="{ isOpen: false }">
             @if($belongingtodos->isNotEmpty())
                 <ul class="border border-gray-300 border-opacity-70">
                     <li class="pl-2"><h5 class="py-2 text-xl text-red-600">Ogjort</h5></li>
                     @foreach ($belongingtodos as $todo)
                         @if($todo->status === 'n')
-                            <li class="pl-2 py-2.5"><a class="text-blue-700 hover:underline" href="/todos/{{ $todo->id }}/edit">{{ $todo->title }}</a><span class="float-right mr-4"> Deadline: <span @if($todo['deadline'] <= $today)class="text-red-600"@endif><b>{{ $todo->deadline }}</b></span>&nbsp;&nbsp;<span class=""><b>{{ $todo->priority }}</b></span>&nbsp;&nbsp<span class=""><b>{{$todo->assigned}}</b></span>&nbsp;&nbsp<span><button type='button' class='btn btn-link' data-toggle='modal' data-target='#detailsModal' @click="getDetail($event, '{{ $todo->details }}')"><span class="" v-if="'{{ $todo->details }}'">Detaljer</span></button></span></span></li>
+                            <li class="pl-2 py-2.5"><a class="text-blue-700 hover:underline" href="/todos/{{ $todo->id }}/edit">{{ $todo->title }}</a><span class="float-right mr-4"> Deadline: <span @if($todo['deadline'] <= $today)class="text-red-600"@endif><b>{{ $todo->deadline }}</b></span>&nbsp<span class=""><b>{{ $todo->priority }}</b></span>&nbsp<span class=""><b>{{$todo->assigned}}</b></span>&nbsp<span>@if($todo->details) <a x-on:click="isOpen = !isOpen" class="text-blue-700 hover:underline" href="#">Detaljer</a>@endif</span></span><br><span x-show="isOpen">{{ $todo->details }}</span></li>
                         @endif
                     @endforeach
                 </ul>
