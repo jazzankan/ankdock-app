@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TodoController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -28,3 +29,7 @@ require __DIR__.'/auth.php';
 Route::resource('/projects', ProjectController::class)
     ->middleware(['auth'])
     ->name('*','projlist');
+
+Route::resource('/todos', TodoController::class)
+    ->middleware(['auth'])
+    ->name('*','todolist');
