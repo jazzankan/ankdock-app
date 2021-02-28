@@ -30,6 +30,7 @@ Route::resource('/projects', ProjectController::class)
     ->middleware(['auth'])
     ->name('*','projlist');
 
+Route::get('/todos/create/{projectid}', [TodoController::class, 'create']);
 Route::resource('/todos', TodoController::class)
     ->middleware(['auth'])
     ->name('*','todolist');
