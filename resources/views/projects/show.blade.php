@@ -15,13 +15,13 @@
         <div class="pl-2">
         <h2 class="text-2xl mb-3">Arbetsuppgifter</h2>
         <a href="/todos/create/{{ $project->id }}" class="btn-blue text-xs font-bold">Skapa arbetsuppgift</a>
-        <div class="mt-4" x-data="{ isOpen: false }">
+        <div class="mt-4">
             @if($belongingtodos->isNotEmpty())
                 <ul class="border border-gray-300 border-opacity-70">
                     <li class="pl-2"><h5 class="py-2 text-xl text-red-600">Ogjort</h5></li>
                     @foreach ($belongingtodos as $todo)
                         @if($todo->status === 'n')
-                            <li class="pl-2 py-2.5"><a class="text-blue-700 hover:underline" href="/todos/{{ $todo->id }}/edit">{{ $todo->title }}</a><span class="float-right mr-4"> Deadline: <span @if($todo['deadline'] <= $today)class="text-red-600"@endif><b>{{ $todo->deadline }}</b></span>&nbsp<span class=""><b>{{ $todo->priority }}</b></span>&nbsp<span class=""><b>{{$todo->assigned}}</b></span>&nbsp<span>@if($todo->details) <a x-on:click="isOpen = !isOpen" class="text-blue-700 hover:underline" href="#">Detaljer</a>@endif</span></span><br>
+                            <li x-data="{ isOpen: false }" class="pl-2 py-2.5"><a class="text-blue-700 hover:underline" href="/todos/{{ $todo->id }}/edit">{{ $todo->title }}</a><span class="float-right mr-4"> Deadline: <span @if($todo['deadline'] <= $today)class="text-red-600"@endif><b>{{ $todo->deadline }}</b></span>&nbsp<span class=""><b>{{ $todo->priority }}</b></span>&nbsp<span class=""><b>{{$todo->assigned}}</b></span>&nbsp<span>@if($todo->details) <a x-on:click="isOpen = !isOpen" class="text-blue-700 hover:underline" href="#">Detaljer</a>@endif</span></span><br>
                                 <div x-show="isOpen" x-transition:enter="transition ease-out duration-500 transform" x-transition:enter-start="opacity-0 transform scale-90" x-transition:leave="transition ease-in duration-500 transform" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-90">{{ $todo->details }}</div></li>
                         @endif
                     @endforeach

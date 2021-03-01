@@ -21,7 +21,7 @@ class CreateTodosTable extends Migration
             $table->date('deadline')->nullable();
             $table->enum('status',array('n', 'o','d'))->default('n');
             $table->enum('priority',array('l', 'm','h'));
-            $table->string('assigned');
+            $table->string('assigned')->nullable();
             $table->timestamps();
         });
     }
