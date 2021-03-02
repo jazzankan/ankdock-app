@@ -1,29 +1,37 @@
 <x-headless-app>
     <div class="py-12">
         <div class="max-w-screen-lg mx-auto sm:px-6 lg:px-8">
-            <h1 class="text-3xl pl-2 mb-3">Arbetsuppgift i projektet <span class="text-blue-400">{{ $taskProject->title }}</span></h1>
+            <h1 class="text-3xl pl-2 mb-3">Redigera <span class="text-blue-400">{{ $todo->title }}</span></h1>
+            <h3 class="text-xl pl-2 mb-5">Arbetsuppgift i projektet "{{ $project->title }}"</h3>
             <div>
-                <form method="post" action="{{ route('todos.store') }}">
+                <form method="post" action="/todos/{{ $todo->id }}">
+                    {{ method_field('PATCH') }}
                     @csrf
+                    <fieldset class="pl-2 mb-5">
+                        <label for="status">Status:</label><br>
+                        <label><input type="radio" name="status" value="n" {{ ($todo->status === 'n') ? 'checked' : '' }}> Ny </label>
+                        <label><input type="radio" name="status" value="o" {{ ($todo->status === 'o') ? 'checked' : '' }}> Pågående </label>
+                        <label><input type="radio" name="status" value="d" {{ ($todo->status === 'd') ? 'checked' : '' }}> Avklarad </label>
+                    </fieldset>
                     <div class="pl-2">
                         <label for="title">Uppgift:</label><br>
-                        <input type="text" class="max-w-lg w-full mt-2 mb-6 px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-green-500" value="{{ old('title') }}" name="title"/>
+                        <input type="text" class="max-w-lg w-full mt-2 mb-6 px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-green-500" value="{{ $todo->title }}" name="title"/>
                         <div>
                             <label for="description">Detaljer:</label><br>
-                            <textarea class="mb-6 w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none" rows="4" id="description" name="details">{!! old('details') !!}</textarea>
+                            <textarea class="mb-6 w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none" rows="4" id="description" name="details">{!! $todo->details !!}</textarea>
                         </div>
                         <div class="mt-5"><label for="deadline">Deadline om det finns:</label><br>
-                            <input type="date" class="border rounded-lg mb-6" value="{{ old('deadline') != null ? old('deadline') : ''}}" name="date">
+                            <input type="date" class="border rounded-lg mb-6" value="{{ ($todo->deadline != null) ? $todo->deadline : ''}}" name="date">
                         </div>
                         <div class="mb-6">
-                            <label><input type="radio" name="priority" value="l" {{ (old('priority') === 'l') ? 'checked' : '' }}> Lågprioriterad</label>
-                            <label><input type="radio" name="priority" value="m" {{ (old('priority') === 'l' || old('prio') === 'h') ? '' : 'checked' }}> Medelprioriterad</label>
-                            <label><input type="radio" name="priority"  value="h" {{ (old('priority') === 'h') ? 'checked' : '' }}> Högprioriterad</label>
+                            <label><input type="radio" name="priority" value="l" {{ ($todo->priority === 'l') ? 'checked' : '' }}> Lågprioriterad</label>
+                            <label><input type="radio" name="priority" value="m" {{ ($todo->priority === 'm') ? 'checked' : '' }}> Medelprioriterad</label>
+                            <label><input type="radio" name="priority"  value="h" {{ ($todo->priority === 'h') ? 'checked' : ''  }}> Högprioriterad</label>
                         </div>
                         <div>
-                            <input type="hidden" value="{{ $taskProject->id }}"  name="project_id"/>
+                            <input type="hidden" value="{{ $project->id }}"  name="project_id"/>
                         </div>
-                        <button type="submit" class="btn-blue">Skapa</button>
+                        <button type="submit" class="btn-blue">Uppdatera</button>
                     </div>
                 </form>
             </div>
