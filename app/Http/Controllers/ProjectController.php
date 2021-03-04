@@ -153,7 +153,7 @@ class ProjectController extends Controller
         });
         //$projcomments = Projcomment::where('project_id', $project->id)->orderBy('id', 'DESC')->get();
         //dd($projcomments->user->name);
-        return view('projects.show')->with('project',$project)->with('belongingtodos',$belongingtodos)->with('today',$today);
+        return view('projects.show')->with('project',$project)->with('belongingtodos',$belongingtodos)->with('today',$today)->with('sharing',$sharing);
         //return view('projects.show')->with('project',$project)->with('sharing',$sharing)->with('belongingtodos',$belongingtodos)->with('belongingfiles',$belongingfiles)->with('projcomments',$projcomments)->with('today',$today);
     }
 
