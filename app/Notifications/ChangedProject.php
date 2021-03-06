@@ -30,8 +30,8 @@ class ChangedProject extends Notification
         $this->newtodo = $new;
         $this->fixedtodo = $fixed;
         $this->project = Project::latest('updated_at')->first();
-        //$this->createdtodo = Todo::latest('created_at')->first();
-        //$this->changedtodo = Todo::latest('updated_at')->first();
+        $this->createdtodo = Todo::latest('created_at')->first();
+        $this->changedtodo = Todo::latest('updated_at')->first();
         $this->myname = auth()->user()->name;
     }
 

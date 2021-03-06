@@ -30,7 +30,7 @@
                     @foreach ($belongingtodos as $todo)
                         @if($todo->status === 'n')
                             <li x-data="{ isOpen: false }" class="todo pl-2 py-2.5"><a class="text-blue-700 hover:underline" href="/todos/{{ $todo->id }}/edit">{{ $todo->title }}</a><span class="float-right mr-4"> Deadline: <span @if($todo['deadline'] <= $today)class="text-red-600"@endif><b>{{ $todo->deadline }}</b></span>&nbsp<span class=""><b>{{ $todo->priority }}</b></span>&nbsp<span class=""><b>{{$todo->assigned}}</b></span>&nbsp<span>@if($todo->details) <a x-on:click="isOpen = !isOpen" class="text-blue-700 hover:underline" href="#">Detaljer</a>@endif</span></span><br>
-                                <div x-show="isOpen" x-transition:enter="transition ease-out duration-500 transform" x-transition:enter-start="opacity-0 transform scale-90" x-transition:leave="transition ease-in duration-500 transform" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-90">{{ $todo->details }}</div></li>
+                                <div x-show="isOpen" x-transition:enter="transition ease-out duration-500 transform" x-transition:enter-start="opacity-0 transform scale-90" x-transition:leave="transition ease-in duration-500 transform" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-90" style='white-space:pre-wrap'>{{ $todo->details }}</div></li>
                         @endif
                     @endforeach
                 </ul>

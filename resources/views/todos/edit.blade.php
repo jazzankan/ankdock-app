@@ -31,9 +31,13 @@
                         @if ($shared)
                             <div class="mail">
                                 <div class="mb-6">
+                                    <input type="checkbox" class="form-checkbox" id="delete" name="delete" value="delete">
+                                    <label for="delete">Ta bort arbetsuppgiften helt!</label>
+                                </div>
+                                <div class="mb-6">
                                     <div>
                                         <input type="checkbox" class="form-checkbox" id="smail" name="smail" value="smail" checked="checked">
-                                        <label class="custom-control-label" for="smail">Skicka mail till dem  du delar projektet med.</label>
+                                        <label for="smail">Skicka mail till dem  du delar projektet med.</label>
                                     </div>
                                 </div>
                             </div>
