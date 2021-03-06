@@ -137,9 +137,11 @@ class TodoController extends Controller
             $query->where('project_id', '=', $thisprojid);
         })->get();
 
-        foreach ($mailusers as $mu) {
-            if ($mu->id !== $myself) {
-                $mu->notify(new ChangedProject($new, $fixed));
+        if($request['smail']) {
+            foreach ($mailusers as $mu) {
+                if ($mu->id !== $myself) {
+                    $mu->notify(new ChangedProject($new, $fixed));
+                }
             }
         }
         return redirect('/projects/' . $thisprojid);
@@ -153,6 +155,6 @@ class TodoController extends Controller
      */
     public function destroy(Todo $todo)
     {
-        //
+        $todo->delete();
     }
 }
