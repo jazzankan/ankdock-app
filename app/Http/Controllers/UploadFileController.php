@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\File;
+use App\Models\File;
 
 class UploadFileController extends Controller
 {

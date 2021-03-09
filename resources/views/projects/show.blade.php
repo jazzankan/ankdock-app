@@ -10,6 +10,14 @@
             @if($project->deadline)
             <p class="mt-3"><span class="font-bold">Deadline:</span> {{ $project->deadline }}</p>
                 @endif
+            @if(count($belongingfiles) > 0)
+                <ul class="mt-4">
+                    <li class="font-bold">Tillhörande filer: </li>
+                    @foreach($belongingfiles as $f)
+                        <li class="list-inline-item"><a class="text-blue-700 hover:underline" href="http://localhost/storage/files/{{ $f->filename }}" target="_blank">{{ $f->filename }}</a></li>
+                    @endforeach
+                </ul>
+            @endif
             @if(count($sharing) > 0)
                 <ul class="mt-3">
                     <li class="font-bold">Projektet delas med: </li>

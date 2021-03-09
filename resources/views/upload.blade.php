@@ -3,8 +3,8 @@
         <div class="max-w-screen-lg mx-auto sm:px-6 lg:px-8">
             <div class="row justify-content-center">
                 <div class="card">
-                    <div class="card-header">Ladda upp fil</div>
-                    <div class="card-body">
+                    <h2 class="text-2xl">Ladda upp fil</h2>
+                    <div class="mt-4">
                         @if ($message = Session::get('success'))
                             <div class="alert alert-success alert-block">
                                 <button type="button" class="close" data-dismiss="alert">×</button>
@@ -12,8 +12,8 @@
                             </div>
                         @endif
                         @if (count($errors) > 0)
-                            <div class="alert alert-danger">
-                                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                            <div class="text-red-600">
+                                <strong>Aj då!</strong> Det var något problem med filen du valde.<br>
                                 <ul>
                                     @foreach ($errors->all() as $error)
                                         <li>{{ $error }}</li>
@@ -26,11 +26,11 @@
                             <div class="form-group">
                                 <input type="file" class="form-control-file" name="fileToUpload" id="exampleInputFile"
                                        aria-describedby="fileHelp">
-                                <input type="hidden" name="projectid" value="{{ $projectid }}">
+                                <input type="hidden" name="projectid" value="{{ $projectid }}"><br>
                                 <small id="fileHelp" class="form-text text-muted">Ladda upp Word- Excel- och PDF-filer.
                                     Eller bild (.jpg .png .gif)</small>
                             </div>
-                            <button type="submit" class="btn btn-primary">Skicka</button>
+                            <button type="submit" class="mt-4 btn-blue text-xs font-bold">Skicka</button>
                         </form>
                     </div>
                 </div>

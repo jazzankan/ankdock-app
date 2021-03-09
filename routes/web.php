@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TodoController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UploadFileController;
 
 
 /*
@@ -34,3 +35,9 @@ Route::get('/todos/create/{projectid}', [TodoController::class, 'create']);
 Route::resource('/todos', TodoController::class)
     ->middleware(['auth'])
     ->name('*','todolist');
+
+Route:: get('/upload/{projectid}', function($projectid) {
+    return view('upload')->with('projectid', $projectid);
+});
+
+Route:: post('/uploadfile', [UploadFileController::class,'index']);
