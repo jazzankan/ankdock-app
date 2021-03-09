@@ -14,7 +14,7 @@
                 <ul class="mt-4">
                     <li class="font-bold">Tillhörande filer: </li>
                     @foreach($belongingfiles as $f)
-                        <li class="list-inline-item"><a class="text-blue-700 hover:underline" href="http://localhost/storage/files/{{ $f->filename }}" target="_blank">{{ $f->filename }}</a></li>
+                        <li class="list-inline-item"><a class="text-blue-700 hover:underline" href="https://ank.webbsallad.se/storage/files/{{ $f->filename }}" target="_blank">{{ $f->filename }}</a></li>
                     @endforeach
                 </ul>
             @endif

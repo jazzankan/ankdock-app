@@ -41,3 +41,5 @@ Route:: get('/upload/{projectid}', function($projectid) {
 });
 
 Route:: post('/uploadfile', [UploadFileController::class,'index']);
+
+Route::get('/storage/files/{fileName}', [FileController::class,'index']);
