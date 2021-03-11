@@ -26,6 +26,24 @@
                     @endforeach
                 </ul>
             @endif
+            @if(count($projcomments) > 0)
+                <p class="mt-3"><span class="font-bold">Kommentarer:</span><br>
+                @foreach($projcomments as $c)
+                    @if($loop->iteration > 2)
+                        @break
+                    @endif
+                    <p><span class="text-yellow-800">{{ $c->body }}</span><br><span class="text-xs">{{ $c->created_at }}</span><br><i><b>{{ $c->user->name }}</b></i></p>
+                @endforeach
+            @endif
+            @if(count($projcomments) > 2)
+                <a href="#" v-on:click="memfilter = !memfilter"><b>Tidigare kommentarer</b></a>
+            @endif
+            @foreach($projcomments as $c)
+                @if($loop->iteration > 2)
+                    <div v-show="memfilter"><span class="commentbody">{{ $c->body }}</span><br>{{ $c->created_at }}<br><i><b>{{ $c->user->name }}</b></i></div>
+                @endif
+            @endforeach
+            <hr>
         </div>
         <hr class="my-4">
         <div class="pl-2">

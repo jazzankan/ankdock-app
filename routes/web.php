@@ -4,6 +4,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TodoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UploadFileController;
+use App\Http\Controllers\ProjcommentController;
 
 
 /*
@@ -43,3 +44,7 @@ Route:: get('/upload/{projectid}', function($projectid) {
 Route:: post('/uploadfile', [UploadFileController::class,'index']);
 
 Route::get('/storage/files/{fileName}', [FileController::class,'index']);
+
+Route::resource('/projcomments', ProjcommentController::class)
+    ->middleware(['auth'])
+    ->name('*','projlist');
