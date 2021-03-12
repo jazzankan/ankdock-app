@@ -27,22 +27,25 @@
                 </ul>
             @endif
             @if(count($projcomments) > 0)
+                <a name="comments"></a>
                 <p class="mt-3"><span class="font-bold">Kommentarer:</span><br>
                 @foreach($projcomments as $c)
                     @if($loop->iteration > 2)
                         @break
                     @endif
-                    <p><span class="text-yellow-800">{{ $c->body }}</span><br><span class="text-xs">{{ $c->created_at }}</span><br><i><b>{{ $c->user->name }}</b></i></p>
+                    <p><span class="text-yellow-800">{{ $c->body }}</span><br><span class="text-xs">{{ $c->created_at }}</span><br><i><b>{{ $c->user->name }}</b></i><br>.....</p>
                 @endforeach
             @endif
+            <div x-data="{ isOpen: false }">
             @if(count($projcomments) > 2)
-                <a href="#" v-on:click="memfilter = !memfilter"><b>Tidigare kommentarer</b></a>
+                <a x-on:click="isOpen = !isOpen" class="text-blue-600 hover:underline" href="#comments">Tidigare kommentarer:</a>
             @endif
             @foreach($projcomments as $c)
                 @if($loop->iteration > 2)
-                    <div v-show="memfilter"><span class="commentbody">{{ $c->body }}</span><br>{{ $c->created_at }}<br><i><b>{{ $c->user->name }}</b></i></div>
+                        <div x-show="isOpen"><span class="text-yellow-800">{{ $c->body }}</span><br><span class="text-xs">{{ $c->created_at }}</span><br><i><b>{{ $c->user->name }}</b></i><br>.....</div>
                 @endif
             @endforeach
+            </div>
             <hr>
         </div>
         <hr class="my-4">
@@ -51,11 +54,12 @@
         <a href="/todos/create/{{ $project->id }}" class="btn-blue text-xs font-bold">Skapa arbetsuppgift</a>
         <div class="mt-4">
             @if($belongingtodos->isNotEmpty())
+                <a name="todos"></a>
                 <ul class="border border-gray-300 border-opacity-70">
                     <li class="pl-2"><h5 class="py-2 text-xl text-red-600">Ogjort</h5></li>
                     @foreach ($belongingtodos as $todo)
                         @if($todo->status === 'n')
-                            <li x-data="{ isOpen: false }" class="todo pl-2 py-2.5"><a class="text-blue-700 hover:underline" href="/todos/{{ $todo->id }}/edit">{{ $todo->title }}</a><span class="float-right mr-4"> Deadline: <span @if($todo['deadline'] <= $today)class="text-red-600"@endif><b>{{ $todo->deadline }}</b></span>&nbsp<span class=""><b>{{ $todo->priority }}</b></span>&nbsp<span class=""><b>{{$todo->assigned}}</b></span>&nbsp<span>@if($todo->details) <a x-on:click="isOpen = !isOpen" class="text-blue-700 hover:underline" href="#">Detaljer</a>@endif</span></span><br>
+                            <li x-data="{ isOpen: false }" class="todo pl-2 py-2.5"><a class="text-blue-700 hover:underline" href="/todos/{{ $todo->id }}/edit">{{ $todo->title }}</a><span class="float-right mr-4"> Deadline: <span @if($todo['deadline'] <= $today)class="text-red-600"@endif><b>{{ $todo->deadline }}</b></span>&nbsp<span class=""><b>{{ $todo->priority }}</b></span>&nbsp<span class=""><b>{{$todo->assigned}}</b></span>&nbsp<span>@if($todo->details) <a x-on:click="isOpen = !isOpen" class="text-blue-700 hover:underline" href="#todos">Detaljer</a>@endif</span></span><br>
                                 <div x-show="isOpen" x-transition:enter="transition ease-out duration-500 transform" x-transition:enter-start="opacity-0 transform scale-90" x-transition:leave="transition ease-in duration-500 transform" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-90" style='white-space:pre-wrap'>{{ $todo->details }}</div></li>
                         @endif
                     @endforeach
@@ -64,7 +68,7 @@
                     <li class="pl-2"><h5 class="py-2 text-xl text-yellow-600">Pågående</h5></li>
                     @foreach ($belongingtodos as $todo)
                         @if($todo->status === 'o')
-                            <li x-data="{ isOpen: false }" class="todo pl-2 py-2.5"><a class="text-blue-700 hover:underline" href="/todos/{{ $todo->id }}/edit">{{ $todo->title }}</a><span class="float-right mr-4"> Deadline: <span @if($todo['deadline'] <= $today)class="text-red-600"@endif><b>{{ $todo->deadline }}</b></span>&nbsp<span class=""><b>{{ $todo->priority }}</b></span>&nbsp<span class=""><b>{{$todo->assigned}}</b></span>&nbsp<span>@if($todo->details) <a x-on:click="isOpen = !isOpen" class="text-blue-700 hover:underline" href="#">Detaljer</a>@endif</span></span><br>
+                            <li x-data="{ isOpen: false }" class="todo pl-2 py-2.5"><a class="text-blue-700 hover:underline" href="/todos/{{ $todo->id }}/edit">{{ $todo->title }}</a><span class="float-right mr-4"> Deadline: <span @if($todo['deadline'] <= $today)class="text-red-600"@endif><b>{{ $todo->deadline }}</b></span>&nbsp<span class=""><b>{{ $todo->priority }}</b></span>&nbsp<span class=""><b>{{$todo->assigned}}</b></span>&nbsp<span>@if($todo->details) <a x-on:click="isOpen = !isOpen" class="text-blue-700 hover:underline" href="#todos">Detaljer</a>@endif</span></span><br>
                                 <div x-show="isOpen" x-transition:enter="transition ease-out duration-500 transform" x-transition:enter-start="opacity-0 transform scale-90" x-transition:leave="transition ease-in duration-500 transform" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-90" style='white-space:pre-wrap'>{{ $todo->details }}</div></li>
                         @endif
                     @endforeach
@@ -73,7 +77,7 @@
                     <li class="pl-2"><h5 class="py-2 text-xl text-green-600">Avklarat</h5></li>
                     @foreach ($belongingtodos as $todo)
                         @if($todo->status === 'd')
-                            <li x-data="{ isOpen: false }" class="todo pl-2 py-2.5"><a class="text-blue-700 hover:underline" href="/todos/{{ $todo->id }}/edit">{{ $todo->title }}</a><span class="float-right mr-4"> Deadline: <span @if($todo['deadline'] <= $today)class="text-red-600"@endif><b>{{ $todo->deadline }}</b></span>&nbsp<span class=""><b>{{ $todo->priority }}</b></span>&nbsp<span class=""><b>{{$todo->assigned}}</b></span>&nbsp<span>@if($todo->details) <a x-on:click="isOpen = !isOpen" class="text-blue-700 hover:underline" href="#">Detaljer</a>@endif</span></span><br>
+                            <li x-data="{ isOpen: false }" class="todo pl-2 py-2.5"><a class="text-blue-700 hover:underline" href="/todos/{{ $todo->id }}/edit">{{ $todo->title }}</a><span class="float-right mr-4"> Deadline: <span @if($todo['deadline'] <= $today)class="text-red-600"@endif><b>{{ $todo->deadline }}</b></span>&nbsp<span class=""><b>{{ $todo->priority }}</b></span>&nbsp<span class=""><b>{{$todo->assigned}}</b></span>&nbsp<span>@if($todo->details) <a x-on:click="isOpen = !isOpen" class="text-blue-700 hover:underline" href="#todos">Detaljer</a>@endif</span></span><br>
                                 <div x-show="isOpen" x-transition:enter="transition ease-out duration-500 transform" x-transition:enter-start="opacity-0 transform scale-90" x-transition:leave="transition ease-in duration-500 transform" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-90" style='white-space:pre-wrap'>{{ $todo->details }}</div></li>
                         @endif
                     @endforeach
