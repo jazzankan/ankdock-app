@@ -14,7 +14,7 @@
                             @endforeach
                         </ul>
                     @else
-                        <h2 class="pl-2 text-xl pt-8 text-red-500">Du har inga projekt på gång.</h2>
+                        <h2 class="pl-2 text-xl pt-8 text-red-500">Det finns inga projekt!</h2>
                     @endif
                 </div>
             </div>

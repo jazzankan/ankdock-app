@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Todo;
 use App\Models\Project;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Notifications\ChangedProject;
+use DB;
 
 class TodoController extends Controller
 {
@@ -17,7 +19,23 @@ class TodoController extends Controller
      */
     public function index()
     {
-        //
+        $today = Carbon::now();
+        $authuserid = auth()->id();
+
+        $undonetodos = Todo::where('status','o')->orWhere('status','n')->orderBy('deadline')->get();
+
+        foreach($undonetodos as $ut){
+            $userids = DB::table('project_user')->where('project_id',$ut['project_id'])->get(['user_id']);
+            if (!$userids->contains('user_id',$authuserid)){
+                $undonetodos = $undonetodos->except($ut->id);
+            }
+            else{
+                $projname = Project::where('id',$ut->project_id)->value('title');
+                $ut['projname'] = $projname;
+            }
+        }
+
+        return view('todos.list')->with('undonetodos',$undonetodos)->with('today',$today);
     }
 
     /**
