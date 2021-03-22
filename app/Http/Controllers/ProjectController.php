@@ -271,6 +271,12 @@ class ProjectController extends Controller
                 $c->delete();
             }
         }
+        $allTodos = Todo::all();
+        foreach($allTodos as $t) {
+            if($t->project_id === $project->id){
+                $t->delete();
+            }
+        }
 
         $project->delete();
     }
