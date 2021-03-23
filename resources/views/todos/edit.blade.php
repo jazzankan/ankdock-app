@@ -28,13 +28,13 @@
                             <label><input type="radio" name="priority" value="m" {{ ($todo->priority === 'm') ? 'checked' : '' }}> Medelprioriterad</label>
                             <label><input type="radio" name="priority"  value="h" {{ ($todo->priority === 'h') ? 'checked' : ''  }}> Högprioriterad</label>
                         </div>
-                        @if ($shared)
-                            <div class="mail">
+                            <div>
                                 <div class="mb-6">
                                     <input type="checkbox" class="form-checkbox" id="delete" name="delete" value="delete">
                                     <label for="delete">Ta bort arbetsuppgiften helt!</label>
                                 </div>
                                 <div class="mb-6">
+                                    @if ($shared)
                                     <div>
                                         <input type="checkbox" class="form-checkbox" id="smail" name="smail" value="smail" checked="checked">
                                         <label for="smail">Skicka mail till dem  du delar projektet med.</label>

@@ -85,7 +85,7 @@ class TodoController extends Controller
 
         foreach ($mailusers as $mu) {
             if($mu->id !== $myself){
-                $mu->notify(new ChangedProject($new, $fixed));
+                $mu->notify(new ChangedProject($new, $fixed, $thisprojid));
             }
         }
 
@@ -113,7 +113,8 @@ class TodoController extends Controller
     {
         $project = Project::where('id', $todo['project_id'])->first();
         //To be able to mail only when the project is shared
-        $shared = $project->users->contains($project['id']);
+        $shared = $project->users->contains($project['id']); //rejält galet.
+        dd($shared);
 
 
         return view('todos.edit')->with('todo',$todo)->with('project',$project)->with('shared',$shared);

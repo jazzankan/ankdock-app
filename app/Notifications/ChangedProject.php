@@ -25,11 +25,10 @@ class ChangedProject extends Notification
     public $newtodo;
     public $fixedtodo;  //Redigerad arbetsuppgift
 
-    public function __construct($new = false, $fixed = false)
+    public function __construct($new = false, $fixed = false, $projid)
     {
         $this->newtodo = $new;
         $this->fixedtodo = $fixed;
-        $this->project = Project::latest('updated_at')->first();
         $this->createdtodo = Todo::latest('created_at')->first();
         $this->changedtodo = Todo::latest('updated_at')->first();
         $this->myname = auth()->user()->name;
@@ -54,6 +53,7 @@ class ChangedProject extends Notification
     public function toMail($notifiable)
     {
         if($this->newtodo == true && $this->fixedtodo == false){
+            $this->project = Project::where('id',$this->createdtodo->project_id)->first();
             return (new MailMessage)
                 ->from('anders@webbsallad.se', 'Ankhemmet')
                 ->subject('Ny arbetsuppgift i projektet "' .$this->project->title .'"!')
@@ -62,6 +62,7 @@ class ChangedProject extends Notification
                 ->action('Till projektet', url('https://ank.webbsallad.se/projects/'.$this->project->id));
         }
         elseif($this->newtodo == false && $this->fixedtodo == true){
+            $this->project = Project::where('id',$this->changedtodo->project_id)->first();
             return (new MailMessage)
                 ->from('anders@webbsallad.se', 'Ankhemmet')
                 ->subject('Arbetsuppgiften ' . $this->changedtodo->title . ' har ändrats.')
@@ -71,6 +72,7 @@ class ChangedProject extends Notification
         }
 
         else {
+            $this->project = Project::latest('updated_at')->first();
             return (new MailMessage)
                 ->from('anders@webbsallad.se', 'Ankhemmet')
                 ->subject('Projektet "'.$this->project->title.'"  har ändrats av '.$this->myname)
