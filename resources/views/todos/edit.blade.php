@@ -34,7 +34,7 @@
                                     <label for="delete">Ta bort arbetsuppgiften helt!</label>
                                 </div>
                                 <div class="mb-6">
-                                    @if ($shared)
+                                    @if (count($shared) > 0)
                                     <div>
                                         <input type="checkbox" class="form-checkbox" id="smail" name="smail" value="smail" checked="checked">
                                         <label for="smail">Skicka mail till dem  du delar projektet med.</label>
