@@ -115,7 +115,6 @@ class TodoController extends Controller
         //To be able to mail only when the project is shared
         $myname = auth()->user()->name;
         $shared = User::Shared($myname, $project);
-        //$shared = $project->users->contains($project['id']); //rejält galet.
 
         return view('todos.edit')->with('todo',$todo)->with('project',$project)->with('shared',$shared);
     }
