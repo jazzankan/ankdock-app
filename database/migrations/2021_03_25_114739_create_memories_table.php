@@ -15,6 +15,12 @@ class CreateMemoriesTable extends Migration
     {
         Schema::create('memories', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->mediumText('description');
+            $table->string('source');
+            $table->string('link');
+            $table->integer('importance')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
         });
     }

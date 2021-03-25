@@ -5,7 +5,7 @@ use App\Http\Controllers\TodoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UploadFileController;
 use App\Http\Controllers\ProjcommentController;
-
+use App\Http\Controllers\MemoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,3 +48,7 @@ Route::get('/storage/files/{fileName}', [FileController::class,'index']);
 Route::resource('/projcomments', ProjcommentController::class)
     ->middleware(['auth'])
     ->name('*','projlist');
+
+Route::resource('/memories', MemoryController::class)
+    ->middleware(['auth'])
+    ->name('*','memories');
