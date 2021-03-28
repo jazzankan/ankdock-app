@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Memory;
-use App\models\Tag;
+use App\Models\Tag;
 use Illuminate\Http\Request;
+use DB;
 
 class MemoryController extends Controller
 {
@@ -98,7 +99,44 @@ class MemoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request['user_id'] = auth()->id();
+
+        $attributes = request()->validate([
+            'title' => 'required | min:3',
+            'description' => 'nullable | min:5',
+            'source' => 'nullable',
+            'link' => 'nullable',
+            'importance' => 'required',
+            'user_id' => 'required',
+        ]);
+
+        $memory = Memory::create($attributes);
+
+        if($request['tags'] !== null) {
+            $tags = $request['tags'];
+            foreach ($tags as $tag){
+                $memory->tags()->attach($tag);
+            }
+        }
+        if($request['newtag1'] !== null) {
+            $newtag1 = $request['newtag1'];
+            $userid = auth()->id();
+            $newtag1id = DB::table('tags')->insertGetId(
+                ['name' => $newtag1, 'user_id' => $userid,'created_at' => Carbon::now(),'updated_at' => Carbon::now(),]
+            );
+            $memory->tags()->attach($newtag1id);
+        }
+        if($request['newtag2'] !== null) {
+            $newtag2 = $request['newtag2'];
+            $userid = auth()->id();
+            $newtag2id = DB::table('tags')->insertGetId(
+                ['name' => $newtag2, 'user_id' => $userid,'created_at' => Carbon::now(),'updated_at' => Carbon::now(),]
+            );
+            $memory->tags()->attach($newtag2id);
+        }
+
+
+        return redirect('/memories');
     }
 
     /**

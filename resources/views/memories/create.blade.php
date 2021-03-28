@@ -2,7 +2,7 @@
     <div class="py-12">
         <div class="max-w-screen-lg mx-auto sm:px-6 lg:px-8">
             <h1 class="text-3xl pl-2 mb-3">Skapa ett minne</h1>
-            <form method="post" action="/memories/create">
+            <form method="post" action="/memories">
                 @csrf
                 <div class="pl-2">
                     <div class="form-group">

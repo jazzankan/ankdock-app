@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UploadFileController;
 use App\Http\Controllers\ProjcommentController;
 use App\Http\Controllers\MemoryController;
+use App\Http\Controllers\FileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,10 +24,6 @@ Route::get('/', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
-
-/*Route::get('/projects', [ProjectController::class, 'index'])
-    ->middleware(['auth'])
-    ->name('projlist');*/
 
 Route::resource('/projects', ProjectController::class)
     ->middleware(['auth'])
