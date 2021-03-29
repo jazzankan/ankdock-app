@@ -17,8 +17,8 @@ class CreateMemoriesTable extends Migration
             $table->id();
             $table->string('title');
             $table->mediumText('description');
-            $table->string('source');
-            $table->string('link');
+            $table->string('source')->nullable();
+            $table->string('link')->nullable() ;
             $table->integer('importance')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->timestamps();
