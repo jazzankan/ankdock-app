@@ -3,14 +3,14 @@
         <div class="max-w-screen-lg mx-auto sm:px-6 lg:px-8">
             @if(count($memories) > 0)
                 <h1 class="text-3xl pl-2 mb-3">Minnen</h1>
-                <div class="ml-2">
+                <div class="ml-2" x-data="{memfilter:false}">
                 <form method="post" action="{{ route('memories.index') }}">
                     @csrf
                     <p class="mb-3"><a href="/memories/create" class="btn-blue text-xs font-bold">Nytt minne</a></p>
                     <input type="text" class="max-w-sm w-full mt-2 mb-6 px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-green-500" value="{{ $searchterm }}" name="search"/> <button type="submit" class="btn-blue text-xs font-bold"
                     >Sök</button>
-                    <a  class="ml-3 text-blue-700 hover:underline" href="#" v-on:click="memfilter = !memfilter"><b>Filtrera</b></a>
-                    <div v-show="memfilter">
+                    <a  class="ml-3 text-blue-700 hover:underline" href="#" x-on:click="memfilter = !memfilter"><b>Filtrera</b></a>
+                    <div class="mb-5" x-show="memfilter">
                         <p><label for="tag">Tagg:</label>
                             @if($tags)
                                 <select id="tag" name="tag">
@@ -45,9 +45,9 @@
                         </div>
                     @endif
                 </div>
-                <ul class="list-group striped-list">
+                <ul class="border border-gray-300 border-opacity-70">
                     @foreach ($memories as $memory)
-                        <li class="list-group-item"><h4><a href="/memories/{{ $memory->id }}">{{ $memory->title }}</a></h4></li>
+                        <li class="todo pl-2 py-2.5"><h4 class="text-xl"><a class="text-blue-700 hover:underline" href="/memories/{{ $memory->id }}">{{ $memory->title }}</a></h4></li>
                     @endforeach
                 </ul>
                 <p>
