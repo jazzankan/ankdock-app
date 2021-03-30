@@ -13,7 +13,7 @@
                     <div class="mb-5" x-show="memfilter">
                         <p><label for="tag">Tagg:</label>
                             @if($tags)
-                                <select id="tag" name="tag">
+                                <select class="border mb-6" id="tag" name="tag">
                                     <option value=""></option>
                                     @foreach($tags as $t)
                                         <option value ="{{ $t['id'] }}">{{ $t['name'] }}</option>
@@ -22,16 +22,16 @@
                                 </select>
                         </p>
                         <p><label for="importance">Viktighet:</label>
-                            <select id="importance" name="importance">
+                            <select class="border mb-6" id="importance" name="importance">
                                 <option value=""></option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                             </select></p>
                         <p><label for="fromdate">Från:</label>
-                            <input type="date" value="" name="fromdate"/>
+                            <input class="border rounded-lg mb-6" type="date" value="" name="fromdate"/>
                             <label for="todate">Till:</label>
-                            <input type="date" value="" name="todate"/></p>
+                            <input class="border rounded-lg mb-6" type="date" value="" name="todate"/></p>
                     </div>
                 </form>
                 <div>
