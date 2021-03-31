@@ -148,9 +148,9 @@ class MemoryController extends Controller
     public function show(Memory $memory)
     {
         //$this->authorize('view', $memory);
-        //$tags = $memory->tags()->orderBy('name')->get();
+        $tags = $memory->tags()->orderBy('name')->get();
         //$belongingfiles = Memfile::whereIn('memoryid',[$memory->id])->get();
-        return view('memories.show')->with('memory',$memory);
+        return view('memories.show')->with('memory',$memory)->with('tags', $tags);
     }
 
     /**
