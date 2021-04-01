@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Memory;
 use App\Models\Tag;
+use App\Models\Memfile;
 use Illuminate\Http\Request;
 use DB;
 

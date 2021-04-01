@@ -37,8 +37,12 @@ Route::resource('/todos', TodoController::class)
 Route:: get('/upload/{projectid}', function($projectid) {
     return view('upload')->with('projectid', $projectid);
 });
+Route:: get('/memupload/{memoryid}', function($memoryid) {
+    return view('upload')->with('projectid', $memoryid);
+});
 
 Route:: post('/uploadfile', [UploadFileController::class,'index']);
+Route:: post('/uploadmemory',[UploadFileController::class,'memories']);
 
 Route::get('/storage/files/{fileName}', [FileController::class,'index']);
 

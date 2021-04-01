@@ -14,9 +14,9 @@ class CreateMemoryTagTable extends Migration
     public function up()
     {
         Schema::create('memory_tag', function (Blueprint $table) {
-            $table->integer('memory_id')->unsigned()->index();
+            $table->bigInteger('memory_id')->unsigned()->index();
             $table->foreign('memory_id')->references('id')->on('memories');
-            $table->integer('tag_id')->unsigned()->index();
+            $table->bigInteger('tag_id')->unsigned()->index();
             $table->foreign('tag_id')->references('id')->on('tags');
             $table->primary(['memory_id', 'tag_id']);
             $table->timestamps();
