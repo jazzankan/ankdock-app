@@ -21,13 +21,12 @@
                 <p><strong>Taggar: </strong>@foreach($tags as $tag) {{ $tag->name }}&nbsp;@endforeach</p>
                 @if(count($belongingfiles) > 0)
                     <ul class="list-group-horizontal nomargin">
-                        <li class="list-inline-item font-weight-bold nomargin">Tillhörande filer: </li>
+                        <li><strong>Tillhörande filer:</strong> </li>
                         @foreach($belongingfiles as $f)
-                            <li class="list-inline-item"><a href="https://ank.webbsallad.se/storage/files/{{ $f->filename }}" target="_blank">{{ $f->filename }}</a></li>
+                            <li class="list-inline-item"><a class="text-blue-600 hover:underline" href="https://ank.webbsallad.se/storage/files/{{ $f->filename }}" target="_blank">{{ $f->filename }}</a></li>
                         @endforeach
                     </ul>
                 @endif
-
             </div>
         </div>
     </div>

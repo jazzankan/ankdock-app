@@ -38,11 +38,11 @@ Route:: get('/upload/{projectid}', function($projectid) {
     return view('upload')->with('projectid', $projectid);
 });
 Route:: get('/memupload/{memoryid}', function($memoryid) {
-    return view('upload')->with('projectid', $memoryid);
+    return view('/memories/memupload')->with('memoryid', $memoryid);
 });
 
-Route:: post('/uploadfile', [UploadFileController::class,'index']);
 Route:: post('/uploadmemory',[UploadFileController::class,'memories']);
+Route:: post('/uploadfile', [UploadFileController::class,'index']);
 
 Route::get('/storage/files/{fileName}', [FileController::class,'index']);
 

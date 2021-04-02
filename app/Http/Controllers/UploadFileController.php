@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\File;
+use App\Models\Memfile;
 
 class UploadFileController extends Controller
 {
-    public function index(request $request)
+    public function index(Request $request)
     {
         $request->validate([
             'fileToUpload' => 'required|file|mimes:docx,xlxs,odt,ods,pdf,jpg,jpeg,png,gif|max:10240',
@@ -26,7 +27,7 @@ class UploadFileController extends Controller
         return redirect('/projects/' . $request->projectid);
     }
 
-    public function memories(request $request)
+    public function memories(Request $request)
     {
         $request->validate([
             'fileToUpload' => 'required|file|mimes:docx,xlxs,odt,ods,pdf,jpg,jpeg,png,gif|max:10240',
