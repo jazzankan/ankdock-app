@@ -7,6 +7,7 @@ use App\Models\Tag;
 use App\Models\Memfile;
 use Illuminate\Http\Request;
 use DB;
+use Carbon\Carbon;
 
 class MemoryController extends Controller
 {
@@ -162,7 +163,11 @@ class MemoryController extends Controller
      */
     public function edit(Memory $memory)
     {
-        //
+        $this->authorize('update',$memory);
+
+        $tags = auth()->user()->tags()->orderBy('name')->get();
+        $seltags = $memory->tags()->orderBy('name')->get();
+        return view('memories.edit')->with('memory', $memory)->with('tags', $tags)->with('seltags',$seltags);
     }
 
     /**

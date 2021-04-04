@@ -14,4 +14,8 @@ class Tag extends Model
     {
         return $this->belongsToMany('App\Models\Memory');
     }
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 }

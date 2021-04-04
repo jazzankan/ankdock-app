@@ -6,6 +6,8 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 use Illuminate\Support\Facades\Gate;
 use App\Models\Project;
 use App\Policies\ProjectPolicy;
+use App\Models\Memory;
+use App\Policies\MemoryPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -16,7 +18,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
-        Project::class => ProjectPolicy::class
+        Project::class => ProjectPolicy::class,
+        Memory::class => MemoryPolicy::class
     ];
 
     /**

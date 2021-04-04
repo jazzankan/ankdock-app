@@ -41,6 +41,19 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Project');
 
     }
+    public function memories()
+    {
+        return $this->hasMany('App\Models\Memory');
+    }
+
+    public function tags()
+    {
+        return $this->hasMany('App\Models\Tag');
+    }
+    public function projcomments()
+    {
+        return $this->hasMany('App\Model\Projcomment');
+    }
     public function scopeShared($query, $myname, $project)
     {
         $sharing = array();
