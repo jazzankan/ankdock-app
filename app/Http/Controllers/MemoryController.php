@@ -6,11 +6,13 @@ use App\Models\Memory;
 use App\Models\Tag;
 use App\Models\Memfile;
 use Illuminate\Http\Request;
+use App\Http\Traits\DeleteTagTrait;
 use DB;
 use Carbon\Carbon;
 
 class MemoryController extends Controller
 {
+    use DeleteTagTrait;
     /**
      * Display a listing of the resource.
      *
@@ -179,7 +181,52 @@ class MemoryController extends Controller
      */
     public function update(Request $request, Memory $memory)
     {
-        //
+        if($request['delete'] === 'delete'){
+            $this->destroy($memory);
+            return redirect('/memories');
+        }
+
+        $request['user_id'] = auth()->id();
+
+        $attributes = request()->validate([
+            'title' => 'required | min:3',
+            'description' => 'nullable | min:5',
+            'source' => 'nullable',
+            'link' => 'nullable',
+            'importance' => 'required',
+            'user_id' => 'required'
+        ]);
+
+        $memory->update(request(['title','description','source','link','importance','user_id']));
+        $selectedtags = $request['tags'];
+        if($selectedtags) {
+            $integerIDs = array_map('intval', $selectedtags);
+            $memory->tags()->sync($integerIDs);
+        }
+        else{
+            $memory->tags()->sync([]);
+        }
+
+        if($request['newtag1'] !== null) {
+            $newtag1 = $request['newtag1'];
+            $userid = auth()->id();
+            $newtag1id = DB::table('tags')->insertGetId(
+                ['name' => $newtag1, 'user_id' => $userid,'created_at' => Carbon::now(),'updated_at' => Carbon::now(),]
+            );
+            $memory->tags()->attach($newtag1id);
+        }
+        if($request['newtag2'] !== null) {
+            $newtag2 = $request['newtag2'];
+            $userid = auth()->id();
+            $newtag2id = DB::table('tags')->insertGetId(
+                ['name' => $newtag2, 'user_id' => $userid,'created_at' => Carbon::now(),'updated_at' => Carbon::now(),]
+            );
+            $memory->tags()->attach($newtag2id);
+        }
+
+        $this->deleteUnusedTags();  //Metod i Traits
+
+        return redirect('/memories/' . $memory->id);
     }
 
     /**
@@ -190,6 +237,8 @@ class MemoryController extends Controller
      */
     public function destroy(Memory $memory)
     {
-        //
+        $memory->tags()->detach();
+        $this->deleteUnusedTags();
+        $memory->delete();
     }
 }
