@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Htto\Traits;
+namespace App\Http\Traits;
 
-use App\Tag;
+use App\Models\Tag;
 use DB;
 use Illuminate\Http\Request;
 
