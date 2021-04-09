@@ -29,7 +29,7 @@ class MemoryController extends Controller
         $searchterm = $request['search'];
         $tags = Tag::where('user_id',$userid)->orderBy('name')->get();
 
-        if(empty($_POST)) {
+        if(empty($_POST) || ($_POST["search"] == "" && $_POST["tag"] =="" && $_POST["importance"]=="" && $_POST["fromdate"]=="" && $_POST["todate"]=="")) {
             $memories = DB::table('memories')->where('user_id', $userid)->orderBy('updated_at', 'desc')->paginate(10);
         }
         else{
@@ -61,7 +61,8 @@ class MemoryController extends Controller
                     ->orWhere('memories.description', 'LIKE', '%'.$searchterm.'%');
             })
                 ->where(function ($q) use ($request) {
-                    $q->where('memories.importance', 'LIKE', $request['importance']);
+                    //$q->where('memories.importance', 'LIKE', $request['importance']);
+                    $q->where('memories.importance', '=', $request['importance']);
                 })
                 ->where(function ($q) use ($request) {
                     $q->whereDate('memories.created_at', '>=', $request['fromdate']);
@@ -112,6 +113,7 @@ class MemoryController extends Controller
             'link' => 'nullable',
             'importance' => 'required',
             'user_id' => 'required',
+            'tags' => 'required'
         ]);
 
         $memory = Memory::create($attributes);
@@ -194,7 +196,8 @@ class MemoryController extends Controller
             'source' => 'nullable',
             'link' => 'nullable',
             'importance' => 'required',
-            'user_id' => 'required'
+            'user_id' => 'required',
+            'tags' => 'required'
         ]);
 
         $memory->update(request(['title','description','source','link','importance','user_id']));

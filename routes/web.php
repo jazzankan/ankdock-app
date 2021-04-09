@@ -53,6 +53,6 @@ Route::resource('/projcomments', ProjcommentController::class)
 Route::resource('/memories', MemoryController::class)
     ->middleware(['auth'])
     ->name('*','memories');
-Route::post('/memories', [MemoryController::class,'index']);
-Route::post('/memories/create', [MemoryController::class,'store']);
+Route::post('/memsearch', [MemoryController::class,'index']);
+
 
