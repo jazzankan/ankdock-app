@@ -112,13 +112,14 @@ class MemoryController extends Controller
             'source' => 'nullable',
             'link' => 'nullable',
             'importance' => 'required',
-            'user_id' => 'required',
+            'user_id' => 'required'
+        ]);
+        request()->validate([
             'tags' => 'required_if:newtag1,==,null'
         ]);
-
         $memory = Memory::create($attributes);
 
-        if($request['tags'] !== null) {
+        if($request['tags']!== null) {
             $tags = $request['tags'];
             foreach ($tags as $tag){
                 $memory->tags()->attach($tag);
