@@ -113,7 +113,7 @@ class MemoryController extends Controller
             'link' => 'nullable',
             'importance' => 'required',
             'user_id' => 'required',
-            'tags' => 'required'
+            'tags' => 'required_if:newtag1,==,null'
         ]);
 
         $memory = Memory::create($attributes);
@@ -197,7 +197,7 @@ class MemoryController extends Controller
             'link' => 'nullable',
             'importance' => 'required',
             'user_id' => 'required',
-            'tags' => 'required'
+            'tags' => 'required_if:newtag1,==,null'
         ]);
 
         $memory->update(request(['title','description','source','link','importance','user_id']));
