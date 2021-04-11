@@ -36,7 +36,7 @@ class MemoryController extends Controller
             if($request['importance'] === null){
                 $request['importance'] = '%';
             }
-            if($request['tag'] === ""){
+            if($request['tag'] === null){
                 $request['tag'] = '%';
             }
             $tomorrow = date("Y-m-d", strtotime('tomorrow'));
@@ -61,8 +61,7 @@ class MemoryController extends Controller
                     ->orWhere('memories.description', 'LIKE', '%'.$searchterm.'%');
             })
                 ->where(function ($q) use ($request) {
-                    //$q->where('memories.importance', 'LIKE', $request['importance']);
-                    $q->where('memories.importance', '=', $request['importance']);
+                    $q->where('memories.importance', 'LIKE', $request['importance']);
                 })
                 ->where(function ($q) use ($request) {
                     $q->whereDate('memories.created_at', '>=', $request['fromdate']);
