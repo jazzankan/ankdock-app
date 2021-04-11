@@ -54,11 +54,11 @@
                     {{$memories->render()}}
                 </p>
             @elseif($searchterm)
-                <h2>Inga träffar!</h2>
-                <p><a href="/memories" class="btn btn-primary btn-sm">Minneslistan</a></p>
+                <h2 class="text-2xl pl-2 mb-3">Inga träffar!</h2>
+                <p><a href="/memories" class="btn-blue text-xs font-bold ml-2">Minneslistan</a></p>
             @else
-                <h2>Det finns inget...</h2>
-                <p><a href="/memories/create" class="btn btn-primary btn-sm">Nytt minne</a></p>
+                <h2 class="text-2xl pl-2 mb-3">Det finns inget...</h2>
+                <p><a href="/memories/create" class="btn-blue text-xs font-bold ml-2">Nytt minne</a></p>
             @endif
                 </div>
         </div>
