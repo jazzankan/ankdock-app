@@ -47,7 +47,7 @@
                 </div>
                 <ul class="border border-gray-300 border-opacity-70">
                     @foreach ($memories as $memory)
-                        <li class="todo pl-2 py-2.5"><h4 class="text-xl"><a class="text-blue-700 hover:underline" href="/memories/{{ $memory->id }}">{{ $memory->title }}</a></h4></li>
+                        <li class="todo pl-2 py-2.5"><h4 class="text-xl"><a class="text-blue-700 hover:underline" href="/memories/{{ $memory->id }}">{{ $memory->title }}</a></h4><span class="text-gray-500 text-xs">{{ substr($memory->created_at,0,10) }}</span></li>
                     @endforeach
                 </ul>
                 <p>

@@ -30,7 +30,7 @@ class MemoryController extends Controller
         $tags = Tag::where('user_id',$userid)->orderBy('name')->get();
 
         if(empty($_POST) || ($_POST["search"] == "" && $_POST["tag"] =="" && $_POST["importance"]=="" && $_POST["fromdate"]=="" && $_POST["todate"]=="")) {
-            $memories = DB::table('memories')->where('user_id', $userid)->orderBy('updated_at', 'desc')->paginate(10);
+            $memories = DB::table('memories')->where('user_id', $userid)->orderBy('created_at', 'desc')->paginate(10);
         }
         else{
             if($request['importance'] === null){
@@ -77,8 +77,8 @@ class MemoryController extends Controller
                 ->where(function ($q) use ($request,$userid) {
                     $q->where('user_id', $userid);
                 })
-                ->orderBy('updated_at', 'desc')
-                ->paginate(10);
+                ->orderBy('created_at', 'desc')
+                ->paginate(1000);
         }
 
         return view('memories.list')->with('memories',$memories)->with('searchterm',$searchterm)->with('tags',$tags);

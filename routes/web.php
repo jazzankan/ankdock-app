@@ -54,5 +54,6 @@ Route::resource('/memories', MemoryController::class)
     ->middleware(['auth'])
     ->name('*','memories');
 Route::post('/memsearch', [MemoryController::class,'index']);
+Route::get('/memsearch', [MemoryController::class,'index']);
 
 
