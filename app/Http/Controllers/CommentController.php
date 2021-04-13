@@ -3,10 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Article;
+use App\Models\User;
+use Session;
+use App\Notifications\NewComment;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['create','store']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +23,14 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+        $comments = Comment::where('published', 'no')->where('reviewed', 'no')->orderBy('created_at', 'desc')->get();
+        $articles = Article::all();
+
+        $comments->each(function ($item, $key) use ($articles){
+            $item['belongart'] = $articles->firstWhere('id',$item->article_id);
+        });
+
+        return view('comments.list')->with('comments', $comments);
     }
 
     /**
@@ -24,7 +40,9 @@ class CommentController extends Controller
      */
     public function create()
     {
-        //
+        $article = Article::where('id', $request->artid)->first();
+
+        return view('comments.create')->with('article', $article);
     }
 
     /**
@@ -35,7 +53,26 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request['wishpublic'] != "yes"){
+            $request['wishpublic'] = "no";
+        }
+
+        $attributes = request()->validate([
+            'article_id' => 'required | int',
+            'name' => 'required | min:3',
+            'email' => 'required | email | unique:users,email',
+            'body' => 'required | min:3',
+            'wishpublic' => 'required | in:yes,no'
+        ]);
+
+        Comment::create($attributes);
+
+        $anders = User::where('id', 1)->first();
+        $anders->notify(new NewComment());
+
+        Session::put('thanks', 'Tack för din kommentar!');
+
+        return redirect('/blog');
     }
 
     /**
@@ -57,7 +94,7 @@ class CommentController extends Controller
      */
     public function edit(Comment $comment)
     {
-        //
+        return view('comments.edit')->with('comment',$comment);
     }
 
     /**
@@ -69,7 +106,23 @@ class CommentController extends Controller
      */
     public function update(Request $request, Comment $comment)
     {
-        //
+        if(!$request['reviewed']){
+            $request['reviewed'] = "no";
+        }
+        if(!$request['published']){
+            $request['published'] = "no";
+        }
+        //dd($request['reviewed']);
+
+        request()->validate([
+            'body' => 'required | min:2',
+            'published' => 'required | in:yes,no',
+            'reviewed' => 'required | in:yes,no'
+        ]);
+
+        $comment->update(request(['body','published','reviewed']));
+
+        return redirect('/comments');
     }
 
     /**

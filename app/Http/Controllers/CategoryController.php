@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Article;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +19,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::all()->sortBy('name');
+
+        return view('categories.list')->with('categories', $categories);
     }
 
     /**
@@ -24,7 +31,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('categories.create');
     }
 
     /**
@@ -35,7 +42,14 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attributes = request()->validate([
+            'name' => 'required | min:3'
+        ]);
+
+        Category::create($attributes);
+
+        return redirect('articles');
+
     }
 
     /**
@@ -57,7 +71,9 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        $articlenum = Article::where('category_id', $category->id)->count();
+
+        return view('categories.edit')->with('category',$category)->with('articlenum', $articlenum);
     }
 
     /**
@@ -69,7 +85,18 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        if($request['delete'] === 'delete') {
+            $this->destroy($category);
+            return redirect('/articles');
+        }
+
+        $attributes = request()->validate([
+            'name' => 'required | min:3'
+        ]);
+
+        $category->update(request(['name']));
+
+        return redirect('/blog');
     }
 
     /**
@@ -80,6 +107,6 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
     }
 }

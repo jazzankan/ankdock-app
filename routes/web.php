@@ -7,6 +7,7 @@ use App\Http\Controllers\UploadFileController;
 use App\Http\Controllers\ProjcommentController;
 use App\Http\Controllers\MemoryController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\ArticleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,5 +56,8 @@ Route::resource('/memories', MemoryController::class)
     ->name('*','memories');
 Route::post('/memsearch', [MemoryController::class,'index']);
 Route::get('/memsearch', [MemoryController::class,'index']);
+
+Route::resource('/articles', ArticleController::class)
+    ->name('*','articles');
 
 
