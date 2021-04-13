@@ -25,7 +25,7 @@ class ChangedProject extends Notification
     public $newtodo;
     public $fixedtodo;  //Redigerad arbetsuppgift
 
-    public function __construct($new = false, $fixed = false, $projid)
+    public function __construct($new = false, $fixed = false)
     {
         $this->newtodo = $new;
         $this->fixedtodo = $fixed;

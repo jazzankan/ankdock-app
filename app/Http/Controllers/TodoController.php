@@ -85,7 +85,7 @@ class TodoController extends Controller
 
         foreach ($mailusers as $mu) {
             if($mu->id !== $myself){
-                $mu->notify(new ChangedProject($new, $fixed, $thisprojid));
+                $mu->notify(new ChangedProject($new, $fixed));
             }
         }
 
@@ -158,7 +158,7 @@ class TodoController extends Controller
         if($request['smail']) {
             foreach ($mailusers as $mu) {
                 if ($mu->id !== $myself) {
-                    $mu->notify(new ChangedProject($new, $fixed, $thisprojid));
+                    $mu->notify(new ChangedProject($new, $fixed));
                 }
             }
         }
