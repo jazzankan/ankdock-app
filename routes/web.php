@@ -8,6 +8,7 @@ use App\Http\Controllers\ProjcommentController;
 use App\Http\Controllers\MemoryController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,5 +60,8 @@ Route::get('/memsearch', [MemoryController::class,'index']);
 
 Route::resource('/articles', ArticleController::class)
     ->name('*','articles');
+
+Route::resource('/categories', CategoryController::class)
+    ->name('*','categories');
 
 

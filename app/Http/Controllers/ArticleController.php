@@ -21,7 +21,7 @@ ArticleController extends Controller
      */
     public function index()
     {
-        $articles = \App\Article::orderByDesc('updated_at')->paginate(6);
+        $articles = Article::orderByDesc('updated_at')->paginate(6);
         $blogtag = "bloggidéer";
         $blogideas = Memory::where(function ($q) use ($blogtag) {
             $q->whereHas('tags', function ($query) use ($blogtag) {
