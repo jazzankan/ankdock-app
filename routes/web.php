@@ -9,6 +9,7 @@ use App\Http\Controllers\MemoryController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,4 +65,6 @@ Route::resource('/articles', ArticleController::class)
 Route::resource('/categories', CategoryController::class)
     ->name('*','categories');
 
+Route::get('/blog', [BlogController::class,'index']);
+Route::post('/blog', [BlogController::class,'index']);
 

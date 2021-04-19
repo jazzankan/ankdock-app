@@ -12,12 +12,12 @@
                     </div>
                 </div>
                 @if($articlenum < 1)
-                    <div class="form-group">
+                    <div class="form-group mt-3">
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" class="custom-control-input" id="delete" name="delete"
                                    value="delete">
                             <label class="custom-control-label" for="delete">Ta bort kategorin. Ingen artikel använder
-                                den.</label>
+                                den.</label><br>
                         </div>
                     </div>@endif
                 <button type="submit" class="btn-blue mt-3">Skicka</button>
