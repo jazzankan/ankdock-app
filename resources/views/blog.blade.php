@@ -1,9 +1,8 @@
 <x-headless-app>
     <div class="py-12 pl-2">
         <div class="max-w-screen-lg mx-auto sm:px-6 lg:px-8">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-8">
+                <div class="grid md:grid-cols-7 gap-5">
+                    <div class="col-span-4">
                         @if (isset($thanks))
                             <h4 class="thankyou">{{ $thanks }}</h4>
                         @endif
@@ -36,7 +35,7 @@
                             <h3>Du kammade noll!</h3>
                         @endif
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-span-3">
                         <form id="search" method="post" action="/blog">
                             @csrf
                             <div class="input-group">
@@ -66,10 +65,8 @@
                                 @endforeach
                             </ul>
                         </div>
-
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 </x-headless-app>
