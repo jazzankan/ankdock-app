@@ -1,14 +1,14 @@
 <x-headless-app>
     <div class="py-12 pl-2">
         <div class="max-w-screen-lg mx-auto sm:px-6 lg:px-8">
-                <div class="grid md:grid-cols-7 gap-5">
+                <div class="grid md:grid-cols-7 gap-20">
                     <div class="col-span-4">
                         @if (isset($thanks))
                             <h4 class="thankyou">{{ $thanks }}</h4>
                         @endif
                         @if($articles->isNotEmpty())
                             @foreach($articles as $key => $art)
-                                <h2 id="{{ $key }}"><a href="#{{ $key }}"
+                                <h2 class="text-2xl"text-2xl id="{{ $key }}"><a class="dashlink" href="#{{ $key }}"
                                                        v-on:click="toggleActive({{ $key }})">{{$art->heading}}</a></h2>
                                 <div class="{{ $key }}" style="display:none;">{!! $art->body !!}
                                     @if(count($art->comments) > 0)<p>Kommentarer:</p>
@@ -25,8 +25,8 @@
                                             href="https://<?php echo $server = $_SERVER['SERVER_NAME'];?>/articles/{{ $art->id }}">https://<?php echo $server = $_SERVER['SERVER_NAME'];  ?>
                                             /articles/{{ $art->id }}</a></p>
                                 </div>
-                                <p><a href="comments/create?artid={{ $art->id }}">Återkoppla/Kommentera</a></p>
-                                <hr>
+                                <p><a class="text-blue-600 hover:underline" href="comments/create?artid={{ $art->id }}">Återkoppla/Kommentera</a></p>
+                                    <hr class="my-5 border-blue-300 border-dashed border-1.5">
                             @endforeach
                             <p>
                                 {{$articles->render()}}
@@ -39,13 +39,10 @@
                         <form id="search" method="post" action="/blog">
                             @csrf
                             <div class="input-group">
-                                <input type="text" class="form-control" value="{{ $searchterm }}" name="search"/>
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-primary newmem">Sök</button>
-                                </div>
+                                <input type="text" class="form-control" value="{{ $searchterm }}" name="search"/><button type="submit" class="btn-blue">Sök</button>
                             </div>
                         </form>
-                        <h2>Kategorier</h2>
+                        <h2 class="text-2xl">Kategorier</h2>
                         <div>
                             <ul class="list-group">
                                 @if($requestcid || $searchterm)
