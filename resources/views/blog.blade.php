@@ -39,14 +39,14 @@
                         <form id="search" method="post" action="/blog">
                             @csrf
                             <div class="input-group">
-                                <input type="text" class="form-control" value="{{ $searchterm }}" name="search"/><button type="submit" class="btn-blue">Sök</button>
+                                <input type="text" class="form-control" value="{{ $searchterm }}" name="search"/> <button type="submit" class="btn-blue">Sök</button>
                             </div>
                         </form>
-                        <h2 class="text-2xl">Kategorier</h2>
+                        <h2 class="text-2xl mt-4">Kategorier</h2>
                         <div>
                             <ul class="list-group">
                                 @if($requestcid || $searchterm)
-                                    <li class="list-group-item"><a href="#" v-on:click="blogcatall()"><h5 id="allfat"
+                                    <li><a href="#" v-on:click="blogcatall()"><h5 id="allfat"
                                                                                                           @if($requestcid == "allcat")style='color:green;font-weight:600'@endif>
                                                 Alla ({{ $allart }})</h5></a></li>@endif
                                 <form id="showall" action="/blog">
@@ -55,7 +55,7 @@
                                 @foreach($categories as $c)
                                     <form id="c{{ $c->id }}" action="/blog">
                                         <input type="hidden" name="cid" value="{{ $c->id }}">
-                                        <li class="list-group-item"><a href="#" v-on:click="blogcatcid('c{{ $c->id}}')">
+                                        <li class="my-2"><a class="text-blue-600 hover:underline font-bold" href="#" v-on:click="blogcatcid('c{{ $c->id}}')">
                                                 <h5 @if($requestcid == $c->id)style='color:green;font-weight:600'@endif>{{$c->name }}
                                                     ({{$c->numcat }})</h5></a></li>
                                     </form>
