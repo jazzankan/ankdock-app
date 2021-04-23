@@ -9,7 +9,8 @@
                     @if($articles->isNotEmpty())
                         @foreach($articles as $key => $art)
                             <div x-data="{ isOpen: false }">
-                                <h2 class="text-2xl" text-2xl id="{{ $key }}"><a class="dashlink" href="#{{ $key }}" x-on:click="isOpen = !isOpen">{{$art->heading}}</a>
+                                <h2 class="text-2xl" text-2xl id="{{ $key }}"><a class="dashlink" href="#{{ $key }}"
+                                                                                 x-on:click="isOpen = !isOpen">{{$art->heading}}</a>
                                 </h2>
                                 <div x-show="isOpen" class="{{ $key }} my-3">{!! $art->body !!}
                                     @if(count($art->comments) > 0)<p>Kommentarer:</p>
@@ -50,8 +51,9 @@
                     <div>
                         <ul class="list-group">
                             @if($requestcid || $searchterm)
-                                <li><a href="#" v-on:click="blogcatall()"><h5 id="allfat"
-                                                                              @if($requestcid == "allcat")style='color:green;font-weight:600'@endif>
+                                <li><a class="text-blue-600 hover:underline font-bold" href="#"
+                                       x-on:click="blogcatall()"><h5 id="allfat"
+                                                                     @if($requestcid == "allcat")style='color:green;font-weight:600'@endif>
                                             Alla ({{ $allart }})</h5></a></li>@endif
                             <form id="showall" action="/blog">
                                 <input type="hidden" id="allcat" name="cid" value="allcat">
@@ -60,7 +62,7 @@
                                 <form id="c{{ $c->id }}" action="/blog">
                                     <input type="hidden" name="cid" value="{{ $c->id }}">
                                     <li class="my-2"><a class="text-blue-600 hover:underline font-bold" href="#"
-                                                        v-on:click="blogcatcid('c{{ $c->id}}')">
+                                                        x-on:click="blogcatcid('c{{ $c->id}}')">
                                             <h5 @if($requestcid == $c->id)style='color:green;font-weight:600'@endif>{{$c->name }}
                                                 ({{$c->numcat }})</h5></a></li>
                                 </form>
