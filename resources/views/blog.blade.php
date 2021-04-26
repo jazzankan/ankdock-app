@@ -43,7 +43,7 @@
                     <form id="search" method="post" action="/blog">
                         @csrf
                         <div class="input-group">
-                            <input type="text" class="form-control" value="{{ $searchterm }}" name="search"/>
+                            <input type="text" class="border rounded-lg text-gray-700" value="{{ $searchterm }}" name="search"/>
                             <button type="submit" class="btn-blue">Sök</button>
                         </div>
                     </form>
@@ -52,7 +52,7 @@
                         <ul class="list-group">
                             @if($requestcid || $searchterm)
                                 <li><a class="text-blue-600 hover:underline font-bold" href="#"
-                                       x-on:click="blogcatall()"><h5 id="allfat"
+                                       onclick="blogcatall()"><h5 id="allfat"
                                                                      @if($requestcid == "allcat")style='color:green;font-weight:600'@endif>
                                             Alla ({{ $allart }})</h5></a></li>@endif
                             <form id="showall" action="/blog">
@@ -62,7 +62,7 @@
                                 <form id="c{{ $c->id }}" action="/blog">
                                     <input type="hidden" name="cid" value="{{ $c->id }}">
                                     <li class="my-2"><a class="text-blue-600 hover:underline font-bold" href="#"
-                                                        x-on:click="blogcatcid('c{{ $c->id}}')">
+                                                        onclick="blogcatcid('c{{ $c->id}}')">
                                             <h5 @if($requestcid == $c->id)style='color:green;font-weight:600'@endif>{{$c->name }}
                                                 ({{$c->numcat }})</h5></a></li>
                                 </form>
@@ -73,4 +73,14 @@
             </div>
         </div>
     </div>
+    <script>
+        function blogcatcid(cid) {
+            document.getElementById(cid).submit()
+        }
+    </script>
+    <script>
+        function blogcatall(cid) {
+            document.getElementById('showall').submit();
+        }
+    </script>
 </x-headless-app>

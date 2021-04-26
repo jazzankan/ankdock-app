@@ -10,6 +10,7 @@ use App\Http\Controllers\FileController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,4 +68,7 @@ Route::resource('/categories', CategoryController::class)
 
 Route::get('/blog', [BlogController::class,'index']);
 Route::post('/blog', [BlogController::class,'index']);
+
+Route::resource('/comments', CommentController::class)
+    ->name('*','comments');
 

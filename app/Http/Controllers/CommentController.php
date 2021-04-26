@@ -38,7 +38,7 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $article = Article::where('id', $request->artid)->first();
 
