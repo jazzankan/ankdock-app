@@ -13,9 +13,9 @@
                                                                                  x-on:click="isOpen = !isOpen">{{$art->heading}}</a>
                                 </h2>
                                 <div x-show="isOpen" class="{{ $key }} my-3">{!! $art->body !!}
-                                    @if(count($art->comments) > 0)<p>Kommentarer:</p>
+                                    @if(count($art->comments) > 0)<p class="mt-4">Kommentarer:</p>
                                     @foreach($art->comments as $com)
-                                        <p><span class="commentbody">{{ $com->body }}</span><br><b>{{ $com->name }}</b>
+                                        <p class="my-2"><span class="text-yellow-900">{{ $com->body }}</span><br><b>{{ $com->name }}</b>
                                         </p>
                                     @endforeach
                                     @endif
