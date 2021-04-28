@@ -23,7 +23,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        $comments = Comment::where('published', 'no')->where('reviewed', 'no')->orderBy('created_at', 'desc')->get();
+        $comments = Comment::where('published', 'no')->where('reviewed', 'no')->orderBy('created_at', 'asc')->get();
         $articles = Article::all();
 
         $comments->each(function ($item, $key) use ($articles){

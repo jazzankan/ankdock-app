@@ -13,18 +13,18 @@
                     </div>
                 </div>
                 <p>Inskickad av <strong>{{ $comment->name }}</strong><br> {{ $comment->email }}</p>
-                <p>Vill ha publicerad: @if($comment->wishpublic === 'yes')Ja @else Nej @endif</p>
+                <p class="my-3">Vill ha publicerad: @if($comment->wishpublic === 'yes')<strong>Ja</strong> @else <strong>Nej</strong> @endif</p>
                 @if($comment->wishpublic ==='yes')
                     <div class="form-group">
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" name="published" value="yes">
+                        <div>
+                            <input type="checkbox" class="my-2" name="published" value="yes">
                             <label class="form-check-label" for="publish">Publicera</label>
                         </div>
                     </div>
                 @endif
                 <div class="form-group">
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" name="reviewed" value="yes" checked="checked">
+                    <div>
+                        <input type="checkbox" class="my-2" name="reviewed" value="yes" checked="checked">
                         <label class="form-check-label" for="publish">Granskad</label>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
         <div>
             <p>
             @if ($errors->any())
-                <div class="alert alert-danger">
+                <div class="text-red-600">
                     <ul>
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>

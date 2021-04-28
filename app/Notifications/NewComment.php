@@ -42,12 +42,13 @@ class NewComment extends Notification
      */
     public function toMail($notifiable)
     {
+        $publ = ($this->comment->wishpublic)=='yes' ? "Ja" : "Nej";
         return (new MailMessage)
 
             ->from('anders@webbsallad.se', 'Ankhemmet')
             ->subject('Ny kommentar Ankhemmets blogg!')
             ->line('Det har skapats en ny kommentar')
-            ->line('Önskas publicerad: ' .  $this->comment->wishpublic)
+            ->line('Önskas publicerad: ' .  $publ)
             ->action('Åtgärda', url('/comments'));
     }
 

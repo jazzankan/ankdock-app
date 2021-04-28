@@ -4,7 +4,7 @@
             <div class="grid md:grid-cols-7 gap-20">
                 <div class="col-span-4">
                     @if (isset($thanks))
-                        <h4 class="thankyou">{{ $thanks }}</h4>
+                        <h4 class="bg-green-100 text-green-600 text-xl font-bold p-2 mb-4">{{ $thanks }}</h4>
                     @endif
                     @if($articles->isNotEmpty())
                         @foreach($articles as $key => $art)

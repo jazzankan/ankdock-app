@@ -6,7 +6,7 @@
                 <ul class="mt-4 list-decimal">
                     @foreach ($comments as $comment)
                         <li class="todo pl-2 py-3"><a class="text-blue-600 hover:underline" href="/comments/{{ $comment->id }}/edit"><strong>Kommentar:</strong></a> {{ $comment->body }}<br>
-                            <strong>Hör till inlägget "{{ $comment->belongart['heading'] }}". Kommentaren skapad {{ $comment->created_at }}.  @if($comment->wishpublic ==='yes') <span class="redalert">Vill ha publicerad!</span> @endif </strong></li>
+                            Hör till inlägget "{{ $comment->belongart['heading'] }}".<br> Kommentaren skapad {{ $comment->created_at }}.<br>  @if($comment->wishpublic ==='yes') <span class="redalert">Vill ha publicerad!</span> @endif</li>
                     @endforeach
                 </ul>
             @else
