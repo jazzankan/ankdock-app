@@ -11,6 +11,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,11 +24,14 @@ use App\Http\Controllers\CommentController;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['auth'])->name('dashboard');*/
 
 require __DIR__.'/auth.php';
+
+Route::get('/', [HomeController::class,'index'])
+    ->name('dashboard');
 
 Route::resource('/projects', ProjectController::class)
     ->middleware(['auth'])
