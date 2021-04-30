@@ -1,6 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
-        <img class="inline rounded" src="https://webbsallad.se/ankfiles/redduck100.png"><span class="ml-4 text-3xl text-red-900">Ankhemmet</span>
+        <p><img class="inline rounded" src="https://webbsallad.se/ankfiles/redduck100.png">
+            <span class="ml-4 text-3xl text-red-900">Kläckt från <a class="underline hover:text-blue-600" href="localhost/about">Ankhemmet</a></span></p>
     </x-slot>
     <div class="py-12 pl-2">
         <div class="max-w-screen-lg mx-auto sm:px-6 lg:px-8">

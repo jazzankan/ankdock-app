@@ -18,7 +18,7 @@
                     <p><a class="dashlink" href="/articles">Blogginlägg</a> - skapa och redigera</p>
                     <p><a class="dashlink" href="/comments">Nya bloggkommentarer</a></p>
                     <p><a class="dashlink" href="/categories">Bloggkategorier</a> - skapa och redigera</p>
-                    <p><a class="dashlink" href="/about">Om Ankhemmet</a> - lite info för bloggbesökare</p>
+                    <p><a class="dashlink" href="/about">Om Ankhemmet</a> - länk finns från publika sidan</p>
                     <hr class="hrdash">
                     <p>Externa visningar: <b>{{ $visitingnumber }}</b>, sedan 2021-04-29</p>
 
