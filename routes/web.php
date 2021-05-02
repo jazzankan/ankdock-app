@@ -33,6 +33,10 @@ require __DIR__.'/auth.php';
 Route::get('/', [HomeController::class,'index'])
     ->name('dashboard');
 
+Route::get('/about', function () {
+    return view('about');
+});
+
 Route::resource('/projects', ProjectController::class)
     ->middleware(['auth'])
     ->name('*','projlist');
