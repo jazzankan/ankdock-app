@@ -1,4 +1,4 @@
-<x-headless-app>
+<x-app-layout>
     <div class="py-12 pl-2">
         <div class="max-w-screen-lg mx-auto sm:px-6 lg:px-8">
             <h2 class="text-2xl">Hej! Tack för att du vill kommentera inlägget "<span
@@ -67,4 +67,4 @@
             </div>
         </div>
     </div>
-</x-headless-app>
+</x-app-layout>
