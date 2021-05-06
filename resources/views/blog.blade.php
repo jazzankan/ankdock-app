@@ -27,9 +27,8 @@
                             </div>
                             <p>Kategori: {{ $art->catname }}</p>
                             <p>Publicerad: {{$art->updated_at->format('Y-m-d')}}</p>
-                            <div class="{{ $key }}" style="display:none;">
-                                <p>Direktlänk: <a
-                                        href="https://<?php echo $server = $_SERVER['SERVER_NAME'];?>/articles/{{ $art->id }}">https://<?php echo $server = $_SERVER['SERVER_NAME'];  ?>
+                            <div class="{{ $key }}">
+                                <p>Direktlänk: <a class="text-blue-600 hover:underline" href="https://<?php echo $server = $_SERVER['SERVER_NAME'];?>/articles/{{ $art->id }}">https://<?php echo $server = $_SERVER['SERVER_NAME'];  ?>
                                         /articles/{{ $art->id }}</a></p>
                             </div>
                             <p><a class="text-blue-600 hover:underline" href="comments/create?artid={{ $art->id }}">Återkoppla/Kommentera</a>
