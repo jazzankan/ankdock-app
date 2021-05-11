@@ -28,6 +28,10 @@
                             <label><input type="radio" name="priority" value="m" {{ ($todo->priority === 'm') ? 'checked' : '' }}> Medelprioriterad</label>
                             <label><input type="radio" name="priority"  value="h" {{ ($todo->priority === 'h') ? 'checked' : ''  }}> Högprioriterad</label>
                         </div>
+                        <div>
+                            <label for="title">Ska utföras av:</label>
+                            <input type="text" class="border rounded-lg mb-6" value="{{ $todo->assigned }}" name="assigned"/>
+                        </div>
                             <div>
                                 <div class="mb-6">
                                     <input type="checkbox" class="form-checkbox" id="delete" name="delete" value="delete">

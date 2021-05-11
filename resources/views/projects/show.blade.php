@@ -4,7 +4,7 @@
             <div class="mr-2 leading-10"><a href="/projects/" class="btn-blue text-xs font-bold">Projektlistan</a> <a
                     class="btn btn-blue text-xs font-bold" href="/projects/{{ $project->id }}/edit">Redigera
                     projektet</a> <a href="/upload/{{ $project->id }}" class="btn-blue text-xs font-bold">Ladda upp
-                    fil</a> <a class="btn-gray text-xs font-bold whitespace-nowrap"
+                    fil</a> <a class="btn-gray text-xs font-bold whitespace-nowrap inline-block md:inline"
                                href="/projcomments/create?projid={{ $project->id }}">Ny kommentar</a>
             </div>
             <div class="pl-2">
@@ -71,11 +71,11 @@
                             @foreach ($belongingtodos as $todo)
                                 @if($todo->status === 'n')
                                     <li x-data="{ isOpen: false }" class="todo pl-2 py-2.5"><a
-                                            class="text-blue-700 hover:underline mr-4"
+                                            class="text-blue-700 hover:underline block md:inline mr-3"
                                             href="/todos/{{ $todo->id }}/edit">{{ $todo->title }}</a><span
                                             class="md:float-right mr-4"> Deadline: <span
                                                 @if($todo['deadline'] <= $today)class="text-red-600"@endif><b>{{ $todo->deadline }}</b></span>&nbsp<span
-                                                class=""><b>{{ $todo->priority }}</b></span>&nbsp<span
+                                                class="text-red-600"><b>{{ $todo->priority }}</b></span>&nbsp<span
                                                 class=""><b>{{$todo->assigned}}</b></span>&nbsp<span>@if($todo->details)
                                                     <a x-on:click="isOpen = !isOpen"
                                                        class="text-blue-700 hover:underline"
@@ -96,9 +96,9 @@
                             @foreach ($belongingtodos as $todo)
                                 @if($todo->status === 'o')
                                     <li x-data="{ isOpen: false }" class="todo pl-2 py-2.5"><a
-                                            class="text-blue-700 hover:underline"
+                                            class="text-blue-700 hover:underline block md:inline"
                                             href="/todos/{{ $todo->id }}/edit">{{ $todo->title }}</a><span
-                                            class="float-right mr-4"> Deadline: <span
+                                            class="md:float-right mr-4"> Deadline: <span
                                                 @if($todo['deadline'] <= $today)class="text-red-600"@endif><b>{{ $todo->deadline }}</b></span>&nbsp<span
                                                 class=""><b>{{ $todo->priority }}</b></span>&nbsp<span
                                                 class=""><b>{{$todo->assigned}}</b></span>&nbsp<span>@if($todo->details)
@@ -121,9 +121,9 @@
                             @foreach ($belongingtodos as $todo)
                                 @if($todo->status === 'd')
                                     <li x-data="{ isOpen: false }" class="todo pl-2 py-2.5"><a
-                                            class="text-blue-700 hover:underline"
+                                            class="text-blue-700 hover:underline block md:inline"
                                             href="/todos/{{ $todo->id }}/edit">{{ $todo->title }}</a><span
-                                            class="float-right mr-4"> Deadline: <span><b>{{ $todo->deadline }}</b></span>&nbsp<span
+                                            class="md:float-right mr-4"> Deadline: <span><b>{{ $todo->deadline }}</b></span>&nbsp<span
                                                 class=""><b>{{ $todo->priority }}</b></span>&nbsp<span
                                                 class=""><b>{{$todo->assigned}}</b></span>&nbsp<span>@if($todo->details)
                                                     <a x-on:click="isOpen = !isOpen"

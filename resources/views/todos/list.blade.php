@@ -6,7 +6,7 @@
                     <h1 class="text-3xl mb-2">Ofärdiga arbetsuppgifter</h1>
                     <ul class="border border-gray-300 border-opacity-70">
                         @foreach ($undonetodos as $t)
-                            <li class="todo pl-2 py-2.5"><h4 class="text-lg">{{ $t->title }}</h4> @if($t['deadline']) Deadline: <span
+                            <li class="todo pl-2 py-2.5"><h4 class="text-lg font-bold">{{ $t->title }}</h4> @if($t['deadline']) Deadline: <span
                                     @if($t['deadline'] <= $today)class="text-red-600"@endif>{{ $t->deadline }}</span>@endif
                                 <br>
                                 <h5>Tillhör projekt: <a class="dashlink" href="/projects/{{ $t->project_id }}">{{ $t->projname }}</a>

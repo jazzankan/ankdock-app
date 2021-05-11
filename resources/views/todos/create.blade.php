@@ -21,6 +21,10 @@
                             <label><input type="radio" name="priority"  value="h" {{ (old('priority') === 'h') ? 'checked' : '' }}> Högprioriterad</label>
                         </div>
                         <div>
+                            <label for="title">Ska utföras av:</label>
+                            <input type="text" class="border rounded-lg mb-6" value="{{ old('assigned') }}" name="assigned"/>
+                        </div>
+                        <div>
                             <input type="hidden" value="{{ $taskProject->id }}"  name="project_id"/>
                         </div>
                         <button type="submit" class="btn-blue">Skapa</button>

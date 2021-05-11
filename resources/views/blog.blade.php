@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <p><img class="inline rounded" src="https://webbsallad.se/ankfiles/redduck100.png">
-            <span class="ml-4 text-2xl md:text-3xl text-red-900">Kläckt från <a class="underline hover:text-blue-600" href="/about">Ankhemmet</a></span></p>
+            <span class="ml-2 text-xl md:text-3xl text-red-900">Kläckt från <a class="underline hover:text-blue-600" href="/about">Ankhemmet</a></span></p>
     </x-slot>
     <div class="py-12 pl-2">
         <div class="max-w-screen-lg mx-auto sm:px-6 lg:px-8">
@@ -47,7 +47,7 @@
                         @csrf
                         <div class="input-group">
                             <input type="text" class="border rounded-lg text-gray-700" value="{{ $searchterm }}" name="search"/>
-                            <button type="submit" class="btn-blue">Sök</button>
+                            <button type="submit" class="btn-blue mt-2">Sök</button>
                         </div>
                     </form>
                     <h2 class="text-2xl mt-4">Kategorier</h2>

@@ -20,4 +20,7 @@
     li.todo:nth-child(even){
         @apply bg-blue-100;
     }
+    a {
+        @apply text-blue-600;
+    }
 }
