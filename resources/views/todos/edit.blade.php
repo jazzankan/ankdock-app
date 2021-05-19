@@ -15,7 +15,7 @@
                     </fieldset>
                     <div class="pl-2">
                         <label for="title">Uppgift:</label><br>
-                        <input type="text" class="max-w-lg w-full mt-2 mb-6 px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-green-500" value="{{ $todo->title }}" name="title"/>
+                        <input type="text" maxlength="45" class="max-w-lg w-full mt-2 mb-6 px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-green-500" value="{{ $todo->title }}" name="title"/>
                         <div>
                             <label for="description">Detaljer:</label><br>
                             <textarea class="mb-6 w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none" rows="4" id="description" name="details">{!! $todo->details !!}</textarea>
