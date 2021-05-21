@@ -9,6 +9,11 @@
             </div>
             <div class="pl-2">
                 <h1 class="text-3xl mb-3 mt-3">{{ $project->title }}</h1>
+                @if(Session::has('mailfail'))
+                    <div class="text-red-600 font-bold">
+                        {{ Session::get('mailfail')}}
+                    </div>
+                @endif
                 <p class="font-bold">Beskrivning:</p>
                 {!! $project->description !!}
                 @if($project->deadline)
