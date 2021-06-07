@@ -5,6 +5,11 @@
             <div class="my-4 pl-2">
                 <a href="/projects/create" class="btn-blue text-xs font-bold">Nytt projekt</a> <a class="btn btn-blue text-xs font-bold"href="/projects?arkiv=y">Arkiverade projekt</a>
             </div>
+            @if(Session::has('mailfail'))
+                <div class="text-red-600 font-bold">
+                    {{ Session::get('mailfail')}}
+                </div>
+            @endif
             <div class="bg-white overflow-hidden shadow-sm border-2 mt-5">
                 <div>
                     @if(count($visibleproj)>0)

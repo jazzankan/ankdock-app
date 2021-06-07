@@ -82,6 +82,7 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+        $mailfail = "";
         $request['visible'] = 'y';
         $request['deadline'] = $request['date'];
         $getSharingUsers = null;
@@ -109,11 +110,15 @@ class ProjectController extends Controller
                     $g->projects()->attach($project->id);
                 }
                 if ($g->id !== $user_id) {
-                    $g->notify(new NewProject());
+                    try {
+                        $g->notify(new NewProject());
+                    } catch(Exception $e) {
+                        $mailfail = 'OBS! Mail om nytt projekt till medarbetare funkade inte!';
+                    }
                 }
             }
         }
-        return redirect('/projects');
+        return redirect('/projects')->with('mailfail',$mailfail);
     }
 
     /**
