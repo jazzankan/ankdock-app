@@ -58,6 +58,7 @@ class TodoController extends Controller
      */
     public function store(Request $request)
     {
+        $mailfail = "";
         $request['status'] = 'n';
         $request['deadline'] = $request['date'];
         $detailstring = $request['details'];
@@ -83,13 +84,17 @@ class TodoController extends Controller
             $query->where('project_user.project_id', '=',$thisprojid);
         })->get();
 
+        try {
         foreach ($mailusers as $mu) {
-            if($mu->id !== $myself){
+            if ($mu->id !== $myself) {
                 $mu->notify(new ChangedProject($new, $fixed));
+                    }
+                }
+            } catch (\Exception $e) {
+                $mailfail = 'OBS! Mail till medarbetare om ny arbetsuppgift funkade inte!';
             }
-        }
 
-        return redirect('/projects/' . $request['project_id']);
+        return redirect('/projects/' . $request['project_id'])->with('mailfail',$mailfail);
     }
 
     /**

@@ -112,8 +112,8 @@ class ProjectController extends Controller
                 if ($g->id !== $user_id) {
                     try {
                         $g->notify(new NewProject());
-                    } catch(Exception $e) {
-                        $mailfail = 'OBS! Mail om nytt projekt till medarbetare funkade inte!';
+                    } catch(\Exception $e) {
+                        $mailfail = 'OBS! Mail till medarbetare om nytt projekt funkade inte!';
                     }
                 }
             }
@@ -239,8 +239,8 @@ class ProjectController extends Controller
                     if ($g->id !== $user_id) {
                         try {
                             $g->notify(new ChangedProject());
-                        } catch(Exception $e) {
-                            $mailfail = 'OBS! Mail om ändring till medarbetare funkade inte';
+                        } catch(\Exception $e) {
+                            $mailfail = 'OBS! Mail till medarbetare om ändring funkade inte';
                         }
                     }
                 }
