@@ -133,6 +133,7 @@ class TodoController extends Controller
      */
     public function update(Request $request, Todo $todo)
     {
+        $mailfail = "";
         $thisprojid = $request['project_id'];
         $request['deadline'] = $request['date'];
         if ($request['delete'] === 'delete') {
@@ -161,13 +162,18 @@ class TodoController extends Controller
         })->get();
 
         if($request['smail']) {
-            foreach ($mailusers as $mu) {
-                if ($mu->id !== $myself) {
-                    $mu->notify(new ChangedProject($new, $fixed));
+            try {
+                foreach ($mailusers as $mu) {
+                    if ($mu->id !== $myself) {
+                        $mu->notify(new ChangedProject($new, $fixed));
+                    }
                 }
+            } catch (\Exception $e) {
+                $mailfail = 'OBS! Mail till medarbetare om ändrad arbetsuppgift funkade inte!';
             }
         }
-        return redirect('/projects/' . $thisprojid);
+
+        return redirect('/projects/' . $thisprojid)->with('mailfail',$mailfail);
     }
 
     /**
