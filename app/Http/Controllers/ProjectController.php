@@ -203,11 +203,6 @@ class ProjectController extends Controller
     {
         $mailfail = "";
 
-        if ($request['delete'] === 'delete') {
-            $this->destroy($project);
-            return redirect('/projects');
-        }
-
         if ($request['visible'] != 'n') {
             $request['visible'] = 'y';
         }
@@ -225,8 +220,6 @@ class ProjectController extends Controller
         $allUsers = User::all();
         $me = auth()->user();
         $user_id = auth()->id();
-
-        $project->update(request(['title', 'description', 'deadline', 'must', 'visible']));
 
         if ($request['selshare']) {
             $getSharingUsers = User::whereIn('name', $request['selshare'])->get();
@@ -257,6 +250,14 @@ class ProjectController extends Controller
                     $a->projects()->detach($project->id);
                 }
             }
+        }
+
+        if ($request['delete'] === 'delete') {
+            $this->destroy($project);
+            return redirect('/projects');
+        }
+        else{
+            $project->update(request(['title', 'description', 'deadline', 'must', 'visible']));
         }
 
         return redirect('/projects/'.$project->id)->with('mailfail',$mailfail);

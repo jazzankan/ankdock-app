@@ -6,6 +6,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use App\Models\Project;
+use App\Models\Todo;
 
 class DelArchProjTodo extends Notification
 {
@@ -16,9 +18,15 @@ class DelArchProjTodo extends Notification
      *
      * @return void
      */
-    public function __construct()
+    public $project;
+    public $todo;
+    public $myname;
+
+    public function __construct($projid, $todoid, $deleted = false)
     {
-        //
+        $this->project = Project::where('id', $projid)->firstOrFail();
+        $this->todo = Todo::where('id', $todoid)->firstOrFail();
+        $this->myname = auth()->user()->name;
     }
 
     /**
@@ -41,6 +49,8 @@ class DelArchProjTodo extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
+                    ->from('anders@webbsallad.se', 'Ankhemmet')
+                    ->subject('Projektet "' .$this->project->title .'" har raderats av ' .$this->myname .'.')
                     ->line('The introduction to the notification.')
                     ->action('Notification Action', url('/'))
                     ->line('Thank you for using our application!');
