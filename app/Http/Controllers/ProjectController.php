@@ -10,6 +10,7 @@ use App\Models\File;
 use App\Models\Projcomment;
 use App\Notifications\ChangedProject;
 use App\Notifications\NewProject;
+use App\Notifications\DelArchProjTodo;
 use Exception;
 
 class ProjectController extends Controller
@@ -208,15 +209,16 @@ class ProjectController extends Controller
         }
         $request['deadline'] = $request['date'];
 
-        $attributes = request()->validate([
+        if ($request['delete'] != 'delete') {
+            $attributes = request()->validate([
 
-            'title' => 'required | min:3',
-            'description' => 'required | min:5',
-            'deadline' => 'nullable|date',
-            'must' => 'required',
-            'visible' => 'required'
-        ]);
-
+                'title' => 'required | min:3',
+                'description' => 'required | min:5',
+                'deadline' => 'nullable|date',
+                'must' => 'required',
+                'visible' => 'required'
+            ]);
+        }
         $allUsers = User::all();
         $me = auth()->user();
         $user_id = auth()->id();
@@ -227,13 +229,21 @@ class ProjectController extends Controller
                 if (!$g->projects->contains($project->id)) {
                     $g->projects()->attach($project->id);
                 }
-
-                if ($request['sendmail']) {
+                if ($request['sendmail'] && $request['delete'] === 'delete') {
+                    if ($g->id !== $user_id) {
+                        try {
+                            $g->notify(new DelArchProjTodo($project->id));
+                        } catch(\Exception $e) {
+                            $mailfail = 'OBS! Mail till medarbetare om borttaget projekt funkade inte.';
+                        }
+                    }
+                }
+                if ($request['sendmail'] && $request['delete'] != 'delete') {
                     if ($g->id !== $user_id) {
                         try {
                             $g->notify(new ChangedProject());
                         } catch(\Exception $e) {
-                            $mailfail = 'OBS! Mail till medarbetare om ändring funkade inte';
+                            $mailfail = 'OBS! Mail till medarbetare om ändring funkade inte.';
                         }
                     }
                 }
@@ -292,7 +302,6 @@ class ProjectController extends Controller
                 $t->delete();
             }
         }
-
         $project->delete();
     }
 }

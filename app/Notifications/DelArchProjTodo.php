@@ -22,10 +22,12 @@ class DelArchProjTodo extends Notification
     public $todo;
     public $myname;
 
-    public function __construct($projid, $todoid, $deleted = false)
+    public function __construct($projid, $todoid = null, $deleted = false)
     {
         $this->project = Project::where('id', $projid)->firstOrFail();
-        $this->todo = Todo::where('id', $todoid)->firstOrFail();
+        if($todoid != null) {
+            $this->todo = Todo::where('id', $todoid)->firstOrFail();
+        }
         $this->myname = auth()->user()->name;
     }
 
