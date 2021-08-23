@@ -21,14 +21,17 @@ class DelArchProjTodo extends Notification
     public $project;
     public $todo;
     public $myname;
+    public $deleted;
 
-    public function __construct($projid, $todoid = null, $deleted = false)
+    public function __construct($projid, $deleted = false, $todoid = null)
     {
         $this->project = Project::where('id', $projid)->firstOrFail();
         if($todoid != null) {
             $this->todo = Todo::where('id', $todoid)->firstOrFail();
         }
         $this->myname = auth()->user()->name;
+        $this->deleted = $deleted;
+        $this->todoid = $todoid;
     }
 
     /**
@@ -50,12 +53,12 @@ class DelArchProjTodo extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-                    ->from('anders@webbsallad.se', 'Ankhemmet')
-                    ->subject('Projektet "' .$this->project->title .'" har raderats av ' .$this->myname .'.')
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+        if($this->deleted === true && $this->todoid === null) {
+            return (new MailMessage)
+                ->from('anders@webbsallad.se', 'Ankhemmet')
+                ->subject('Projektet "'.$this->project->title.'" har raderats.')
+                ->line('Projektet "'.$this->project->title.'" har raderats av '.$this->myname.'.');
+        }
     }
 
     /**

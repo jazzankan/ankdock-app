@@ -232,7 +232,7 @@ class ProjectController extends Controller
                 if ($request['sendmail'] && $request['delete'] === 'delete') {
                     if ($g->id !== $user_id) {
                         try {
-                            $g->notify(new DelArchProjTodo($project->id));
+                            $g->notify(new DelArchProjTodo($project->id,true));
                         } catch(\Exception $e) {
                             $mailfail = 'OBS! Mail till medarbetare om borttaget projekt funkade inte.';
                         }
