@@ -59,6 +59,26 @@ class DelArchProjTodo extends Notification
                 ->subject('Projektet "'.$this->project->title.'" har raderats.')
                 ->line('Projektet "'.$this->project->title.'" har raderats av '.$this->myname.'.');
         }
+        elseif($this->deleted === false && $this->todoid === null) {
+            return (new MailMessage)
+                ->from('anders@webbsallad.se', 'Ankhemmet')
+                ->subject('Projektet "'.$this->project->title.'" har arkiverats.')
+                ->line('Projektet "'.$this->project->title.'" har arkiverats av '.$this->myname.'.');
+        }
+        elseif($this->todoid != null){
+            return (new MailMessage)
+            ->from('anders@webbsallad.se', 'Ankhemmet')
+                ->subject('Arbetsuppgiften ' . $this->todo->title . ' har ändrats.')
+                ->line( 'Arbetsuppgiften "' . $this->todo->title. '" tillhörande projektet "' . $this->project->title . '" har tagits bort')
+                ->line('Kanske var det något som inte behövde göras?')
+                ->action('Till projektet', url('https://ank.webbsallad.se/projects/'.$this->project->id));
+        }
+        else{
+            return (new MailMessage)
+                ->from('anders@webbsallad.se', 'Ankhemmet')
+                ->subject('Mailutskick misslyckades')
+                ->line('Något gick snett');
+        }
     }
 
     /**

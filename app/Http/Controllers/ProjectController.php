@@ -247,6 +247,15 @@ class ProjectController extends Controller
                         }
                     }
                 }
+                if ($request['sendmail'] && $request['visible'] === 'n') {
+                    if ($g->id !== $user_id) {
+                        try {
+                            $g->notify(new DelArchProjtodo($project->id));
+                        } catch(\Exception $e) {
+                            $mailfail = 'OBS! Mail till medarbetare om arkivering funkade inte.';
+                        }
+                    }
+                }
             }
             foreach ($allUsers as $a) {
                 if ($a->projects->contains($project->id) && $getSharingUsers->where('name',
