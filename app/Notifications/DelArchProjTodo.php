@@ -68,7 +68,7 @@ class DelArchProjTodo extends Notification
         elseif($this->todoid != null){
             return (new MailMessage)
             ->from('anders@webbsallad.se', 'Ankhemmet')
-                ->subject('Arbetsuppgiften ' . $this->todo->title . ' har ändrats.')
+                ->subject('Arbetsuppgiften ' . $this->todo->title . ' har tagits bort.')
                 ->line( 'Arbetsuppgiften "' . $this->todo->title. '" tillhörande projektet "' . $this->project->title . '" har tagits bort')
                 ->line('Kanske var det något som inte behövde göras?')
                 ->action('Till projektet', url('https://ank.webbsallad.se/projects/'.$this->project->id));

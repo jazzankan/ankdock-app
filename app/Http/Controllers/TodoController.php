@@ -8,6 +8,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Notifications\ChangedProject;
+use App\Notifications\DelArchProjTodo;
 use DB;
 
 class TodoController extends Controller
@@ -136,10 +137,6 @@ class TodoController extends Controller
         $mailfail = "";
         $thisprojid = $request['project_id'];
         $request['deadline'] = $request['date'];
-        if ($request['delete'] === 'delete') {
-            $this->destroy($todo);
-            return redirect('/projects/'.$thisprojid);
-        }
         $myself = auth()->id();
         $new = false;
         $fixed = true;
@@ -161,7 +158,7 @@ class TodoController extends Controller
             $query->where('project_id', '=', $thisprojid);
         })->get();
 
-        if($request['smail']) {
+        if($request['smail'] && $request['delete'] != 'delete') {
             try {
                 foreach ($mailusers as $mu) {
                     if ($mu->id !== $myself) {
@@ -171,6 +168,21 @@ class TodoController extends Controller
             } catch (\Exception $e) {
                 $mailfail = 'OBS! Mail till medarbetare om ändrad arbetsuppgift funkade inte!';
             }
+        }
+        if($request['smail'] && $request['delete'] === 'delete') {
+            try {
+                foreach ($mailusers as $mu) {
+                    if ($mu->id !== $myself) {
+                        $mu->notify(new DelArchProjTodo($thisprojid, true, $todo->id));
+                    }
+                }
+            } catch (\Exception $e) {
+                $mailfail = 'OBS! Mail till medarbetare om borttagen arbetsuppgift funkade inte!';
+            }
+        }
+        if ($request['delete'] === 'delete') {
+            $this->destroy($todo);
+            return redirect('/projects/'.$thisprojid);
         }
 
         return redirect('/projects/' . $thisprojid)->with('mailfail',$mailfail);
