@@ -137,8 +137,6 @@ class ProjectController extends Controller
         $belongingfiles = File::where('projectid', $project->id)->get();
         $belongingtodos = Todo::where('project_id', $project->id)->orderBy('deadline', 'ASC')->get();
 
-        $detlink = false;
-
         $belongingtodos->each(function ($todo, $key) {
             if ($todo['assigned']) {
                 $todo['assigned'] = " Utförs av: ".$todo['assigned'];
@@ -273,7 +271,7 @@ class ProjectController extends Controller
 
         if ($request['delete'] === 'delete') {
             $this->destroy($project);
-            return redirect('/projects');
+            return redirect('/projects')->with('mailfail', $mailfail);
         }
         else{
             $project->update(request(['title', 'description', 'deadline', 'must', 'visible']));

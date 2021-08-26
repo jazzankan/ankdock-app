@@ -182,7 +182,6 @@ class TodoController extends Controller
         }
         if ($request['delete'] === 'delete') {
             $this->destroy($todo);
-            return redirect('/projects/'.$thisprojid);
         }
 
         return redirect('/projects/' . $thisprojid)->with('mailfail',$mailfail);
