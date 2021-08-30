@@ -3,7 +3,7 @@
         <div class="max-w-screen-lg mx-auto sm:px-6 lg:px-8">
             <h1 class="text-3xl pl-2 mb-2">Mina projekt</h1>
             <div class="my-4 pl-2">
-                <a href="/projects/create" class="btn-blue text-xs font-bold">Nytt projekt</a> <a class="btn btn-blue text-xs font-bold"href="/projects?arkiv=y">Arkiverade projekt</a>
+                <a href="/projects/create" class="btn-blue text-xs font-bold">Nytt projekt</a> @if(!$archived)<a class="btn btn-blue text-xs font-bold"href="/projects?arkiv=y">Arkiverade projekt</a>@endif @if($archived)<a href="/projects/" class="btn-blue text-xs font-bold">Aktiva projekt</a>@endif
             </div>
             @if(Session::has('mailfail'))
                 <div class="text-red-600 font-bold">

@@ -33,8 +33,8 @@
                             </select>
                         </div>
                         <div class="mt-3" x-data="{ archive:true, erase:true }">
-                                <p x-show="archive" class="mb-2"><input type="checkbox" class="form-checkbox" id="visible" name="visible" value="n" x-on:click="erase = ! erase">
-                                    <label class="" for="visible">Arkivera projektet. Det syns då inte längre i den vanliga projektlistan.</label></p>
+                                @if($project->visible === 'y')<p x-show="archive" class="mb-2"><input type="checkbox" class="form-checkbox" id="visible" name="visible" value="n" x-on:click="erase = ! erase">
+                                    <label class="" for="visible">Arkivera projektet. Det syns då inte längre i den vanliga projektlistan.</label></p>@endif
                                 <p x-show="erase" class="mb-2"><input type="checkbox" class="form-checkbox" id="delete" name="delete" value="delete" x-on:click="archive = ! archive">
                                 <label class="" for="delete">Ta bort projektet för gott. All tillhörande data tas bort!</label></p>
                                 @if($sharing)

@@ -236,7 +236,7 @@ class ProjectController extends Controller
                         }
                     }
                 }
-                if ($request['sendmail'] && $request['delete'] != 'delete') {
+                if ($request['sendmail'] && $request['delete'] != 'delete' && $request['visible'] !== 'n') {
                     if ($g->id !== $user_id) {
                         try {
                             $g->notify(new ChangedProject());
