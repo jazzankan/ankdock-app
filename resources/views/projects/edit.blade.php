@@ -2,6 +2,7 @@
     <div class="py-12">
         <div class="max-w-screen-lg mx-auto sm:px-6 lg:px-8">
             <h1 class="text-3xl pl-2 mb-3">Redigera projektet <span class="text-blue-800">{{ $project->title }}</span></h1>
+            @if($project->visible === 'n')<h2 class="text-xl pl-2 mb-3 mt-3 text-red-600 font-bold">ARKIVERAT PROJEKT!</h2>@endif
             <div>
                 <form method="post" action="/projects/{{ $project->id  }}">
                     @method('PATCH')
@@ -31,8 +32,11 @@
                                     @endif
                                 @endforeach
                             </select>
+                            <input type="hidden" value="n" name="visible"/>
                         </div>
                         <div class="mt-3" x-data="{ archive:true, erase:true }">
+                            @if($project->visible === 'n')<p x-show="archive" class="mb-2"><input type="checkbox" class="form-checkbox" id="visible" name="visible" value="y" x-on:click="erase = ! erase">
+                                <label class="" for="visible">Aktivera projektet igen.</label></p>@endif
                                 @if($project->visible === 'y')<p x-show="archive" class="mb-2"><input type="checkbox" class="form-checkbox" id="visible" name="visible" value="n" x-on:click="erase = ! erase">
                                     <label class="" for="visible">Arkivera projektet. Det syns då inte längre i den vanliga projektlistan.</label></p>@endif
                                 <p x-show="erase" class="mb-2"><input type="checkbox" class="form-checkbox" id="delete" name="delete" value="delete" x-on:click="archive = ! archive">

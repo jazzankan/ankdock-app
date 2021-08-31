@@ -3,13 +3,13 @@
         <div class="my-4 pl-2">
             <div class="mr-2 leading-10"><a href="/projects/" class="btn-blue text-xs font-bold">Projektlistan</a> <a
                     class="btn btn-blue text-xs font-bold" href="/projects/{{ $project->id }}/edit">Redigera
-                    projektet</a> <a href="/upload/{{ $project->id }}" class="btn-blue text-xs font-bold">Ladda upp
+                    projektet</a> @if($project->visible === 'y')<a href="/upload/{{ $project->id }}" class="btn-blue text-xs font-bold">Ladda upp
                     fil</a> <a class="btn-gray text-xs font-bold whitespace-nowrap inline-block md:inline"
-                               href="/projcomments/create?projid={{ $project->id }}">Ny kommentar</a>
+                               href="/projcomments/create?projid={{ $project->id }}">Ny kommentar</a>@endif
             </div>
             <div class="pl-2">
                 <h1 class="text-3xl mb-3 mt-3">{{ $project->title }}</h1>
-                @if($project->visible === 'n')<h2 class="text-2xl mb-3 mt-3 text-red-600 font-bold">ARKIVERAT PROJEKT!</h2>@endif
+                @if($project->visible === 'n')<h2 class="text-xl mb-3 mt-3 text-red-600 font-bold">ARKIVERAT PROJEKT!</h2>@endif
                 @if(Session::has('mailfail'))
                     <div class="text-red-600 font-bold">
                         {{ Session::get('mailfail')}}
@@ -68,7 +68,7 @@
             <hr class="my-4">
             <div class="pl-2">
                 <h2 class="text-2xl mb-3">Arbetsuppgifter</h2>
-                <a href="/todos/create/{{ $project->id }}" class="btn-blue text-xs font-bold">Skapa arbetsuppgift</a>
+                @if($project->visible === 'y')<a href="/todos/create/{{ $project->id }}" class="btn-blue text-xs font-bold">Skapa arbetsuppgift</a>@endif
                 <div class="mt-4">
                     @if($belongingtodos->isNotEmpty())
                         <a name="todos"></a>
