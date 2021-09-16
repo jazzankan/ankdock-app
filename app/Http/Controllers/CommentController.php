@@ -62,9 +62,11 @@ class CommentController extends Controller
             'name' => 'required | min:3',
             'email' => 'required | email | unique:users,email',
             'body' => 'required | min:3',
-            'wishpublic' => 'required | in:yes,no'
+            'wishpublic' => 'required | in:yes,no',
+            'human' => 'required | max:3 | in:sex,6,SEX,Sex'
         ]);
-
+        $collection = collect($attributes)->except('human'); // $attributes är en array. Man kan inte använda except på en array
+        $attributes = $collection->toArray();
         Comment::create($attributes);
 
         $anders = User::where('id', 1)->first();

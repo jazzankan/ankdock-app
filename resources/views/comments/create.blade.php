@@ -39,6 +39,12 @@
                             <textarea class="mb-6 w-3/5 px-3 py-2 text-gray-700 border rounded-lg focus:outline-none"
                                       id="body" name="body" required>{{ old('body') }}</textarea>
                         </div>
+                        <div>
+                            <label for="name">Människotest. Vad kommer efter fem?</label><br>
+                            <input type="text"
+                                   class="max-w-xs mt-2 mb-6 px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-green-500"
+                                   value="" name="human" maxlength="3" required/></p>
+                        </div>
                         <input type="hidden" value="{{ $article->id }}" name="article_id"/>
                     </div>
                 </div>
@@ -46,12 +52,6 @@
                     <button type="submit" class="btn-blue">Skicka</button>
                 </p>
             </form>
-            <div class="mt-3" x-data="{ isOpen: false }">
-                <p x-on:click="isOpen = !isOpen"><a class="text-blue-600 hover:underline" href="#">Visa inlägget du vill
-                        kommentera här (ifall du behöver kolla
-                        något):</a></p>
-                <div x-show="isOpen">{!! $article->body !!}</div>
-            </div>
             <div>
                 <p>
                 @if ($errors->any())
@@ -64,6 +64,12 @@
                     </div>
                     @endif
                     </p>
+            </div>
+            <div class="mt-3" x-data="{ isOpen: false }">
+                <p x-on:click="isOpen = !isOpen"><a class="text-blue-600 hover:underline" href="#">Visa inlägget du vill
+                        kommentera här (ifall du behöver kolla
+                        något):</a></p>
+                <div x-show="isOpen">{!! $article->body !!}</div>
             </div>
         </div>
     </div>
