@@ -62,17 +62,17 @@
                                       value="3" {{ (old('importance') === '3') ? 'checked' : '' }}> 3 &nbsp;</label>
                     </div>
                     <div class=" mt-4"> Påminnelser:<br>
-                        <div class="radio" x-data="{ onceinput:false }">
+                        <div class="radio" @if(old('reminder') === 'once') x-data="{ onceinput: true }"@else x-data="{ onceinput: false }"@endif>
                         <label><input type="radio" name="reminder" x-on:click="onceinput = true"
                                value="once" {{ (old('reminder') === 'once') ? 'checked' : '' }}> En gång &nbsp; </label>
                             <label> <input type="radio" name="reminder" x-on:click="onceinput = false"
                                            value="yearly" {{ (old('reminder') === 'yearly') ? 'checked' : '' }}> Årligen</label>
-                            @if(old('date') != null)<div x-show="onceinput">
+                            <div x-show="onceinput">
                                 <div class="mt-3">
-                                    <input type="date" class="border rounded-lg mb-6" value="{{ old('date') != null ? old('date') : ''}}" name="date">
+                                    <input type="date" class="border rounded-lg mb-3" value="{{ old('date') != null ? old('date') : ''}}" name="date">
                                 </div>
                             </div>
-                        </div>@endif
+                        </div>
                     </div>
                     <button type="submit" class="btn-blue mt-4">Skapa</button>
             </form>
