@@ -111,6 +111,8 @@ class MemoryController extends Controller
             'source' => 'nullable',
             'link' => 'nullable',
             'importance' => 'required',
+            'reminder' => 'nullable | in:once,yearly',
+            'date' => 'nullable | date',
             'user_id' => 'required'
         ]);
         request()->validate([
