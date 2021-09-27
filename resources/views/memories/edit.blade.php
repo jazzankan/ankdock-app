@@ -48,6 +48,19 @@
                         <label> <input type="radio" name="importance" value="2" {{ ($memory->importance === 2  ) ? 'checked' : '' }}> 2 </label>
                         <label><input type="radio" name="importance" value="3"  {{ ($memory->importance === 3) ? 'checked' : '' }}> 3 </label>
                     </div>
+                    <div class=" mt-4"> Påminnelser:<br>
+                        <div class="radio" @if(old('reminder') === 'once') x-data="{ onceinput: true }"@else x-data="{ onceinput: false }"@endif>
+                            <label><input type="radio" name="reminder" x-on:click="onceinput = true"
+                                          value="once" {{ (old('reminder') === 'once') ? 'checked' : '' }}> En gång &nbsp; </label>
+                            <label> <input type="radio" name="reminder" x-on:click="onceinput = false"
+                                           value="yearly" {{ (old('reminder') === 'yearly') ? 'checked' : '' }}> Årligen</label>
+                            <div x-show="onceinput">
+                                <div class="mt-3">
+                                    <input type="date" class="border rounded-lg mb-3" value="{{ old('date') != null ? old('date') : ''}}" name="date">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <div class="mt-4">
                             <input type="checkbox" class="custom-control-input" id="delete" name="delete" value="delete">

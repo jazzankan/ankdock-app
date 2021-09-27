@@ -39,8 +39,9 @@
                         </select><br>
                         <div class="form-group row">
                             <div class="col-xs-2 mt-4" x-data="{ newtaginput:false }">
-                                Skapa och använd <a class="text-blue-700 hover:underline" href="#tags" x-on:click="newtaginput = !newtaginput">nya taggar:</a><br>
-                                <div  id=tags x-show="newtaginput">
+                                Skapa och använd <a class="text-blue-700 hover:underline" href="#tags"
+                                                    x-on:click="newtaginput = !newtaginput">nya taggar:</a><br>
+                                <div id=tags x-show="newtaginput">
                                     <input type="text"
                                            class="max-w-sm w-full mt-2 mb-6 px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-green-500"
                                            value="{{ old('newtag1') }}" name="newtag1"/><br>
@@ -62,14 +63,20 @@
                                       value="3" {{ (old('importance') === '3') ? 'checked' : '' }}> 3 &nbsp;</label>
                     </div>
                     <div class=" mt-4"> Påminnelser:<br>
-                        <div class="radio" @if(old('reminder') === 'once') x-data="{ onceinput: true }"@else x-data="{ onceinput: false }"@endif>
-                        <label><input type="radio" name="reminder" x-on:click="onceinput = true"
-                               value="once" {{ (old('reminder') === 'once') ? 'checked' : '' }}> En gång &nbsp; </label>
+                        <div class="radio" @if(old('reminder') === 'once') x-data="{ onceinput: true }"
+                             @else x-data="{ onceinput: false }"@endif>
+                            <label> <input type="radio" name="reminder" x-on:click="onceinput = false"
+                                           value="yearly" {{ (old('reminder') === 'noreminder') ? 'checked' : '' }}> Ingen
+                            </label>
+                            <label><input type="radio" name="reminder" x-on:click="onceinput = true"
+                                          value="once" {{ (old('reminder') === 'once') ? 'checked' : '' }}> En gång
+                                &nbsp; </label>
                             <label> <input type="radio" name="reminder" x-on:click="onceinput = false"
                                            value="yearly" {{ (old('reminder') === 'yearly') ? 'checked' : '' }}> Årligen</label>
                             <div x-show="onceinput">
                                 <div class="mt-3">
-                                    <input type="date" class="border rounded-lg mb-3" value="{{ old('date') != null ? old('date') : ''}}" name="date">
+                                    <input type="date" class="border rounded-lg mb-3"
+                                           value="{{ old('date') != null ? old('date') : ''}}" name="date">
                                 </div>
                             </div>
                         </div>
