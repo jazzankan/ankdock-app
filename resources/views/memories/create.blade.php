@@ -66,9 +66,8 @@
                         <div class="radio" @if(old('reminder') === 'once') x-data="{ onceinput: true }"
                              @else x-data="{ onceinput: false }"@endif>
                             <label> <input type="radio" name="reminder" x-on:click="onceinput = false"
-                                           value="yearly" {{ (old('reminder') === 'noreminder') ? 'checked' : '' }}> Ingen
-                            </label>
-                            <label><input type="radio" name="reminder" x-on:click="onceinput = true"
+                                           value="noreminder" {{ (old('reminder') === 'noreminder' || old('reminder') == null) ? 'checked' : '' }}> Ingen &nbsp;  </label>
+                            <label> <input type="radio" name="reminder" x-on:click="onceinput = true"
                                           value="once" {{ (old('reminder') === 'once') ? 'checked' : '' }}> En gång
                                 &nbsp; </label>
                             <label> <input type="radio" name="reminder" x-on:click="onceinput = false"
@@ -81,7 +80,9 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn-blue mt-4">Skapa</button>
+                    <div x-data="">
+                    <button type="submit" class="btn-blue mt-4" @click="handleClick">Skapa</button>
+                    </div>
             </form>
         </div>
         <div>
@@ -95,7 +96,10 @@
                 </div>
             @endif
         </div>
-    </div>
-    </div>
+        <script>
+            function handleClick(e) {
+                alert("Hello! I am an alert box!!");
+            }
+        </script>
     </div>
 </x-headless-app>
