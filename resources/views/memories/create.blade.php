@@ -62,8 +62,9 @@
                         <label><input type="radio" name="importance"
                                       value="3" {{ (old('importance') === '3') ? 'checked' : '' }}> 3 &nbsp;</label>
                     </div>
+                    <div x-data="{ onceinput: true }">
                     <div class=" mt-4"> Påminnelser:<br>
-                        <div class="radio" @if(old('reminder') === 'once') x-data="{ onceinput: true }"
+                        <div class="radio" @if(old('reminder') === 'once')
                              @else x-data="{ onceinput: false }"@endif>
                             <label> <input type="radio" name="reminder" x-on:click="onceinput = false"
                                            value="noreminder" {{ (old('reminder') === 'noreminder' || old('reminder') == null) ? 'checked' : '' }}> Ingen &nbsp;  </label>
@@ -80,8 +81,8 @@
                             </div>
                         </div>
                     </div>
-                    <div x-data="">
-                    <button type="submit" class="btn-blue mt-4" @click="handleClick">Skapa</button>
+
+                    <button type="submit" class="btn-blue mt-4" x-on:click="handleClick()">Skapa</button>
                     </div>
             </form>
         </div>
@@ -98,7 +99,9 @@
         </div>
         <script>
             function handleClick(e) {
-                alert("Hello! I am an alert box!!");
+                if(document.querySelector('input[name=reminder]:checked').value == "once" && document.querySelector('input[name=date]').value == "") {
+                    alert("Du måste välja ett datum för påminnelsen!");
+                }
             }
         </script>
     </div>
