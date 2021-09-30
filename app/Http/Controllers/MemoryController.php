@@ -111,7 +111,7 @@ class MemoryController extends Controller
             'source' => 'nullable',
             'link' => 'nullable',
             'importance' => 'required',
-            'reminder' => 'nullable | in:once,yearly',
+            'reminder' => 'nullable | in:noreminder,once,yearly',
             'date' => 'nullable | date',
             'user_id' => 'required'
         ]);
@@ -198,11 +198,13 @@ class MemoryController extends Controller
             'source' => 'nullable',
             'link' => 'nullable',
             'importance' => 'required',
+            'reminder' => 'nullable | in:noreminder,once,yearly',
+            'date' => 'nullable | date',
             'user_id' => 'required',
             'tags' => 'required_if:newtag1,==,null'
         ]);
 
-        $memory->update(request(['title','description','source','link','importance','user_id']));
+        $memory->update(request(['title','description','source','link','importance','reminder','date','user_id']));
         $selectedtags = $request['tags'];
         if($selectedtags) {
             $integerIDs = array_map('intval', $selectedtags);

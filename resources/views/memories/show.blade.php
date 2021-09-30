@@ -19,7 +19,9 @@
                 <p><strong>Senast ändrat: </strong> {{ $memory-> updated_at  }}</p>
             @endif
                 <p><strong>Taggar: </strong>@foreach($tags as $tag) {{ $tag->name }}&nbsp;@endforeach</p>
-                @if($memory->reminder != null)
+                @if($memory->reminder === 'noreminder' || $memory->reminder == null)
+                    <strong>Ingen påminnelse</strong>
+                @else
                 <p><strong>Påminnelse: </strong> {{ $memory-> date }} , @if($memory->reminder === 'yearly')årlig.@endif @if($memory->reminder === 'once') en gång.@endif</p>
                 @endif
                 @if(count($belongingfiles) > 0)

@@ -14,7 +14,7 @@ class AddReminderAndDateToUsers extends Migration
     public function up()
     {
         Schema::table('memories', function (Blueprint $table) {
-            $table->enum('reminder',array('once', 'yearly'))->nullable()->after('importance');
+            $table->enum('reminder',array('noreminder','once','yearly'))->nullable()->after('importance');
             $table->date('date')->nullable()->after('reminder');
         });
     }
