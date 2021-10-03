@@ -57,7 +57,16 @@ class Kernel extends ConsoleKernel
                     }
                 }
             }
-        })->daily();
+            $onetimememory = Memory::where('date',$today)->where('reminder','once');
+            if ($onetimememory) {
+                foreach ($onetimememory as $otm) {
+                    $u = $otm->users()->first();
+                    $u->notify(new OnceRemembered($otm));
+                }
+            }
+
+        })->everyMinute();
+
     }
 
     /**

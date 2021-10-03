@@ -197,6 +197,14 @@ class MemoryController extends Controller
 
         $request['user_id'] = auth()->id();
 
+        if($request['reminder'] === 'noreminder'){
+            $request['date'] = null;;
+        }
+        $createddate = new Carbon($memory['created_at']);
+        if($request['reminder'] === 'yearly'){
+            $request['date'] = $createddate->addYear()->format('Y-m-d');
+        }
+
         $attributes = request()->validate([
             'title' => 'required | min:3',
             'description' => 'nullable | min:5',
