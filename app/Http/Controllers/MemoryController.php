@@ -105,6 +105,10 @@ class MemoryController extends Controller
     {
         $request['user_id'] = auth()->id();
 
+        if($request['reminder'] === 'yearly'){
+            $request['date'] = Carbon::now()->addYear()->format('Y-m-d');;
+        }
+
         $attributes = request()->validate([
             'title' => 'required | min:3',
             'description' => 'nullable | min:5',
@@ -115,6 +119,7 @@ class MemoryController extends Controller
             'date' => 'nullable | date',
             'user_id' => 'required'
         ]);
+
         request()->validate([
             'tags' => 'required_if:newtag1,==,null'
         ]);
