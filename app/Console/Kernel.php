@@ -4,10 +4,16 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\DB;
 use App\Models\Project;
 use App\Models\Todo;
+use App\Models\Memory;
+use App\Models\User;
 use App\Notifications\NeardeadProject;
 use App\Notifications\NeardeadTodo;
+use App\Notifications\OnceRemembered;
+use Carbon\Carbon;
+
 
 class Kernel extends ConsoleKernel
 {
@@ -57,14 +63,18 @@ class Kernel extends ConsoleKernel
                     }
                 }
             }
-            $onetimememory = Memory::where('date',$today)->where('reminder','once');
-            if ($onetimememory) {
-                foreach ($onetimememory as $otm) {
-                    $u = $otm->users()->first();
-                    $u->notify(new OnceRemembered($otm));
+            $rmemory = Memory::where('date',$today)->get();
+            if ($rmemory) {
+                foreach ($rmemory as $rmem) {
+                    sleep(5);
+                    $u = User::where('id',$rmem['user_id'])->firstOrFail();
+                    $u->notify(new OnceRemembered($rmem));
+                    if($rmem['reminder'] === 'yearly') {
+                        $newdate = Carbon::now()->addYear()->format('Y-m-d');
+                        DB::table('memories')->where('id',$rmem->id)->update(['date' => $newdate]);
+                    }
                 }
             }
-
         })->everyMinute();
 
     }

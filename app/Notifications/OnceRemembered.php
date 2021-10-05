@@ -44,9 +44,8 @@ class OnceRemembered extends Notification
         return (new MailMessage)
                     ->from('anders@webbsallad.se', 'Ankhemmet')
                     ->subject('Påminnelse om minnet ' . $this->otm->title)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->line('Vi påminner om minnet: "' . $this->otm->title . '" som skapades ' . $this->otm->created_at)
+                    ->action('Till minnet', url('https://ank.webbsallad.se/memories/'.$this->otm->id));
     }
 
     /**
