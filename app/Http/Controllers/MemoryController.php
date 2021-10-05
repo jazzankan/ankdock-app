@@ -160,10 +160,10 @@ class MemoryController extends Controller
      */
     public function show(Memory $memory)
     {
-        //$this->authorize('view', $memory);
+        $today = Carbon::now()->format('Y-m-d');
         $tags = $memory->tags()->orderBy('name')->get();
         $belongingfiles = Memfile::whereIn('memoryid',[$memory->id])->get();
-        return view('memories.show')->with('memory',$memory)->with('tags', $tags)->with('belongingfiles', $belongingfiles);
+        return view('memories.show')->with('memory',$memory)->with('today',$today)->with('tags', $tags)->with('belongingfiles', $belongingfiles);
     }
 
     /**

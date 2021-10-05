@@ -23,6 +23,9 @@
                     <strong>Ingen påminnelse</strong>
                 @else
                 <p><strong>Påminnelse: </strong> {{ $memory-> date }} , @if($memory->reminder === 'yearly')årlig.@endif @if($memory->reminder === 'once') en gång.@endif</p>
+                    @if($today > $memory->date)
+                        <p class="text-red-600 font-bold">Påminnelsedatum är passerat!</p>
+                    @endif
                 @endif
                 @if(count($belongingfiles) > 0)
                     <ul class="list-group-horizontal nomargin">
