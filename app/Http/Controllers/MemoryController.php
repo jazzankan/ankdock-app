@@ -200,9 +200,18 @@ class MemoryController extends Controller
         if($request['reminder'] === 'noreminder'){
             $request['date'] = null;;
         }
-        $createddate = new Carbon($memory['created_at']);
         if($request['reminder'] === 'yearly'){
-            $request['date'] = $createddate->addYear()->format('Y-m-d');
+            $today = Carbon::today();
+            $creation = new Carbon($memory['created_at']);
+            $yearlater = $creation->addMonths(12);
+            if($yearlater->lessThan($today) === true) {
+                $yearstoadd = $today->diffInYears($creation) + 1;
+                $request['date'] = $creation->addYears($yearstoadd)->format('Y-m-d');
+                }
+            else{
+                $createddate = new Carbon($memory['created_at']);
+                $request['date'] = $createddate->addYear()->format('Y-m-d');
+            }
         }
 
         $attributes = request()->validate([
