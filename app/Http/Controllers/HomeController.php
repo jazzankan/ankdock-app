@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -24,7 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $anders = User::where('id', 1)->first();
+        //dd($firstuser);
         $visitingnumber = file_get_contents("../counter.txt");
-        return view('dashboard')->with('visitingnumber',$visitingnumber);
+        return view('dashboard')->with('anders',$anders)->with('visitingnumber',$visitingnumber);
     }
 }

@@ -202,9 +202,13 @@ class ProjectController extends Controller
     {
         $mailfail = "";
 
-        if ($request['visible'] != 'n') {
+        if ($request['invisible'] === 'y') {
+            $request['visible'] = 'n';
+        }
+        else{
             $request['visible'] = 'y';
         }
+
         $request['deadline'] = $request['date'];
 
         if ($request['delete'] != 'delete') {
@@ -214,7 +218,8 @@ class ProjectController extends Controller
                 'description' => 'required | min:5',
                 'deadline' => 'nullable|date',
                 'must' => 'required',
-                'visible' => 'required'
+                'visible' => 'required | in:y,n',
+                'invisible' => 'in:y'
             ]);
         }
         $allUsers = User::all();
