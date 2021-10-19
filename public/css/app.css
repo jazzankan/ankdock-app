@@ -881,6 +881,16 @@ select {
   margin-bottom: 1.1rem;
 }
 
+ul.dot{
+  list-style-type: disc;
+  margin-left: 1rem
+}
+
+ol.num{
+  list-style-type: decimal;
+  margin-left: 1rem
+}
+
 li.todo:nth-child(even){
   --tw-bg-opacity: 1;
   background-color: rgba(219, 234, 254, var(--tw-bg-opacity));

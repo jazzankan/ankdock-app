@@ -14,7 +14,7 @@
                     <p><a class="dashlink" href="/todos">Ofärdiga arbetsuppgifter</a></p>
                     <hr class="my-3">
                     <h5 class="text-lg font-semibold">Blogg</h5>
-                    <p><a class="dashlink" href="/blog">Publik blogg</a> - Bara Anders kan redigera.</p>
+                    <p><a class="dashlink" href="/blog">Publik blogg</a> - bara Anders kan redigera.</p>
                     @if(Auth::user()->id === $anders->id)
                     <p><a class="dashlink" href="/articles">Blogginlägg</a> - skapa och redigera</p>
                     <p><a class="dashlink" href="/comments">Nya bloggkommentarer</a></p>

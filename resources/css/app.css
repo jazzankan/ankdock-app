@@ -17,6 +17,12 @@
         margin-top: 1.1rem;
         margin-bottom: 1.1rem;
     }
+    ul.dot{
+        @apply list-disc ml-4
+    }
+    ol.num{
+        @apply list-decimal ml-4
+    }
     li.todo:nth-child(even){
         @apply bg-blue-100;
     }
