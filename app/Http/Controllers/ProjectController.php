@@ -88,7 +88,9 @@ class ProjectController extends Controller
         $request['visible'] = 'y';
         $request['deadline'] = $request['date'];
         $getSharingUsers = null;
-        $request['description'] = app()->call(CKeditorServiceProvider::class->editlist(), [$request['description']]);
+        $app = app();
+        $fixlists = new CKeditorServiceProvider($app);
+        $request['description'] = $fixlists->editlist($request['description']);
         //$request['description'] = new CKeditorServiceProvider=>editlist($request['description']);
 
         $attributes = request()->validate([
