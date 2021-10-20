@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Providers\CKeditorServiceProvider;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Project;
@@ -87,6 +88,8 @@ class ProjectController extends Controller
         $request['visible'] = 'y';
         $request['deadline'] = $request['date'];
         $getSharingUsers = null;
+        $request['description'] = app()->call(CKeditorServiceProvider::class->editlist(), [$request['description']]);
+        //$request['description'] = new CKeditorServiceProvider=>editlist($request['description']);
 
         $attributes = request()->validate([
 
