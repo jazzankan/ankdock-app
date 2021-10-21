@@ -88,10 +88,10 @@ class ProjectController extends Controller
         $request['visible'] = 'y';
         $request['deadline'] = $request['date'];
         $getSharingUsers = null;
+        //Kod för att få till punktlistor med CKEditor och Tailwind. Gjorde en service som ett litet experiment.
         $app = app();
         $fixlists = new CKeditorServiceProvider($app);
         $request['description'] = $fixlists->editlist($request['description']);
-        //$request['description'] = new CKeditorServiceProvider=>editlist($request['description']);
 
         $attributes = request()->validate([
 
@@ -163,11 +163,10 @@ class ProjectController extends Controller
             $todo['details'] = str_replace("'", "\\'", $todo['details']); //Annars blank sida om ' förekommer
         });
         $projcomments = Projcomment::where('project_id', $project->id)->orderBy('id', 'DESC')->get();
-        //dd($projcomments->user->name);
+
         return view('projects.show')->with('project', $project)->with('belongingtodos', $belongingtodos)->with('today',
             $today)->with('sharing', $sharing)->with('belongingfiles', $belongingfiles)->with('projcomments',
             $projcomments);
-        //return view('projects.show')->with('project',$project)->with('sharing',$sharing)->with('belongingtodos',$belongingtodos)->with('belongingfiles',$belongingfiles)->with('projcomments',$projcomments)->with('today',$today);
     }
 
     /**
@@ -215,6 +214,11 @@ class ProjectController extends Controller
         }
 
         $request['deadline'] = $request['date'];
+
+        //Kod för att få till punktlistor med CKEditor och Tailwind. Gjorde en service som ett litet experiment.
+        $app = app();
+        $fixlists = new CKeditorServiceProvider($app);
+        $request['description'] = $fixlists->editlist($request['description']);
 
         if ($request['delete'] != 'delete') {
             $attributes = request()->validate([

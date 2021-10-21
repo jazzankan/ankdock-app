@@ -25,6 +25,7 @@ class CKeditorServiceProvider extends ServiceProvider
     {
         //
     }
+    //Variablerna är för projekt, men det används också för bloggartiklar.
     public function editlist($description){
         $projdescription = str_replace("<ul>","<ul class='dot'>",$description);
         $projdescription = str_replace("<ol>","<ol class='num'>",$projdescription);

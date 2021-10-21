@@ -52,6 +52,11 @@ ArticleController extends Controller
      */
     public function store(Request $request)
     {
+        //Kod för att få till punktlistor med CKEditor och Tailwind. Gjorde en service som ett litet experiment.
+        $app = app();
+        $fixlists = new CKeditorServiceProvider($app);
+        $request['body'] = $fixlists->editlist($request['body']);
+
         $attributes = request()->validate([
 
             'heading' => 'required | min:3',
@@ -113,6 +118,10 @@ ArticleController extends Controller
             $this->destroy($article);
             return redirect('/articles');
         }
+        //Kod för att få till punktlistor med CKEditor och Tailwind. Gjorde en service som ett litet experiment.
+        $app = app();
+        $fixlists = new CKeditorServiceProvider($app);
+        $request['body'] = $fixlists->editlist($request['body']);
 
         $attributes = request()->validate([
             'heading' => 'required | min:3',

@@ -1,4 +1,4 @@
-<x-headless-app>
+ <x-headless-app>
     <div class="py-12 pl-2">
         <div class="max-w-screen-lg mx-auto sm:px-6 lg:px-8">
             <h1 class="text-3xl mb-3">Skapa ett blogginlägg</h1>
