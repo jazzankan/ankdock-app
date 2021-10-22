@@ -6,6 +6,7 @@ use App\Models\Memory;
 use App\Models\Article;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Providers\CKeditorServiceProvider;
 
 class
 ArticleController extends Controller
