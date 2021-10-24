@@ -30,6 +30,9 @@ class CKeditorServiceProvider extends ServiceProvider
     public function editlist($description){
         $projdescription = str_replace("<ul>","<ul class='dot'>",$description);
         $projdescription = str_replace("<ol>","<ol class='num'>",$projdescription);
+        $projdescription = str_replace("<h1>","<h1 class='sone'>",$projdescription);
+        $projdescription = str_replace("<h2>","<h2 class='stwo'>",$projdescription);
+        $projdescription = str_replace("<h3>","<h3 class='sthree'>",$projdescription);
         return $projdescription;
     }
 }
