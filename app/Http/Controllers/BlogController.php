@@ -47,8 +47,11 @@ class BlogController extends Controller
 
         if(!auth()->user()) {
             $visitingnumber = file_get_contents("../counter.txt");
-            $visitingnumber = (int)$visitingnumber + 1;
-            file_put_contents("../counter.txt", $visitingnumber);
+            //Försök att förhindra reset med en  if-sats. Funktionen kan tydligen returnera en tom sträng ibland.
+            if($visitingnumber != "") {
+                $visitingnumber = (int)$visitingnumber + 1;
+                file_put_contents("../counter.txt", $visitingnumber);
+            }
         }
         return view('blog')->with('articles',$articles)->with('categories', $categories)->with('requestcid',$requestcid)->with('allart', $allart)->with('searchterm', $searchterm)->with('thanks', $thanks);
     }

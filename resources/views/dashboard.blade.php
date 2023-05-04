@@ -21,7 +21,7 @@
                     <p><a class="dashlink" href="/categories">Bloggkategorier</a> - skapa och redigera</p>
                     <p><a class="dashlink" href="/about">Om Ankhemmet</a> - länk finns från publika sidan</p>
                     <hr class="my-3">
-                    <p>Externa visningar: <b>{{ $visitingnumber }}</b>, sedan 2021-05-06</p>
+                    <p>Externa visningar: <b>{{ $visitingnumber }}</b>, sedan 2022-05-02</p>
                     @endif
                     <hr class="my-3">
                     <p class="text-sm">Du är inloggad!</p>
