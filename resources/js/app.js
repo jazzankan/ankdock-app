@@ -1,3 +1,8 @@
-require('./bootstrap');
+//require('./bootstrap');
+//import './bootstrap';
+//import '../sass/app.scss'
 
-require('alpinejs');
+//require('alpinejs'); Doesn't work with Vite
+import Alpine from 'alpinejs'
+window.Alpine = Alpine
+Alpine.start()
