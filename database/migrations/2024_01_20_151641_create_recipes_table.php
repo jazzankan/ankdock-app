@@ -13,6 +13,20 @@ return new class extends Migration
     {
         Schema::create('recipes', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('spice')->nullable();
+            $table->string('c_time')->nullable();
+            $table->enum('eating_order', ['starter', 'main', 'dessert']);
+            $table->text('comment')->nullable();
+            $table->string('printed_source')->nullable();
+            $table->text('whole_text')->nullable();
+            $table->string('url')->nullable();
+            $table->boolean('cooked')->default(false);
+            $table->unsignedInteger('rating')->default(5);
+            $table->text('judgement')->nullable();
+
+
+
             $table->timestamps();
         });
     }

@@ -12,6 +12,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\IngredientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,4 +80,7 @@ Route::post('/blog', [BlogController::class,'index']);
 
 Route::resource('/comments', CommentController::class)
     ->name('*','comments');
+
+Route::resource('/ingredients', IngredientController::class)
+    ->name('*','ingredients');
 

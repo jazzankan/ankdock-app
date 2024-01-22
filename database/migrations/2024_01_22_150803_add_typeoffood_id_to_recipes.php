@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('typeoffoods', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->timestamps();
+        Schema::table('recipes', function (Blueprint $table) {
+            $table->unsignedBigInteger('typeoffood_id')->after('id')->index();
         });
     }
 
@@ -23,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('typeoffoods');
+        Schema::table('recipes', function (Blueprint $table) {
+            $table->dropColumn('typeoffood_id');
+        });
     }
 };
