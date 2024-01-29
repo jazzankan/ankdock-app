@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Recipe;
 use App\Models\Typeoffood;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,9 @@ class TypeoffoodController extends Controller
      */
     public function index()
     {
-        //
+        $typeoffoods = Typeoffood::all()->sortBy('name');
+
+        return view('typeoffoods.list')->with('typeoffoods', $typeoffoods);
     }
 
     /**
@@ -20,7 +23,7 @@ class TypeoffoodController extends Controller
      */
     public function create()
     {
-        //
+        return view('typeoffoods.create');
     }
 
     /**
@@ -28,7 +31,13 @@ class TypeoffoodController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attributes = request()->validate([
+            'name' => 'required | min:3',
+        ]);
+
+        Typeoffood::create($attributes);
+
+        return redirect('typeoffoods');
     }
 
     /**
@@ -44,7 +53,14 @@ class TypeoffoodController extends Controller
      */
     public function edit(Typeoffood $typeoffood)
     {
-        //
+        $recipes = Recipe::all();
+        $hasrecipe = false;
+        foreach($recipes as $r){
+            if($r->typeoffood_id == $typeoffood->id) {
+                $hasrecipe = true;
+            }
+        }
+        return view('typeoffoods.edit')->with('typeoffood',$typeoffood)->with('hasrecipe', $hasrecipe);
     }
 
     /**
@@ -52,7 +68,16 @@ class TypeoffoodController extends Controller
      */
     public function update(Request $request, Typeoffood $typeoffood)
     {
-        //
+        if($request['delete'] === 'delete') {
+            $this->destroy($typeoffood);
+            return redirect('/typeoffoods');
+        }
+        $attributes = request()->validate([
+            'name' => 'required | min:3'
+        ]);
+        $typeoffood->update(request(['name']));
+
+        return redirect('/typeoffoods');
     }
 
     /**
@@ -60,6 +85,6 @@ class TypeoffoodController extends Controller
      */
     public function destroy(Typeoffood $typeoffood)
     {
-        //
+        $typeoffood->delete();
     }
 }

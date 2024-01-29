@@ -13,6 +13,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IngredientController;
+use App\Http\Controllers\TypeoffoodController;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,4 +84,7 @@ Route::resource('/comments', CommentController::class)
 
 Route::resource('/ingredients', IngredientController::class)
     ->name('*','ingredients');
+
+Route::resource('/typeoffoods', TypeoffoodController::class)
+    ->name('*','typeoffoods');
 

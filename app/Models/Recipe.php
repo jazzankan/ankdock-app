@@ -10,7 +10,7 @@ class Recipe extends Model
     use HasFactory;
     protected $guarded = [];
 
-    public function ingrediants()
+    public function ingredients()
     {
         return $this->belongsToMany('App\Models\Ingredient');
     }

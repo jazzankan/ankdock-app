@@ -231,6 +231,15 @@ class ProjectController extends Controller
                 'invisible' => 'in:y'
             ]);
         }
+
+        if ($request['delete'] === 'delete') {
+            $this->destroy($project);
+            return redirect('/projects')->with('mailfail', $mailfail);
+        }
+        else{
+            $project->update(request(['title', 'description', 'deadline', 'must', 'visible']));
+        }
+
         $allUsers = User::all();
         $me = auth()->user();
         $user_id = auth()->id();
@@ -281,14 +290,6 @@ class ProjectController extends Controller
                     $a->projects()->detach($project->id);
                 }
             }
-        }
-
-        if ($request['delete'] === 'delete') {
-            $this->destroy($project);
-            return redirect('/projects')->with('mailfail', $mailfail);
-        }
-        else{
-            $project->update(request(['title', 'description', 'deadline', 'must', 'visible']));
         }
 
         return redirect('/projects/'.$project->id)->with('mailfail',$mailfail);
