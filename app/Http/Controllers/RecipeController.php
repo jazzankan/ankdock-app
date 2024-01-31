@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ingredient;
 use App\Models\Recipe;
+use App\Models\Typeoffood;
 use Illuminate\Http\Request;
 
 class RecipeController extends Controller
@@ -12,7 +14,9 @@ class RecipeController extends Controller
      */
     public function index()
     {
-        //
+        $recipes = Recipe::all()->sortBy('name');
+
+        return view('recipes.list')->with('recipes', $recipes);
     }
 
     /**
@@ -20,7 +24,10 @@ class RecipeController extends Controller
      */
     public function create()
     {
-        //
+        $ingredients = Ingredient::all()->sortBy('name');
+        $typeoffoods = Typeoffood::all()->sortBy('name');
+
+        return view('recipes.create')->with('ingredients',$ingredients)->with('typeoffoods', $typeoffoods);
     }
 
     /**
@@ -60,6 +67,6 @@ class RecipeController extends Controller
      */
     public function destroy(Recipe $recipe)
     {
-        //
+        $recipe->delete();
     }
 }

@@ -12,6 +12,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\TypeoffoodController;
 
@@ -81,6 +82,11 @@ Route::post('/blog', [BlogController::class,'index']);
 
 Route::resource('/comments', CommentController::class)
     ->name('*','comments');
+
+//Recept:
+
+Route::resource('/recipes', RecipeController::class)
+    ->name('*','recipes');
 
 Route::resource('/ingredients', IngredientController::class)
     ->name('*','ingredients');
