@@ -42,6 +42,23 @@
                         <input type="text" class="max-w-lg w-half mt-2 mb-6 px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-green-500" value="{{ old('c_time') }}" name="c_time"/>
                     </div>
                 </div>
+                <div class="radio mb-6">
+                    <label><input type="radio" name="eating_order"
+                                  value="starter" {{ (old('eating_order') === 'starter') ? 'checked' : '' }}> Förrätt </label>
+                    <label> <input type="radio" class="ml-2" name="eating_order"
+                                   value="main" {{ (old('eating_order') === 'main') || (old('eating_order') == '') ? 'checked' : '' }}> Huvudrätt</label>
+                    <label><input type="radio" class="ml-2" name="eating_order"
+                                  value="dessert" {{ (old('eating_order') === 'dessert') ? 'checked' : '' }}> Efterrätt</label>
+                </div>
+                <p class="font-bold">Välj minst ett sätt att hitta hela receptet:</p>
+                <div class="mt-4">
+                    <label for="printed_source">Tryckt källa:</label><br>
+                    <input type="text" class="max-w-lg w-full mt-2 mb-6 px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-green-500" value="{{ old('printed_source') }}" name="printed_source"/>
+                </div>
+                <div>
+                    <label for="url">URL:</label><br>
+                    <input type="text" class="max-w-lg w-full mt-2 mb-6 px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-green-500" value="{{ old('url') }}" name="url"/>
+                </div>
                 <button type="submit" class="btn-blue mt-6">Skicka</button>
             </form>
             @if ($errors->any())
