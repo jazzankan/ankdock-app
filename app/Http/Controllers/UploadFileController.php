@@ -45,4 +45,22 @@ class UploadFileController extends Controller
         }
         return redirect('/memories/'. $request->memoryid);
     }
+    public function recipes(Request $request)
+    {
+        $request->validate([
+            'fileToUpload' => 'required|file|mimes:docx,odt,ods,pdf,jpg,jpeg,png,gif|max:10240',
+        ]);
+
+        $fileName = request()->fileToUpload->getClientOriginalName();
+
+        $path = $request->fileToUpload->storeAs('files',$fileName);
+
+        if($path){
+            $file = new Memfile;
+            $file->filename = $fileName;
+            $file->recipeid = $request->recipeid;
+            $file->save();
+        }
+        return redirect('/memories/'. $request->memoryid);
+    }
 }
