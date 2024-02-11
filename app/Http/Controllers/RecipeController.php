@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\IngredientCategories;
 use App\Models\Ingredient;
 use App\Models\Recipe;
 use App\Models\Typeoffood;
@@ -35,7 +36,14 @@ class RecipeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attributes = request()->validate([
+            'name' => 'required | min:3',
+
+        ]);
+
+        Ingredient::create($attributes);
+
+        return redirect('recipes');
     }
 
     /**

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\File;
 use App\Models\Memfile;
+use App\Models\Recipefile;
 
 class UploadFileController extends Controller
 {
@@ -45,6 +46,7 @@ class UploadFileController extends Controller
         }
         return redirect('/memories/'. $request->memoryid);
     }
+
     public function recipes(Request $request)
     {
         $request->validate([
@@ -54,13 +56,15 @@ class UploadFileController extends Controller
         $fileName = request()->fileToUpload->getClientOriginalName();
 
         $path = $request->fileToUpload->storeAs('files',$fileName);
+        dd(keys());
 
         if($path){
-            $file = new Memfile;
+            $file = new Recipefile;
             $file->filename = $fileName;
-            $file->recipeid = $request->recipeid;
             $file->save();
         }
-        return redirect('/memories/'. $request->memoryid);
+        //$request->flash();
+        return redirect('recipes/create')->withInput()->with('fileName', $fileName);
+        //withInput() Session saknas?
     }
 }

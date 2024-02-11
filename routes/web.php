@@ -55,8 +55,8 @@ Route:: get('/upload/{projectid}', function($projectid) {
 Route:: get('/memupload/{memoryid}', function($memoryid) {
     return view('/memories/memupload')->with('memoryid', $memoryid);
 });
-Route:: get('/recipeupload/{recipeid}', function($recipeid) {
-    return view('/recipes/recipeupload')->with('recipeid', $recipeid);
+Route:: get('/recipeupload', function() {
+ return view('/recipes/recipeupload');
 });
 
 Route:: post('/uploadmemory',[UploadFileController::class,'memories']);
