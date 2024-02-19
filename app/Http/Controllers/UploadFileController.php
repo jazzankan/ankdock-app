@@ -56,15 +56,14 @@ class UploadFileController extends Controller
         $fileName = request()->fileToUpload->getClientOriginalName();
 
         $path = $request->fileToUpload->storeAs('files',$fileName);
-        dd(keys());
 
         if($path){
             $file = new Recipefile;
             $file->filename = $fileName;
             $file->save();
         }
-        //$request->flash();
-        return redirect('recipes/create')->withInput()->with('fileName', $fileName);
-        //withInput() Session saknas?
+        $request->session()->flash('upload', 'successful');
+
+        return view('/recipes/uploadsuccess');
     }
 }

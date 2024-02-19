@@ -5,7 +5,7 @@
             <p><a class="btn-blue text-xs font-bold" href="/recipes/create" class="btn btn-primary btn-sm">Nytt recept</a></p>
             <ul class="mt-4">
                 @foreach ($recipes as $rec)
-                    <li class="todo pl-2 py-2.5"><h4><a class="dashlink" href="/recipes/{{ $rec->id }}/edit">{{ $rec->name }}</a></h4>
+                    <li class="todo pl-2 py-2.5"><h4><a class="dashlink" href="/recipes/{{ $rec->id }}">{{ $rec->name }}</a></h4>
                 @endforeach
             </ul>
         </div>

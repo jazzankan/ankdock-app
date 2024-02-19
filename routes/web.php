@@ -58,6 +58,9 @@ Route:: get('/memupload/{memoryid}', function($memoryid) {
 Route:: get('/recipeupload', function() {
  return view('/recipes/recipeupload');
 });
+Route:: get('/recipes/uploadsuccess', function() {
+    return view('/recipes/uploadsuccess');
+});
 
 Route:: post('/uploadmemory',[UploadFileController::class,'memories']);
 Route:: post('/uploadrecipe',[UploadFileController::class,'recipes']);

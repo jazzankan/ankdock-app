@@ -27,7 +27,7 @@
                     <br>
                     <small id="fileHelp" class="form-text text-muted">Format: Word,PDF, .jpg och .png</small>
                 </div>
-                <button type="submit" class="mt-4 btn-blue text-xs font-bold">Skicka</button>
+                <button type="submit" class="mt-4 btn-blue text-xs font-bold">Ladda upp</button>
             </form>
         </div>
     </div>
