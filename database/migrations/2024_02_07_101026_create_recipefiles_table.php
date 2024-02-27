@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('recipefiles', function (Blueprint $table) {
             $table->id();
             $table->string('filename');
-            $table->integer('recipeid')->unsigned()->nullable();
+            $table->integer('recipe_id')->unsigned()->nullable();
             $table->timestamps();
         });
     }

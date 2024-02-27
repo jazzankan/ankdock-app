@@ -60,7 +60,10 @@ class RecipeController extends Controller
             'fileToUpload' => 'required_without_all:printed_source,url,whole_text, | nullable | regex:/uploaded/'
         ]);
 
-        array_pop($attributes);
+        if($request['fileToUpload']) {
+            array_pop($attributes);
+        }
+
 
         $recipe = Recipe::create($attributes);
 
@@ -71,13 +74,12 @@ class RecipeController extends Controller
                 }
             }
         if(isset($uploadedfile)){
-            //$request->fileToUpload = $uploadedfile;
             $recipe = Recipe::latest()->first();
             $uploadedfile->recipeid = $recipe->id;
             $uploadedfile->save();
         }
 
-        return redirect('recipes');
+        return redirect("recipes/" . $recipe->id)->with('recipe', $recipe);
     }
 
     /**
@@ -85,7 +87,11 @@ class RecipeController extends Controller
      */
     public function show(Recipe $recipe)
     {
-        //
+        $typeoffood = Typeoffood::where('id', $recipe->typeoffood_id)->first();
+
+        $file = $recipe->recipefile()->first();
+
+        return view('recipes.show')->with('recipe', $recipe)->with('typeoffood', $typeoffood)->with('file', $file);
     }
 
     /**
@@ -93,7 +99,12 @@ class RecipeController extends Controller
      */
     public function edit(Recipe $recipe)
     {
-        //
+        $ingredients = Ingredient::all()->sortBy('name');
+        $typeoffoods = Typeoffood::all()->sortBy('name');
+
+        //dd($recipe->ingredients()->get()->toArray());
+
+        return view("recipes.edit")->with('recipe', $recipe)->with('ingredients', $ingredients)->with('typeoffoods', $typeoffoods);
     }
 
     /**
@@ -101,7 +112,19 @@ class RecipeController extends Controller
      */
     public function update(Request $request, Recipe $recipe)
     {
-        //
+        if($request['rating'] == null){
+            $request['rating'] = 0;
+        }
+        $attributes = request()->validate([
+            'latestcook' => 'required | date',
+            'rating' => 'nullable | integer',
+            'judgement' => 'nullable | min:3'
+        ]);
+        $request['cooked'] = true;
+
+        $recipe->update(request(['date','latestcook','cooked', 'rating','judgement']));
+
+        return redirect('/recipes/' . $recipe->id);
     }
 
     /**

@@ -19,4 +19,9 @@ class Recipe extends Model
     {
         return $this->HasOne('App\Models\Typeoffood');
     }
+
+    public function recipefile()
+    {
+        return $this->HasOne(Recipefile::class);
+    }
 }

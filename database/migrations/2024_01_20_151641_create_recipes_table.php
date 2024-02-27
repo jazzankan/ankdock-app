@@ -22,7 +22,7 @@ return new class extends Migration
             $table->text('whole_text')->nullable();
             $table->string('url')->nullable();
             $table->boolean('cooked')->default(false);
-            $table->unsignedInteger('rating')->default(5);
+            $table->unsignedInteger('rating')->default(0);
             $table->text('judgement')->nullable();
 
 

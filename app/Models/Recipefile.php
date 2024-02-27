@@ -11,7 +11,7 @@ class Recipefile extends Model
 
     protected $guarded = [];
 
-    public function recipes()
+    public function recipe()
     {
         return $this->belongsTo('App\Models\Recipe');
     }
