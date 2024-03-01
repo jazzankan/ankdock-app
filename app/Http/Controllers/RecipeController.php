@@ -101,10 +101,11 @@ class RecipeController extends Controller
     {
         $ingredients = Ingredient::all()->sortBy('name');
         $typeoffoods = Typeoffood::all()->sortBy('name');
+        $file = $recipe->recipefile()->first();
 
         //dd($recipe->ingredients()->get()->toArray());
 
-        return view("recipes.edit")->with('recipe', $recipe)->with('ingredients', $ingredients)->with('typeoffoods', $typeoffoods);
+        return view("recipes.edit")->with('recipe', $recipe)->with('ingredients', $ingredients)->with('typeoffoods', $typeoffoods)->with('file', $file);
     }
 
     /**

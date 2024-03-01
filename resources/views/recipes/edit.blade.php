@@ -64,44 +64,53 @@
                             Efterrätt</label>
                     </div>
                     <div>
-                        <p x-on:click="commentopen = ! commentopen" class="text-blue-800" style="cursor: pointer"><b>Lägg
-                                till kommentar</b></p>
-                        <div x-show="commentopen">
-                            <label for="name">Kommentar:</label><br>
-                            <input type="text"
-                                   class="max-w-lg w-full mt-2 mb-6 px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-green-500"
-                                   value="{{ old('comment') }}" name="comment"/>
-                        </div>
+                        <label for="name">Kommentar:</label><br>
+                        <input type="text"
+                               class="max-w-lg w-full mt-2 mb-6 px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-green-500"
+                               value="{{ $recipe->comment }}" name="comment"/>
                     </div>
-                    <p class="font-bold mt-4">Välj minst ett sätt att hitta hela receptet:</p>
-                    <p class="text-blue-800" style="cursor: pointer" x-on:click="printopen = ! printopen"><b>Ange tryckt
-                            källa</b></p>
-                    <div x-show="printopen" class="mt-4">
+                    <div class="mt-4">
                         <label for="printed_source">Tryckt i:</label><br>
                         <input type="text"
                                class="max-w-lg w-full mt-2 mb-6 px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-green-500"
-                               value="{{ old('printed_source') }}" name="printed_source"/>
+                               value="{{ $recipe->printed_source }}" name="printed_source"/>
                     </div>
                     <div>
-                        <a class="text-blue-800" href="/recipeupload" target="_blank"><b>Ladda upp fil </b><span class="text-sm">(Öppnas i ny flik)</span></a>
+                        <label for="url">URL:</label><br>
+                        <input type="text"
+                               class="max-w-lg w-full mt-2 mb-6 px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-green-500"
+                               value="{{ $recipe->url }}" name="url"/>
                     </div>
-                    <div>
-                        <p class="text-blue-800" style="cursor: pointer" x-on:click="urlopen = ! urlopen"><b>Länka till
-                                webbsida</b></p>
-                        <div x-show="urlopen">
-                            <label for="url">URL:</label><br>
+                    <div class="mt-4">
+                        <label for="whole_text">Hela texten:</label><br>
+                        <textarea class="mb-6 w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none"
+                                  id="whole_text" name="whole_text">{{ $recipe->whole_text }}</textarea>
+                    </div>
+                    @if($file != null)
+                        <p><strong>Länk till fil: </strong> <a class="text-blue-600 hover:underline" href="/storage/files/{{ $file->filename }}" target="_blank">{{ $file->filename }}</a></p>
+                    @else
+                        <p>Tillhörande fil saknas. Kan laddas upp från receptets sida.</p>
+                    @endif
+                    @if($recipe->cooked)
+                        <div class="mt-4">
+                            <label for="latestcook">Senast lagad:</label><br>
                             <input type="text"
                                    class="max-w-lg w-full mt-2 mb-6 px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-green-500"
-                                   value="{{ old('url') }}" name="url"/>
+                                   value="{{ $recipe->latestcook }}" name="latestcook"/>
                         </div>
-                    </div>
-                    <p class="text-blue-800" style="cursor: pointer" x-on:click="wholeopen = ! wholeopen"><b>Hela
-                            texten</b></p>
-                    <div x-show="wholeopen" class="mt-4">
-                        <label for="whole_text">Klistra in eller skriv text:</label><br>
-                        <textarea class="mb-6 w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none"
-                                  id="whole_text" name="whole_text">{{ old('whole_text') }}</textarea>
-                    </div>
+                        <div>
+                            <label for="rating">Betyg:</label><br>
+                            <input type="text"
+                                   class="max-w-lg w-full mt-2 mb-6 px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-green-500"
+                                   value="{{ $recipe->rating }}" name="rating"/>
+                        </div>
+                        <div>
+                            <label for="judgement">Omdöme:</label><br>
+                            <input type="text"
+                                   class="max-w-lg w-full mt-2 mb-6 px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-green-500"
+                                   value="{{ $recipe->judgement }}" name="judgement"/>
+                        </div>
+                    @endif
                     <button type="submit" class="btn-blue mt-6">Skicka</button>
                 </form>
                 @if ($errors->any())
