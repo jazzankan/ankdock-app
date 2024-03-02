@@ -46,6 +46,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <input type="hidden" value="markingcooked" name="markingcooked">
                                 <button type="submit" class="btn-blue mt-6 ml-2 mb-2">Spara</button>
                             </form>
                             @if ($errors->any())

@@ -111,6 +111,10 @@
                                    value="{{ $recipe->judgement }}" name="judgement"/>
                         </div>
                     @endif
+                    <div class="mt-4">
+                        <input type="checkbox" class="custom-control-input" id="delete" name="delete" value="delete">
+                        <label class="custom-control-label" for="delete">Ta bort receptet helt!</label>
+                    </div>
                     <button type="submit" class="btn-blue mt-6">Skicka</button>
                 </form>
                 @if ($errors->any())
