@@ -8,7 +8,7 @@
     <div class="py-12">
         <div class="max-w-screen-lg mx-auto sm:px-6 lg:px-8">
             <div class="ml-2" @if($errors->any()) x-data="{cookedopen: true}" @else x-data="{cookedopen: false}" @endif >
-                <p><a class="btn-blue text-xs font-bold" href="/recipes">Receptsöksidan</a> <a class="btn-blue text-xs font-bold" href="/recipes/{{ $recipe->id }}/edit">Redigera receptet</a> <a class="btn-blue text-xs font-bold" href="/recipeload/{{ $recipe->id }}">Ladda upp fil</a>
+                <p><a class="btn-blue text-xs font-bold" href="/recipes">Receptsöksidan</a> <a class="btn-blue text-xs font-bold" href="/recipes/{{ $recipe->id }}/edit">Redigera receptet</a> <a class="btn-blue text-xs font-bold" href="/recipeupload/{{ $recipe->id }}">Ladda upp fil</a>
                 <h2 class="text-2xl my-4">{{ $recipe->name }}</h2>
                 @if($recipe->cooked == 0 or $errors->any())
                     <div class="mb-4">

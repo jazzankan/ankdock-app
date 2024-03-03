@@ -24,6 +24,7 @@
                 <div class="form-group">
                     <input type="file" class="form-control-file" name="fileToUpload" id="exampleInputFile"
                            aria-describedby="fileHelp">
+                    <input type="hidden" name="recipeid" value={{ isset($recipeid) ? $recipeid : ''}}>
                     <br>
                     <small id="fileHelp" class="form-text text-muted">Format: Word,PDF, .jpg och .png</small>
                 </div>

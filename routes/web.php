@@ -58,6 +58,9 @@ Route:: get('/memupload/{memoryid}', function($memoryid) {
 Route:: get('/recipeupload', function() {
  return view('/recipes/recipeupload');
 });
+Route:: get('/recipeupload/{recipeid}', function($recipeid) {
+    return view('/recipes/recipeupload')->with('recipeid', $recipeid);
+});
 Route:: get('/recipes/uploadsuccess', function() {
     return view('/recipes/uploadsuccess');
 });

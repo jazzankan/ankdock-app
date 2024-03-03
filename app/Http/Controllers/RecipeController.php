@@ -75,7 +75,7 @@ class RecipeController extends Controller
             }
         if(isset($uploadedfile)){
             $recipe = Recipe::latest()->first();
-            $uploadedfile->recipeid = $recipe->id;
+            $uploadedfile->recipe_id = $recipe->id;
             $uploadedfile->save();
         }
 

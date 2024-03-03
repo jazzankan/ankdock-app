@@ -60,10 +60,18 @@ class UploadFileController extends Controller
         if($path){
             $file = new Recipefile;
             $file->filename = $fileName;
+            if($request->recipeid){
+                $file->recipe_id = $request->recipeid;
+            }
             $file->save();
         }
         $request->session()->flash('upload', 'successful');
 
-        return view('/recipes/uploadsuccess');
+        if($request->recipeid){
+            return redirect('recipes/'. $request->recipeid);
+        }
+        else {
+            return view('/recipes/uploadsuccess');
+        }
     }
 }
