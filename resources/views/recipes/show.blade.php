@@ -87,8 +87,9 @@
                     <p><strong>Länk till fil: </strong> <a class="text-blue-600 hover:underline" href="/storage/files/{{ $file->filename }}" target="_blank">{{ $file->filename }}</a></p>
                 @endif
                 @if($recipe->whole_text != null)
-                    <p><strong>Hela receptet: </strong> {!! nl2br(e($recipe->whole_text)) !!}</p>
+                    <p><strong>Hela receptet: </strong><br>{!! nl2br(e($recipe->whole_text)) !!}</p>
                 @endif
+                <hr>
                 @if($recipe->cooked)
                     <div class="bg-green-100 mt-4" >
                         <p><strong>Senast lagad: </strong> {{ $recipe->latestcook }}</p>
