@@ -81,7 +81,7 @@
                     <p><strong>Tryckt källa: </strong> {{ $recipe->printed_source }}</p>
                 @endif
                 @if($recipe->url != null)
-                    <p><strong>Länk till receptet: </strong> <a class="text-blue-600 hover:underline" href="{{ $recipe->url }}" target="_blank">{{ $recipe->url }}</a></p>
+                    <a class="text-blue-600 hover:underline" href="{{ $recipe->url }}" target="_blank"><strong>Länk till receptet</strong></a>
                 @endif
                 @if($file != null)
                     <p><strong>Länk till fil: </strong> <a class="text-blue-600 hover:underline" href="/storage/files/{{ $file->filename }}" target="_blank">{{ $file->filename }}</a></p>

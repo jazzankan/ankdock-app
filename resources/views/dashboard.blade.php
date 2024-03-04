@@ -12,7 +12,9 @@
                     <h5 class="text-lg font-semibold">Projekt</h5>
                     <p><a class="dashlink" href="/projects">Mina projekt</a></p>
                     <p><a class="dashlink" href="/todos">Ofärdiga arbetsuppgifter</a></p>
-                    <hr class="my-3">
+                    <hr class="my-3 hrdash">
+                    <h4><a class="text-blue-600 text-xl font-bold hover:text-purple-600 hover:underline" href="/recipes">Recept</a></h4>
+                    <hr class="my-3 hrdash">
                     <h5 class="text-lg font-semibold">Blogg</h5>
                     <p><a class="dashlink" href="/blog">Publik blogg</a> - bara Anders kan redigera.</p>
                     @if(Auth::user()->id === $anders->id)
