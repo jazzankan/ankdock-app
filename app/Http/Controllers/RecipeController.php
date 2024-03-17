@@ -10,6 +10,7 @@ use App\Models\Recipefile;
 use App\Models\Recipe;
 use App\Models\Typeoffood;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class RecipeController extends Controller
 {
@@ -19,8 +20,9 @@ class RecipeController extends Controller
     public function index()
     {
         $recipes = Recipe::all()->sortBy('name');
+        //$latestviewed = Recipe::sortByDesc('latestview')->limit(1);
 
-        return view('recipes.list')->with('recipes', $recipes);
+        return view('recipes.list')->with('recipes', $recipes)->with('latestviewed', $latestviewed);
     }
 
     /**
@@ -90,6 +92,9 @@ class RecipeController extends Controller
         $typeoffood = Typeoffood::where('id', $recipe->typeoffood_id)->first();
 
         $file = $recipe->recipefile()->first();
+
+        $recipe->latestviewed = Carbon::now();
+        $recipe->save();
 
         return view('recipes.show')->with('recipe', $recipe)->with('typeoffood', $typeoffood)->with('file', $file);
     }
