@@ -19,8 +19,8 @@ class RecipeController extends Controller
      */
     public function index()
     {
-        $recipes = Recipe::all()->sortBy('name');
-        //$latestviewed = Recipe::sortByDesc('latestview')->limit(1);
+        $recipes = Recipe::all()->sortByDesc('created_at')->take(5);
+        $latestviewed = $recipes->sortByDesc('latestviewed')->first();
 
         return view('recipes.list')->with('recipes', $recipes)->with('latestviewed', $latestviewed);
     }
