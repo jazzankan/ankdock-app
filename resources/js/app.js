@@ -3,6 +3,6 @@
 //import '../sass/app.scss'
 
 //require('alpinejs'); Doesn't work with Vite
-import Alpine from 'alpinejs'
-window.Alpine = Alpine
-Alpine.start()
+// import Alpine from 'alpinejs'
+//window.Alpine = Alpine
+//Alpine.start()

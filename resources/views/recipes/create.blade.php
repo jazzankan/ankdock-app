@@ -4,7 +4,6 @@
             display: none !important; /* This disables LastPass */
         }
     </style>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <div class="py-12 pl-2">
         <div x-data="{ commentopen: false, printopen: false, urlopen: false, fileopen: false, wholeopen: false }">
             <div class="max-w-screen-lg mx-auto sm:px-6 lg:px-8">
