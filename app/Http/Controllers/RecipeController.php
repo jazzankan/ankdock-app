@@ -19,10 +19,11 @@ class RecipeController extends Controller
      */
     public function index()
     {
-        $recipes = Recipe::all()->sortByDesc('created_at')->take(5);
+        $recipes = Recipe::all()->sortByDesc('created_at');
         $latestviewed = $recipes->sortByDesc('latestviewed')->first();
+        $latestrecipes = $recipes->take(5);
 
-        return view('recipes.list')->with('recipes', $recipes)->with('latestviewed', $latestviewed);
+        return view('recipes.list')->with('latestrecipes', $latestrecipes)->with('latestviewed', $latestviewed);
     }
 
     /**
@@ -49,7 +50,7 @@ class RecipeController extends Controller
         }
 
         $attributes = request()->validate([
-            'typeoffood_id' => 'nullable | int',
+            'typeoffoods_id' => 'nullable | int',
             'name' => 'required | min:3',
             'ingredients[]' => 'nullable | array',
             'spice' => 'nullable | min:3',
@@ -89,7 +90,7 @@ class RecipeController extends Controller
      */
     public function show(Recipe $recipe)
     {
-        $typeoffood = Typeoffood::where('id', $recipe->typeoffood_id)->first();
+        $typeoffood = Typeoffood::where('id', $recipe->typeoffoods_id)->first();
 
         $file = $recipe->recipefile()->first();
 
@@ -134,7 +135,7 @@ class RecipeController extends Controller
             }
 
             $precookedattributes = request()->validate([
-                'typeoffood_id' => 'nullable | int',
+                'typeoffoods_id' => 'nullable | int',
                 'name' => 'required | min:3',
                 'ingredients[]' => 'nullable | array',
                 'spice' => 'nullable | min:3',

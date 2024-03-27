@@ -1,4 +1,18 @@
 <div class="mb-8">
+    <div>
+        <a class="text-xs font-bold" href="">Slumpa fram ett recept</a>
+    </div>
+    <div class="radio mb-2">
+        <label><input type="radio" name="eating_order"
+                      value="starter">
+            Förrätt </label>
+        <label> <input type="radio" class="ml-2" name="eating_order"
+                       value="main" checked="checked">
+            Huvudrätt</label>
+        <label><input type="radio" class="ml-2" name="eating_order"
+                      value="dessert">
+            Efterrätt</label>
+    </div>
     <input type="text"
            autocomplete="off"
            onclick="this.value=''"

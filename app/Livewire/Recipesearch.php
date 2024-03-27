@@ -2,6 +2,8 @@
 
 namespace App\Livewire;
 
+use App\Models\Typeoffood;
+use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 use App\Models\Recipe;
 
@@ -24,6 +26,11 @@ class Recipesearch extends Component
     public function updatedQuery()
     {
         $this->recipes = Recipe:: where('name', 'like', '%' . $this->query . '%')
+            ->orWhereRelation('ingredients', 'name', 'like', '%' . $this->query . '%')
+            ->orWhereRelation('typeoffoods', 'name', 'like', '%' . $this->query . '%')
+           // ->orWhereBelongsTo(Typeoffood::class, function ($q)  {
+            //    $q->where('name', 'LIKE', '%'. $this->query . '%');
+            //})
             ->get();
     }
 

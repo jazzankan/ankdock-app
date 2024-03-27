@@ -64,7 +64,7 @@
                 @if($recipe->ingredients()->first() != null)
                     <p><strong>Huvudingrediens(er): </strong>@foreach($recipe->ingredients()->get() as $ingredient) {{ $ingredient->name }}&nbsp;@endforeach</p>
                 @endif
-                @if($recipe->typeoffood_id != null)
+                @if($recipe->typeoffoods_id != null)
                     <p><strong>Typ av mat: </strong> {{ $typeoffood->name }}</p>
                 @endif
                 @if($recipe->spice != null)

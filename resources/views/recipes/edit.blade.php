@@ -30,11 +30,11 @@
                             </select>
                         </div>
                         <div class="mt-4">
-                            <label for="typeoffood_id">Typ av mat:</label>
-                            <select name="typeoffood_id" id="typeoffood_id" class="border rounded-lg text-gray-700">
+                            <label for="typeoffoods_id">Typ av mat:</label>
+                            <select name="typeoffoods_id" id="typeoffoods_id" class="border rounded-lg text-gray-700">
                                 <option value="">Välj:</option>
                                 @foreach($typeoffoods as $t)
-                                    <option value="{{ $t->id }}" {{ $t->id == $recipe->typeoffood_id ? 'selected': ''}}>{{ $t->name }}</option>
+                                    <option value="{{ $t->id }}" {{ $t->id == $recipe->typeoffoods_id ? 'selected': ''}}>{{ $t->name }}</option>
                                 @endforeach
                             </select>
                         </div>

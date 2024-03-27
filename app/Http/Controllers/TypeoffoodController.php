@@ -56,7 +56,7 @@ class TypeoffoodController extends Controller
         $recipes = Recipe::all();
         $hasrecipe = false;
         foreach($recipes as $r){
-            if($r->typeoffood_id == $typeoffood->id) {
+            if($r->typeoffoods_id == $typeoffood->id) {
                 $hasrecipe = true;
             }
         }

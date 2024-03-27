@@ -17,7 +17,7 @@ class Recipe extends Model
 
     public function typeoffoods()
     {
-        return $this->HasOne('App\Models\Typeoffood');
+        return $this->BelongsTo('App\Models\Typeoffood');
     }
 
     public function recipefile()
