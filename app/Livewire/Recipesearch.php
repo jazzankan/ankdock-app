@@ -1,9 +1,6 @@
 <?php
 
 namespace App\Livewire;
-
-use App\Models\Typeoffood;
-use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 use App\Models\Recipe;
 
@@ -11,11 +8,18 @@ class Recipesearch extends Component
 {
     public $query;
     public $recipes;
+    public $eating_order;
 
     function mount()
     {
         $this->query = "";
         $this->recipes = [];
+        $this->eating_order = "main";
+    }
+
+    function dish($order)
+    {
+        //ändrar eating_order
     }
 
     function emptyquery()
@@ -25,12 +29,12 @@ class Recipesearch extends Component
 
     public function updatedQuery()
     {
-        $this->recipes = Recipe:: where('name', 'like', '%' . $this->query . '%')
-            ->orWhereRelation('ingredients', 'name', 'like', '%' . $this->query . '%')
-            ->orWhereRelation('typeoffoods', 'name', 'like', '%' . $this->query . '%')
-           // ->orWhereBelongsTo(Typeoffood::class, function ($q)  {
-            //    $q->where('name', 'LIKE', '%'. $this->query . '%');
-            //})
+        $this->recipes = Recipe::where('eating_order', '=' , $this->eating_order)
+            ->where(function($query) {
+                $query->where('name', 'like', '%' . $this->query . '%')
+                    ->orWhereRelation('ingredients', 'name', 'like', '%' . $this->query . '%')
+                    ->orWhereRelation('typeoffoods', 'name', 'like', '%' . $this->query . '%');
+            })
             ->get();
     }
 
