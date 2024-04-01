@@ -1,15 +1,12 @@
-<div class="mb-8">
-    <div>
-        <a class="text-xs font-bold" href="">Slumpa fram ett recept</a>
-    </div>
+<div class="mt-4 mb-4">
     <div class="radio mb-2">
-        <label><input type="radio" name="eating_order"
+        <label><input wire:click="dish('starter')" type="radio" name="eating_order"
                       value="starter">
             Förrätt </label>
-        <label> <input type="radio" class="ml-2" name="eating_order"
+        <label> <input wire:click="dish('main')" type="radio" class="ml-2" name="eating_order"
                        value="main" checked="checked">
             Huvudrätt</label>
-        <label><input type="radio" class="ml-2" name="eating_order"
+        <label><input wire:click="dish('dessert')" type="radio" class="ml-2" name="eating_order"
                       value="dessert">
             Efterrätt</label>
     </div>
@@ -34,4 +31,12 @@
                 <hr class="mt-4">
             @endif
         </ul>
+        <div>
+            <p wire:click.live="random" class="mt-4 text-xs font-bold dashlink" style="cursor:pointer">Slumpa fram ett recept</p>
+            <div wire:model.live="random_recipe">
+                @if($random_recipe != null)
+                    <p class="bg-red-100"><strong>Slumpad rätt:<br></strong><a class="dashlink" href="/recipes/{{ $random_recipe->id }}">{{ $random_recipe->name }}</a>@if($random_recipe->latestcook), <span class="text-xs text-green-700">lagad: {{ $random_recipe->latestcook }}</span>@endif</p>
+                @endif
+            </div>
+        </div>
 </div>

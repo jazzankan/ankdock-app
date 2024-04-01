@@ -9,17 +9,41 @@ class Recipesearch extends Component
     public $query;
     public $recipes;
     public $eating_order;
+    public $random_recipe;
 
     function mount()
     {
         $this->query = "";
         $this->recipes = [];
         $this->eating_order = "main";
+        $this->random_recipe = null;
     }
 
     function dish($order)
     {
-        //ändrar eating_order
+        if($order == "starter")
+        {
+            $this->eating_order = "starter";
+        }
+        if($order == "main")
+        {
+            $this->eating_order = "main";
+        }
+        if($order == "dessert")
+        {
+            $this->eating_order = "dessert";
+        }
+    }
+
+    function random()
+    {
+        $all = Recipe::where('eating_order', $this->eating_order)->get();
+            $number = count($all);
+        if($number > 0) {
+            $random_num = rand(0, $number - 1);
+            $this->random_recipe = $all[$random_num];
+        }
+
     }
 
     function emptyquery()
