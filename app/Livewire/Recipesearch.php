@@ -1,15 +1,19 @@
 <?php
 
 namespace App\Livewire;
+use Livewire\WithPagination;
 use Livewire\Component;
 use App\Models\Recipe;
 
 class Recipesearch extends Component
 {
+    use WithPagination;
+
     public $query;
     public $recipes;
     public $eating_order;
     public $random_recipe;
+    public $showallcat;
 
     function mount()
     {
@@ -17,6 +21,7 @@ class Recipesearch extends Component
         $this->recipes = [];
         $this->eating_order = "main";
         $this->random_recipe = null;
+        $this->showallcat = true;
     }
 
     function dish($order)
@@ -33,6 +38,10 @@ class Recipesearch extends Component
         {
             $this->eating_order = "dessert";
         }
+        if($order == "baking")
+        {
+            $this->eating_order = "baking";
+        }
     }
 
     function random()
@@ -46,20 +55,33 @@ class Recipesearch extends Component
 
     }
 
+    function allcat()
+    {
+        $this->query = "Alla";
+        $this->updatedQuery();
+        $this->showallcat = false;
+    }
+
     function emptyquery()
     {
         $this->query = "";
+        $this->showallcat = true;
     }
 
     public function updatedQuery()
     {
-        $this->recipes = Recipe::where('eating_order', '=' , $this->eating_order)
-            ->where(function($query) {
-                $query->where('name', 'like', '%' . $this->query . '%')
-                    ->orWhereRelation('ingredients', 'name', 'like', '%' . $this->query . '%')
-                    ->orWhereRelation('typeoffoods', 'name', 'like', '%' . $this->query . '%');
-            })
-            ->get();
+        if($this->query == "Alla"){
+            $this->recipes = Recipe::where('eating_order', '=' , $this->eating_order)->get()->sortByDesc('latestcook');
+        }
+        else {
+            $this->recipes = Recipe::where('eating_order', '=', $this->eating_order)
+                ->where(function ($query) {
+                    $query->where('name', 'like', '%' . $this->query . '%')
+                        ->orWhereRelation('ingredients', 'name', 'like', '%' . $this->query . '%')
+                        ->orWhereRelation('typeoffoods', 'name', 'like', '%' . $this->query . '%');
+                })
+                ->get()->sortByDesc('latestcook');
+        }
     }
 
 

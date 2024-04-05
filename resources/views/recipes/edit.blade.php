@@ -61,6 +61,9 @@
                         <label><input type="radio" class="ml-2" name="eating_order"
                                       value="dessert" {{ $recipe->eating_order === 'dessert' ? 'checked' : '' }}>
                             Efterrätt</label>
+                        <label><input type="radio" class="ml-2" name="eating_order"
+                                      value="baking" {{ $recipe->eating_order === 'baking' ? 'checked' : '' }}>
+                            Bakning</label>
                     </div>
                     <div>
                         <label for="name">Kommentar:</label><br>

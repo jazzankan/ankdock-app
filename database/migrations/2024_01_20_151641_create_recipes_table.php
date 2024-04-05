@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('spice')->nullable();
             $table->string('c_time')->nullable();
-            $table->enum('eating_order', ['starter', 'main', 'dessert']);
+            $table->enum('eating_order', ['starter', 'main', 'dessert', 'baking']);
             $table->text('comment')->nullable();
             $table->string('printed_source')->nullable();
             $table->text('whole_text')->nullable();

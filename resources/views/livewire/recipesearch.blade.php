@@ -9,6 +9,9 @@
         <label><input wire:click="dish('dessert')" type="radio" class="ml-2" name="eating_order"
                       value="dessert">
             Efterrätt</label>
+        <label><input wire:click="dish('baking')" type="radio" class="ml-2" name="eating_order"
+                      value="baking">
+            Bakning</label>
     </div>
     <input type="text"
            autocomplete="off"
@@ -18,7 +21,7 @@
     @if(strlen($query)>2)
         <p class="py-0 mt-6"><strong>Träffar:</strong></p>
         <ul>
-            @if(count($recipes)> 0)
+            @if(count($recipes) > 0)
                 @foreach ($recipes as $rec)
                     <li class="todo pl-2 py-2.5"><h4><a class="dashlink" href="/recipes/{{ $rec->id }}">{{ $rec->name }}</a>
                             <span class="text-xs text-green-700">
@@ -31,6 +34,11 @@
                 <hr class="mt-4">
             @endif
         </ul>
+        @if($showallcat)
+        <div>
+            <p wire:click.live="allcat" class="mt-4 text-xs font-bold dashlink" style="cursor:pointer">Alla i vald kategori</p>
+        </div>
+        @endif
         <div>
             <p wire:click.live="random" class="mt-4 text-xs font-bold dashlink" style="cursor:pointer">Slumpa fram ett recept</p>
             <div wire:model.live="random_recipe">

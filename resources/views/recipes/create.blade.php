@@ -60,6 +60,9 @@
                         <label><input type="radio" class="ml-2" name="eating_order"
                                       value="dessert" {{ (old('eating_order') === 'dessert') ? 'checked' : '' }}>
                             Efterrätt</label>
+                        <label><input type="radio" class="ml-2" name="eating_order"
+                                      value="baking" {{ (old('eating_order') === 'baking') ? 'checked' : '' }}>
+                            Bakning</label>
                     </div>
                     <div>
                         <p x-on:click="commentopen = ! commentopen" class="text-blue-800" style="cursor: pointer"><b>Lägg
