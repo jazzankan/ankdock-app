@@ -4,7 +4,7 @@
                       value="starter">
             Förrätt </label>
         <label> <input wire:click="dish('main')" type="radio" class="ml-2" name="eating_order"
-                       value="main" checked="checked">
+                       value="main" checked>
             Huvudrätt</label>
         <label><input wire:click="dish('dessert')" type="radio" class="ml-2" name="eating_order"
                       value="dessert">
