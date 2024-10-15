@@ -67,10 +67,16 @@
         </div>
     </div>
 </x-headless-app>
-<script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
 <script>
-    function ckreplace() {
-        CKEDITOR.replace('description');
-    }
-    window.onload=ckreplace;
+    // Initialize CKEditor
+    ClassicEditor
+        .create(document.querySelector('textarea'))
+        .then(editor => {
+            console.log('Editor was initialized', editor);
+        })
+        .catch(error => {
+            console.error('Error during initialization of the editor', error);
+        });
 </script>
+
