@@ -61,7 +61,7 @@ class CommentController extends Controller
             'article_id' => 'required | int',
             'name' => 'required | min:3',
             'email' => 'required | email | unique:users,email',
-            'body' => 'required | min:3',
+            'body' => 'required | min:3 | not_regex:/url=/',
             'wishpublic' => 'required | in:yes,no',
             'human' => 'required | max:3 | in:sex,6,SEX,Sex'
         ]);
