@@ -40,10 +40,11 @@
                                       id="body" name="body" required>{{ old('body') }}</textarea>
                         </div>
                         <div>
-                            <label for="name">Människotest. Vad kommer efter fem?</label><br>
+                            <label for="human">Människotest. Vad kommer efter fem?<br>
+                            Lägg sen till två! Vad får du då? Använd bokstäver!</label><br>
                             <input type="text"
                                    class="max-w-xs mt-2 mb-6 px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-green-500"
-                                   value="" name="human" maxlength="3" required/></p>
+                                   value="" name="human" maxlength="4" required/></p>
                         </div>
                         <input type="hidden" value="{{ $article->id }}" name="article_id"/>
                     </div>

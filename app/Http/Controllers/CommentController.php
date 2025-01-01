@@ -63,7 +63,7 @@ class CommentController extends Controller
             'email' => 'required | email | unique:users,email',
             'body' => 'required | min:3 | not_regex:/url=/',
             'wishpublic' => 'required | in:yes,no',
-            'human' => 'required | max:3 | in:sex,6,SEX,Sex'
+            'human' => 'required | max:4 | in:åtta,ÅTTA,Åtta'
         ]);
         $collection = collect($attributes)->except('human'); // $attributes är en array. Man kan inte använda except på en array
         $attributes = $collection->toArray();
