@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Memory;
 use App\Models\Tag;
+use App\Models\User;
 use App\Models\Memfile;
 use Illuminate\Http\Request;
 use App\Http\Traits\DeleteTagTrait;
@@ -160,10 +161,22 @@ class MemoryController extends Controller
      */
     public function show(Memory $memory)
     {
+        $this->authorize('view',$memory);
+        $mailfail = null;
         $today = Carbon::now()->format('Y-m-d');
+        $sharing_user_ids = $memory->sharedmemoriesuser()->pluck('user_id')->toArray();
+        $sharing_users = [];
+            if(count($sharing_user_ids) > 0){
+                foreach ($sharing_user_ids as $sharing_user_id){
+                    $user = User::where('id', $sharing_user_id)->pluck('name')->first();
+                    array_push($sharing_users, $user);
+                }
+            }
+        $sharing_users = implode(', ', $sharing_users);
         $tags = $memory->tags()->orderBy('name')->get();
         $belongingfiles = Memfile::whereIn('memoryid',[$memory->id])->get();
-        return view('memories.show')->with('memory',$memory)->with('today',$today)->with('tags', $tags)->with('belongingfiles', $belongingfiles);
+        return view('memories.show')->with('memory',$memory)->with('today',$today)->with('tags', $tags)->with('belongingfiles', $belongingfiles)
+            ->with('sharing_users', $sharing_users)->with('mailfail',$mailfail);
     }
 
     /**
@@ -268,6 +281,7 @@ class MemoryController extends Controller
     {
         $memory->tags()->detach();
         $this->deleteUnusedTags();
+        $memory->sharedmemoriesuser()->delete();
         $memory->delete();
     }
 }

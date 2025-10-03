@@ -22,7 +22,15 @@ class MemoryPolicy
     public function view(User $user, Memory $memory)
     {
         $usersmemory = $memory->where('user_id',$user->id)->where('id',$memory->id)->get();
-        return count($usersmemory) > 0;
+        if(count($usersmemory) > 0) {
+            return true;
+            }
+        elseif ($memory->sharedmemoriesuser()->where('user_id', $user->id)->exists()){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
     public function update(User $user, Memory $memory)
     {

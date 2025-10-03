@@ -6,7 +6,7 @@
                 <div class="ml-2" x-data="{memfilter:false}">
                 <form method="post" action="/memsearch">
                     @csrf
-                    <p class="mb-3"><a href="/memories/create" class="btn-blue text-xs font-bold">Nytt minne</a></p>
+                    <p class="mb-3"><a href="/memories/create" class="btn-blue text-xs font-bold">Nytt minne</a> <a href="/memories/sharing" class="btn-blue text-xs font-bold">Delade minnen</a></p>
                     <input type="text" class="max-w-sm w-full mt-2 mb-6 px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-green-500" value="{{ $searchterm }}" name="search"/> <button type="submit" class="btn-blue text-xs font-bold"
                     >Sök</button>
                     <a  class="ml-3 text-blue-700 hover:underline" href="#" x-on:click="memfilter = !memfilter"><b>Filtrera</b></a>

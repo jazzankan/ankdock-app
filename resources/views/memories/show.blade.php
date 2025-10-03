@@ -2,7 +2,7 @@
     <div class="py-12">
         <div class="max-w-screen-lg mx-auto sm:px-6 lg:px-8">
             <div class="ml-2">
-            <p><a class="btn-blue text-xs font-bold" href="/memories">Minneslistan</a> <a class="btn-blue text-xs font-bold" href="/memories/{{ $memory->id }}/edit">Redigera minnet</a> <a class="btn-blue text-xs font-bold" href="/memupload/{{ $memory->id }}">Ladda upp fil</a>
+            <p><a class="btn-blue text-xs font-bold" href="/memories">Minneslistan</a>@if($memory->user_id == auth()->user()->id) <a class="btn-blue text-xs font-bold" href="/memories/{{ $memory->id }}/edit">Redigera minnet</a> <a class="btn-blue text-xs font-bold" href="/memupload/{{ $memory->id }}">Ladda upp fil</a> <a class="btn-blue text-xs font-bold" href="/memories/{{ $memory->id }}/share">Dela minnet</a>@endif
             <h2 class="text-2xl my-4">{{ $memory->title  }}</h2>
             @if($memory->description != null)
                 <p><strong>Beskrivning: </strong> {!! nl2br(e($memory->description)) !!}</p>
@@ -26,6 +26,12 @@
                     @if($today > $memory->date)
                         <p class="text-red-600 font-bold">Påminnelsedatum är passerat!</p>
                     @endif
+                @endif
+                @if($sharing_users)
+                <p class="text-sm text-green-700">Minnet delat till {{ $sharing_users }}</p>
+                @endif
+                @if($mailfail)
+                    <p class="text-sm text-red-700">{{ $mailfail }}</p>
                 @endif
                 @if(count($belongingfiles) > 0)
                     <ul class="list-group-horizontal nomargin">

@@ -15,6 +15,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\TypeoffoodController;
+use App\Http\Controllers\SharedMemoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +56,11 @@ Route:: get('/upload/{projectid}', function($projectid) {
 Route:: get('/memupload/{memoryid}', function($memoryid) {
     return view('/memories/memupload')->with('memoryid', $memoryid);
 });
+Route:: get('/memories/{memory_id}/share', [SharedMemoryController::class,'share']);
+Route:: get('/memories/sharing', [SharedMemoryController::class,'sharing']);
+Route:: post('/SharedmemoryController@store', [SharedMemoryController::class,'store'])
+ ->name('sharedmemories.store');
+
 Route:: get('/recipeupload', function() {
  return view('/recipes/recipeupload');
 });

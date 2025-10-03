@@ -45,6 +45,10 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Memory');
     }
+    public function sharedmemories()
+    {
+        return $this->belongsToMany('App\Models\SharedMemory');
+    }
 
     public function tags()
     {
