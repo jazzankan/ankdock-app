@@ -58,7 +58,8 @@
                 <p><a href="/memories" class="btn-blue text-xs font-bold ml-2">Minneslistan</a></p>
             @else
                 <h2 class="text-2xl pl-2 mb-3">Det finns inget...</h2>
-                <p><a href="/memories/create" class="btn-blue text-xs font-bold ml-2">Nytt minne</a></p>
+                <p><a href="/memories/create" class="btn-blue text-xs font-bold ml-2">Nytt minne</a>
+                        <a href="/memories/sharing" class="btn-blue text-xs font-bold">Delade minnen</a></p>
             @endif
                 </div>
         </div>

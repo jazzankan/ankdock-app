@@ -172,6 +172,7 @@ class MemoryController extends Controller
                     array_push($sharing_users, $user);
                 }
             }
+            $sharing_users = array_unique($sharing_users);
         $sharing_users = implode(', ', $sharing_users);
         $tags = $memory->tags()->orderBy('name')->get();
         $belongingfiles = Memfile::whereIn('memoryid',[$memory->id])->get();

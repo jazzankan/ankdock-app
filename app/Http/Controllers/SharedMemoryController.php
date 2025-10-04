@@ -46,9 +46,9 @@ class SharedMemoryController extends Controller
         $toyouids = DB::table('shared_memory_user')->where('user_id', $myself->id)->get()->pluck('shared_memory_id');
         $memories = Memory::whereIn('id', $toyouids)->get();
         foreach ($memories as $m){
-            $m['sharetime'] = $m->sharedmemoriesuser()->value('created_at')->format('Y-m-d');
+            $m['sharetime'] = $m->sharedmemoriesuser()->latest()->value('updated_at')->format('Y-m-d');
         };
-        $memories = $memories->sortByDesc('sharetime');
+        $memories = $memories->sortByDesc(['sharetime', 'created_at']);
         $newmemory = Carbon::now()->subDay()->format('Y-m-d');
         return view('/memories/sharing')->with('memories', $memories)->with('myself', $myself)->with('newmemory', $newmemory);
     }

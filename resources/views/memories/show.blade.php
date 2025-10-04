@@ -28,7 +28,7 @@
                     @endif
                 @endif
                 @if($sharing_users)
-                <p class="text-sm text-green-700">Minnet delat till {{ $sharing_users }}</p>
+                    <p class="text-sm text-green-700">Minnet delat till {{ $sharing_users }}</p>
                 @endif
                 @if($mailfail)
                     <p class="text-sm text-red-700">{{ $mailfail }}</p>
