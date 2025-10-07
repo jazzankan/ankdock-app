@@ -2,7 +2,8 @@
     <div class="py-12">
         <div class="max-w-screen-lg mx-auto sm:px-6 lg:px-8">
             <div class="ml-2">
-            <p><a class="btn-blue text-xs font-bold" href="/memories">Minneslistan</a>@if($memory->user_id == auth()->user()->id) <a class="btn-blue text-xs font-bold" href="/memories/{{ $memory->id }}/edit">Redigera minnet</a> <a class="btn-blue text-xs font-bold" href="/memupload/{{ $memory->id }}">Ladda upp fil</a> <a class="btn-blue text-xs font-bold" href="/memories/{{ $memory->id }}/share">Dela minnet</a>@endif
+                <p><a class="btn-blue text-xs font-bold" href="/memories">Minneslistan</a>@if($memory->user_id == auth()->user()->id) <a class="btn-blue text-xs font-bold" href="/memories/{{ $memory->id }}/edit">Redigera minnet</a> <a class="btn-blue text-xs font-bold" href="/memupload/{{ $memory->id }}">Ladda upp fil</a></p>
+                <p class="mt-4"><a class="btn-blue text-xs font-bold" href="/memories/{{ $memory->id }}/share">Dela minnet</a></p>@endif
             <h2 class="text-2xl my-4">{{ $memory->title  }}</h2>
             @if($memory->description != null)
                 <p><strong>Beskrivning: </strong> {!! nl2br(e($memory->description)) !!}</p>
@@ -37,7 +38,7 @@
                     <ul class="list-group-horizontal nomargin">
                         <li><strong>Tillhörande filer:</strong> </li>
                         @foreach($belongingfiles as $f)
-                            <li class="list-inline-item"><a class="text-blue-600 hover:underline" href="https://ank.webbsallad.se/storage/files/{{ $f->filename }}" target="_blank">{{ $f->filename }}</a></li>
+                            <li class="list-inline-item"><a target="_blank" class="" href="https://ank.webbsallad.se/storage/files/{{ $f->filename }}"><img class="mb-4" src="https://ank.webbsallad.se/storage/files/{{ $f->filename }}" alt="bild" style="width:140px"></a></li>
                         @endforeach
                     </ul>
                 @endif
