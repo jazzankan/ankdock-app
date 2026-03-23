@@ -13,7 +13,7 @@
                 </div>
                 <div class="form-group">
                     <label for="body">Brödtext:</label>
-                    <textarea class="form-control" id="body" name="body">{!! $article->body !!}</textarea>
+                    <textarea id="myeditorinstance" class="form-control" id="body" name="body">{!! $article->body !!}</textarea>
                 </div>
                 <div class="form-group mt-3">
                     Kategorier:<br>
@@ -61,15 +61,5 @@
         </div>
     </div>
 </x-headless-app>
-<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
-<script>
-    // Initialize CKEditor
-    ClassicEditor
-        .create(document.querySelector('textarea'))
-        .then(editor => {
-            console.log('Editor was initialized', editor);
-        })
-        .catch(error => {
-            console.error('Error during initialization of the editor', error);
-        });
-</script>
+<x-head.tinymce-config/>
+

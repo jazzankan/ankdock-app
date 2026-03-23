@@ -6,6 +6,7 @@
                 <a class="btn-blue text-xs font-bold" href="/ingredients">Huvudingredienser</a>
                 <a class="btn-blue text-xs font-bold" href="/typeoffoods">Typ av mat</a>
             </p>
+            @if(count($latestrecipes) > 0)
             <livewire:recipesearch />
             <hr class="mt-4">
             <p class="bg-green-100"><strong>Senast visade:<br></strong><a class="dashlink" href="/recipes/{{ $latestviewed->id }}">{{ $latestviewed->name }}</a>@if($latestviewed->latestcook), <span class="text-xs text-green-700">lagad: {{ $latestviewed->latestcook }}</span>@endif</p>
@@ -17,6 +18,9 @@
                                     @if($rec->latestcook)<br>Lagad: {{ $rec->latestcook }} @endif</span></h4>
                 @endforeach
             </ul>
+            @else
+                <h1 class="text-2xl mt-6">Det finns inga recept ännu!</h1>
+            @endif
         </div>
     </div>
 </x-headless-app>
