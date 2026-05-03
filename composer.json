@@ -12,8 +12,8 @@
         "symfony/console": "^7.0",
         "symfony/var-dumper": "^7.0",
         "guzzlehttp/guzzle": "^7.0.1",
-        "laravel/framework": "^12.0",
-        "laravel/tinker": "^2.5",
+        "laravel/framework": "^13.0",
+        "laravel/tinker": "^3.0",
         "livewire/livewire": "^3.4"
     },
     "require-dev": {
@@ -22,7 +22,7 @@
         "laravel/sail": "^1.31",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^8.1",
-        "phpunit/phpunit": "^11.0",
+        "phpunit/phpunit": "^12.0",
         "spatie/laravel-ignition": "^2.0"
     },
     "config": {
